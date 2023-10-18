@@ -1,0 +1,6 @@
+Driving-ACTIVATES-AudioReading-AutoReply
+Meeting-ACTIVATES-Silent
+Day-ACTIVATES-Light-Sound
+Night-ACTIVATES-Dark-Silent
+MobileData-ACTIVATES-ManualStart-ManualDL-ILQ
+Wifi-ACTIVATES-AutoStart-AutoDL-IHQ

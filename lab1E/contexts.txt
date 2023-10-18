@@ -1,0 +1,9 @@
+Context/MANDATORY/Connectivity-ThemeContext-Mode-Device-Meeting-Driving
+Context/OPTIONAL/Time
+Device/ALTERNATIVE/Phone-Tablet-Computter
+Mode/MANDATORY/NormalMode
+Mode/OPTIONAL/FlightMode
+NormalMode/ALTERNATIVE/SoundMode-VibrateMode-SilentMode
+Connectivity/ALTERNATIVE/Wifi-MobileData
+ThemeContext/ALTERNATIVE/DarkTheme-LightTheme
+Time/ALTERNATIVE/Day-Night
