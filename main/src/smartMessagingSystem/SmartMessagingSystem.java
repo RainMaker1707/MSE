@@ -25,6 +25,7 @@ class SmartMessagingSystem{
         Contact whiteHat = new Contact("White Hat", null);
         Contact blackHat = new Contact("Black Hat", null);
 
+        // Tests contact list manipulation
         System.out.println("Contact List before add");
         System.out.println(user.getContactList()+"\n");
 
@@ -38,9 +39,9 @@ class SmartMessagingSystem{
         System.out.println("Contact List after blocking Black Hat");
         System.out.println(user.getContactList()+"\n");
 
-
-        System.out.println(alice.getName());
-
-
+        // Tests change status
+        whiteHat.changeStatus();
+        System.out.println("Contact List white hat is online");
+        System.out.println(user.getContactList());
     }
 }
