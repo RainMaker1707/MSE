@@ -17,6 +17,11 @@ class SmartMessagingSystem{
         this.commands = commands;
     }
 
+    //Tests only for now
+    /* TODO read input to know which user we are
+        create profiles from DB
+        really send messages
+    */
     public static void main(String[] args) {
         System.out.println("Welcome in SMS\n\n");
         System.out.println("Creating list of contact");
@@ -59,6 +64,7 @@ class SmartMessagingSystem{
         System.out.println("Normally again sent as alice is offline");
         msg.receive();
         System.out.println(msg+"\n");
+        
         // Test now change because alice is online
         alice.changeStatus();
         System.out.println("Now received because alice is online");
