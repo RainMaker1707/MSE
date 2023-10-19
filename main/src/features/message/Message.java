@@ -7,14 +7,12 @@ import static features.message.MessageState.*;
 public class Message {
     Profile sender;
     Contact receiver;
-    String content;
     MessageState state;
 
     //TODO add conversation to know in which conversation we are
-    public Message(Profile sender, Contact receiver, String content) {
+    public Message(Profile sender, Contact receiver) {
         this.sender = sender;
         this.receiver = receiver;
-        this.content = content;
         this.state = sending;
         this.send();
     }
@@ -26,11 +24,6 @@ public class Message {
     public Contact getReceiver() {
         return this.receiver;
     }
-
-    public String getContent() {
-        return this.content;
-    }
-
 
     public void send(){
         //TODO send the message to the receiver user
@@ -44,10 +37,5 @@ public class Message {
 
     public void seen(){
         // TODO logic when receiver has read the message
-    }
-
-    public String toString(){
-        return this.sender.getName() + " send to " + this.receiver.getName()
-                + ": " + this.content + " -> " + this.state;
     }
 }

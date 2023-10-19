@@ -2,8 +2,8 @@ package smartMessagingSystem;
 
 import context.*;
 import commands.*;
-import features.contact.Contact;
-import features.message.Message;
+import features.contact.*;
+import features.message.*;
 import features.profile.Profile;
 
 
@@ -52,19 +52,19 @@ class SmartMessagingSystem{
 
 
         // Test first message
-        Message msg = new Message(user, whiteHat, "Hello from bob");
+        TextMessage msg = new TextMessage(user, whiteHat, "Hello from bob");
         System.out.println(msg);
 
         msg.receive();
         System.out.println(msg+"\n");
 
         // Test offline user don't change the status for received
-        msg = new Message(user, alice, "Hello alice");
+        msg = new TextMessage(user, alice, "Hello alice");
         System.out.println(msg+"\n");
         System.out.println("Normally again sent as alice is offline");
         msg.receive();
         System.out.println(msg+"\n");
-        
+
         // Test now change because alice is online
         alice.changeStatus();
         System.out.println("Now received because alice is online");
