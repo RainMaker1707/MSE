@@ -3,27 +3,19 @@ package features.contact;
 
 import features.profile.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class Contact {
+public class Contact extends Profile{
 
     private Status status;
-    private final Profile profile;
 
-    public Contact(Profile profile){
+    public Contact(String name, Image picture){
+        super(name, picture);
         this.status = Status.offline;
-        this.profile = profile;
     }
 
     public Status getStatus() {
         return this.status;
-    }
-
-    public String getName() {
-        return this.profile.getName();
-    }
-
-    public Image getPicture() {
-        return this.profile.getPicture();
     }
 
     public void changeStatus() {
