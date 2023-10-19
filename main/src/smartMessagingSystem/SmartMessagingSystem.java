@@ -3,6 +3,7 @@ package smartMessagingSystem;
 import context.*;
 import commands.*;
 import features.contact.Contact;
+import features.message.Message;
 import features.profile.Profile;
 
 
@@ -43,5 +44,13 @@ class SmartMessagingSystem{
         whiteHat.changeStatus();
         System.out.println("Contact List white hat is online");
         System.out.println(user.getContactList());
+
+
+        // Test first message
+        Message msg = new Message(user, whiteHat, "Hello from bob");
+        System.out.println(msg);
+
+        msg.receive();
+        System.out.println(msg);
     }
 }
