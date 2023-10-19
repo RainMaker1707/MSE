@@ -12,7 +12,6 @@ class SmartMessagingSystem{
     public SmartMessagingSystem(Context context, Commands commands){
         this.context = context;
         this.commands = commands;
-
     }
 
     public static void main(String[] args) {
