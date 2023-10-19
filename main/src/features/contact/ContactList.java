@@ -7,14 +7,19 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ContactList{
-    private final Profile owner ;
+    private final Profile owner;
     List<Contact> contactList;
     List<Contact> blocked;
+
     public ContactList(Profile profile){
         this.owner = profile;
         this.contactList = new ArrayList<>();
         this.blocked = new ArrayList<>();
         // TODO read DB to restore contact list for a certain profile
+    }
+
+    public List<Contact> getContacts() {
+        return this.contactList;
     }
 
     public void addContact(Contact contact){
@@ -45,8 +50,10 @@ public class ContactList{
     public String toString() {
         StringBuilder contactList = new StringBuilder();
         contactList.append("[");
-        for(String name: this.getContactsName()){
-            contactList.append(name);
+        for(Contact contact: this.getContacts()){
+            contactList.append(contact.getName());
+            contactList.append(": ");
+            contactList.append(contact.getStatus());
             contactList.append(", ");
         }
         if(contactList.length()>2)contactList.delete(contactList.length() - 2, contactList.length());
