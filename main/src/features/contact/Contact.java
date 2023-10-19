@@ -3,7 +3,6 @@ package features.contact;
 
 import features.profile.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Contact extends Profile{
 
