@@ -43,13 +43,25 @@ class SmartMessagingSystem{
         // Tests change status
         whiteHat.changeStatus();
         System.out.println("Contact List white hat is online");
-        System.out.println(user.getContactList());
+        System.out.println(user.getContactList()+"\n");
 
 
         // Test first message
         Message msg = new Message(user, whiteHat, "Hello from bob");
         System.out.println(msg);
 
+        msg.receive();
+        System.out.println(msg+"\n");
+
+        // Test offline user don't change the status for received
+        msg = new Message(user, alice, "Hello alice");
+        System.out.println(msg+"\n");
+        System.out.println("Normally again sent as alice is offline");
+        msg.receive();
+        System.out.println(msg+"\n");
+        // Test now change because alice is online
+        alice.changeStatus();
+        System.out.println("Now received because alice is online");
         msg.receive();
         System.out.println(msg);
     }
