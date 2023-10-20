@@ -3,19 +3,30 @@ package features.profile;
 
 import features.contact.Contact;
 import features.contact.ContactList;
+import features.conversation.Conversation;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Profile {
     private final Image picture;
     private final String name;
     private final ContactList contactList;
 
+    private final List<Conversation> conversations;
+
     public Profile(String name, Image picture){
         this.name = name;
         this.picture = picture;
         this.contactList = new ContactList(this);
+        this.conversations = new ArrayList<>();
     }
+
+    public Profile getProfile(){
+        return this;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -38,5 +49,13 @@ public class Profile {
 
     public void blockContact(Contact contact){
         this.contactList.blockContact(contact);
+    }
+
+    public void addConversation(Conversation c){
+        this.conversations.add(c);
+    }
+
+    public List<Conversation> getConversations(){
+        return this.conversations;
     }
 }
