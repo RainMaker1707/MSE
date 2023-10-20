@@ -3,6 +3,7 @@ package smartMessagingSystem;
 import context.*;
 import commands.*;
 import features.contact.*;
+import features.conversation.Conversation;
 import features.message.*;
 import features.profile.Profile;
 
@@ -25,7 +26,8 @@ class SmartMessagingSystem{
     public static void main(String[] args) {
         System.out.println("Welcome in SMS\n\n");
         System.out.println("Creating list of contact");
-        Profile user = new Profile("Bob", null);
+        Contact user = new Contact("Bob", null);
+        user.changeStatus(); // Bob is online
 
         Contact alice = new Contact("Alice", null);
         Contact whiteHat = new Contact("White Hat", null);
@@ -46,29 +48,29 @@ class SmartMessagingSystem{
         System.out.println(user.getContactList()+"\n");
 
         // Tests change status
-        whiteHat.changeStatus();
+        whiteHat.changeStatus(); //whiteHat is online
         System.out.println("Contact List white hat is online");
         System.out.println(user.getContactList()+"\n");
 
 
         // Test first message
-        TextMessage msg = new TextMessage(user, whiteHat, "Hello from bob");
-        System.out.println(msg);
-
-        msg.receive();
-        System.out.println(msg+"\n");
+        Conversation conv = new Conversation(user, whiteHat);
+        conv.sendMessage(new TextMessage(user, whiteHat, "Hello from bob", conv));
+        System.out.println("Conversation 1 history:");
+        for(Message message: conv.getMessages()) System.out.println(message);
 
         // Test offline user don't change the status for received
-        msg = new TextMessage(user, alice, "Hello alice");
-        System.out.println(msg+"\n");
-        System.out.println("Normally again sent as alice is offline");
-        msg.receive();
-        System.out.println(msg+"\n");
-
+        Conversation conv2 = new Conversation(user, alice);
+        conv2.sendMessage(new TextMessage(user, alice, "Hello alice", conv2));
+        System.out.println("\nConversation 2 history (alice offline):");
+        for(Message message: conv2.getMessages()) System.out.println(message);
         // Test now change because alice is online
         alice.changeStatus();
-        System.out.println("Now received because alice is online");
-        msg.receive();
-        System.out.println(msg);
+        System.out.println("\nConversation 2 history (alice online):");
+        for(Message message: conv2.getMessages()) System.out.println(message);
+        conv2.sendMessage(new TextMessage(alice, user, "Hello Bob", conv2));
+        alice.changeStatus(); // alice is now offline
+        conv2.sendMessage(new TextMessage(user, alice, "can you help me to implement a Kruskal", conv2));
+        for(Message message: conv2.getMessages()) System.out.println(message);
     }
 }
