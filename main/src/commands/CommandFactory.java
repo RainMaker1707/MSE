@@ -23,10 +23,7 @@ public class CommandFactory {
                 yield null;
             }
             case "login" -> new Login(contexts, command);
-            case "logout" -> {
-                System.out.println("LOGOUT command triggered");
-                yield null;
-            }
+            case "logout" -> new Logout(contexts, command);
             case "send" -> {
                 System.out.println("SEND command triggered");
                 yield null;
