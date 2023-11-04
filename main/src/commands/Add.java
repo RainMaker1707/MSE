@@ -11,22 +11,7 @@ public class Add extends Command{
     }
     @Override
     public void run() {
-
-    }
-
-    @Override
-    public List<String> getArguments() {
-        return null;
-    }
-
-    @Override
-    public void error(String err) {
-
-    }
-
-    @Override
-    public void feedback(String feedback) {
-
+        // TODO: add contact IFF a user is loggedIn
     }
 
     @Override

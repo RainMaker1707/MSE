@@ -13,23 +13,13 @@ public class Activate extends Command{
 
     @Override
     public void run() {
-        List<String> args = this.getArguments();
+        List<String> args = this.getArguments(true);
         for(String arg: args) {
             int index = contexts.stream().map(Context::getName).toList().indexOf(arg);
             if(index != -1){
                 contexts.get(index).activate();
             }else Context.error(arg + " not found!");
         }
-    }
-
-    @Override
-    public void error(String err) {
-
-    }
-
-    @Override
-    public void feedback(String feedback) {
-
     }
 
     @Override

@@ -14,21 +14,6 @@ public class Remove extends Command{
     }
 
     @Override
-    public List<String> getArguments() {
-        return null;
-    }
-
-    @Override
-    public void error(String err) {
-
-    }
-
-    @Override
-    public void feedback(String feedback) {
-
-    }
-
-    @Override
     public void help(){
 
     }

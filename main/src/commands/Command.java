@@ -1,5 +1,6 @@
 package commands;
 
+import constant.Colors;
 import context.Context;
 
 import java.util.ArrayList;
@@ -18,13 +19,22 @@ public abstract class Command {
     }
 
     public abstract void run();
-    public List<String> getArguments() {
+    public List<String> getArguments(boolean lowerCase) {
         List<String> arguments = new ArrayList<>();
-        for(String s: command.split(" ")) if(!s.equalsIgnoreCase(this.getKeyword())) arguments.add(s.toLowerCase());
+        for(String s: command.split(" ")) {
+            if(!s.equalsIgnoreCase(this.getKeyword())) {
+                if(lowerCase) arguments.add(s.toLowerCase());
+                else arguments.add(s);
+            }
+        }
         return arguments;
     }
-    public abstract void error(String err);
-    public abstract void feedback(String feedback);
+    public void error(String err){
+        System.out.println(Colors.ANSI_RED + "Command Error: " + this.getKeyword() + " --> " + err + Colors.ANSI_RESET);
+    }
+    public void feedback(String feedback){
+        System.out.println(Colors.ANSI_BLUE + feedback + Colors.ANSI_RESET);
+    }
 
     public abstract void help();
 

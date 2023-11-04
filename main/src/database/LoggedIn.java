@@ -14,7 +14,6 @@ public enum LoggedIn {
             System.out.println(Colors.ANSI_RED + "A user is already logged in: " + loggedIn.getName() + "!"+Colors.ANSI_RESET);
         else{
             loggedIn = profile;
-            System.out.println(Colors.ANSI_BLUE + "Now connected as " + loggedIn.getName() + "." + Colors.ANSI_RESET);
         }
     }
 
