@@ -16,9 +16,7 @@ public class Logout extends Command{
         List<String> args = this.getArguments();
         if(!args.isEmpty())
             System.out.println(Colors.ANSI_RED + "Logout doesn't need argument" + Colors.ANSI_RESET);
-        else{
-            LoggedIn.INSTANCE.logout();
-        }
+        else LoggedIn.INSTANCE.logout();
     }
 
     @Override
