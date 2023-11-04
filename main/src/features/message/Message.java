@@ -10,9 +10,17 @@ public class Message extends Feature {
     Contact sender;
     Contact receiver;
     MessageState state;
-    
+
     public Message(Contact sender, Contact receiver, Conversation conversation){
         super("Message");
+        this.conversation = conversation;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.state = sending;
+    }
+
+    public Message(String name, Contact sender, Contact receiver, Conversation conversation){
+        super(name);
         this.conversation = conversation;
         this.sender = sender;
         this.receiver = receiver;
