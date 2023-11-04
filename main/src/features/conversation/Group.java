@@ -13,6 +13,12 @@ public class Group extends Conversation{
         super(owner, c2);
         this.owner = owner;
         this.members = new ArrayList<>();
+        this.addToGroup(owner);
+        this.addToGroup(c2);
+    }
+
+    public Contact getOwner(){
+        return this.owner;
     }
 
     public List<Contact> getMembers(){

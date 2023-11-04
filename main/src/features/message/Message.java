@@ -1,17 +1,18 @@
 package features.message;
 
+import features.Feature;
 import features.contact.*;
 import features.conversation.Conversation;
 import static features.message.MessageState.*;
 
-public class Message {
+public class Message extends Feature {
     private final Conversation conversation;
     Contact sender;
     Contact receiver;
     MessageState state;
-
-    //TODO add conversation to know in which conversation we are
-    public Message(Contact sender, Contact receiver, Conversation conversation) {
+    
+    public Message(Contact sender, Contact receiver, Conversation conversation){
+        super("Message");
         this.conversation = conversation;
         this.sender = sender;
         this.receiver = receiver;

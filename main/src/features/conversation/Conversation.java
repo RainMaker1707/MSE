@@ -1,17 +1,19 @@
 package features.conversation;
 
+import features.Feature;
 import features.contact.Contact;
 import features.message.Message;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Conversation {
+public class Conversation extends Feature {
     Contact contact1;
     Contact contact2;
     List<Message> conversation;
 
     public Conversation(Contact c1, Contact c2){
+        super("Conversation");
         this.contact1 = c1;
         this.contact2 = c2;
         this.conversation = new ArrayList<>();

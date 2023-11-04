@@ -8,8 +8,9 @@ import features.conversation.Conversation;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import features.Feature;
 
-public class Profile {
+public class Profile extends Feature{
     private final Image picture;
     private final String name;
     private final ContactList contactList;
@@ -17,6 +18,7 @@ public class Profile {
     private final List<Conversation> conversations;
 
     public Profile(String name, Image picture){
+        super("Profile");
         this.name = name;
         this.picture = picture;
         this.contactList = new ContactList(this);

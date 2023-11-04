@@ -1,17 +1,19 @@
 package features.contact;
 
 
+import features.Feature;
 import features.profile.Profile;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class ContactList{
+public class ContactList extends Feature {
     private final Profile owner;
     List<Contact> contactList;
     List<Contact> blocked;
 
     public ContactList(Profile profile){
+        super("ContactList");
         this.owner = profile;
         this.contactList = new ArrayList<>();
         this.blocked = new ArrayList<>();
