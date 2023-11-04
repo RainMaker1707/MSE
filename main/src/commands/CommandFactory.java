@@ -23,10 +23,7 @@ public class CommandFactory {
                 System.out.println("BLOCK command triggered");
                 yield null;
             }
-            case "send" -> {
-                System.out.println("SEND command triggered");
-                yield null;
-            }
+            case "send" -> new Send(contexts, command);
             case "new" -> {
                 System.out.println("NEW command triggered");
                 yield null;
