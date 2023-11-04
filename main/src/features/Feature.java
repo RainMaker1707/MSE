@@ -1,6 +1,6 @@
 package features;
 
-public class Feature {
+public abstract class Feature {
     String name;
     boolean activated;
 
