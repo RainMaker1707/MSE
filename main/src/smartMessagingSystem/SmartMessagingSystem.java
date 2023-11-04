@@ -2,21 +2,66 @@ package smartMessagingSystem;
 
 import context.*;
 import commands.*;
-import features.contact.*;
-import features.conversation.Conversation;
-import features.message.*;
-import features.profile.Profile;
+import features.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 class SmartMessagingSystem{
 
-    Context context;
-    Commands commands;
+    List<Context> contexts;
+    List<Command> commands;
 
-    public SmartMessagingSystem(Context context, Commands commands){
-        this.context = context;
-        this.commands = commands;
+    public SmartMessagingSystem(){
+        this.defaultContext();
     }
+
+    public void defaultContext(){
+        contexts = new ArrayList<>();
+        contexts.add(new Driving());
+        contexts.add(new Meeting());
+        contexts.add(new Device());
+        contexts.add(new Mode());
+        contexts.add(new Connectivity());
+        contexts.add(new Time());
+    }
+
+    private List<Context> getContexts() {
+        return this.contexts;
+    }
+
+    public void activateContext(String contextName){
+        for(Context context: contexts){
+            if(context.getName().equals(contextName)){
+                context.activate();
+                return;
+            }
+        }
+        Context.error(contextName + " not found!");
+    }
+
+    public void deactivateContext(String contextName){
+        for(Context context: contexts){
+            if(context.getName().equals(contextName)){
+                context.deactivate();
+                return;
+            }
+        }
+        Context.error(contextName + " not found!");
+    }
+
+    public void activateFeature(Feature feature){
+        // TODO: link feature to context
+        // TODO: activate feature when linked context is activated
+    }
+
+    public void deactivateFeature(Feature feature){
+        // TODO: link feature to context
+        // TODO: deactivate feature when linked context is deactivated
+    }
+
 
     //Tests only for now
     /* TODO read input to know which user we are
@@ -24,53 +69,25 @@ class SmartMessagingSystem{
         really send messages
     */
     public static void main(String[] args) {
-        System.out.println("Welcome in SMS\n\n");
-        System.out.println("Creating list of contact");
-        Contact user = new Contact("Bob", null);
-        user.changeStatus(); // Bob is online
 
-        Contact alice = new Contact("Alice", null);
-        Contact whiteHat = new Contact("White Hat", null);
-        Contact blackHat = new Contact("Black Hat", null);
+        System.out.println("Welcome in SMS\n");
+        SmartMessagingSystem sms = new SmartMessagingSystem();
+        System.out.println();
 
-        // Tests contact list manipulation
-        System.out.println("Contact List before add");
-        System.out.println(user.getContactList()+"\n");
+        // Scanner for command at runtime
+        System.out.println("Insert command to start conversation or (un)active context");
+        Scanner scanner = new Scanner(System.in);
+        CommandFactory cmdFactory = new CommandFactory();
 
-        user.addContact(alice);
-        user.addContact(whiteHat);
-        user.addContact(blackHat);
-        System.out.println("Contact List after add 3 contacts");
-        System.out.println(user.getContactList()+"\n");
-
-        user.blockContact(blackHat);
-        System.out.println("Contact List after blocking Black Hat");
-        System.out.println(user.getContactList()+"\n");
-
-        // Tests change status
-        whiteHat.changeStatus(); //whiteHat is online
-        System.out.println("Contact List white hat is online");
-        System.out.println(user.getContactList()+"\n");
-
-
-        // Test first message
-        Conversation conv = new Conversation(user, whiteHat);
-        conv.sendMessage(new TextMessage(user, whiteHat, "Hello from bob", conv));
-        System.out.println("Conversation 1 history:");
-        for(Message message: conv.getMessages()) System.out.println(message);
-
-        // Test offline user don't change the status for received
-        Conversation conv2 = new Conversation(user, alice);
-        conv2.sendMessage(new TextMessage(user, alice, "Hello alice", conv2));
-        System.out.println("\nConversation 2 history (alice offline):");
-        for(Message message: conv2.getMessages()) System.out.println(message);
-        // Test now change because alice is online
-        alice.changeStatus();
-        System.out.println("\nConversation 2 history (alice online):");
-        for(Message message: conv2.getMessages()) System.out.println(message);
-        conv2.sendMessage(new TextMessage(alice, user, "Hello Bob", conv2));
-        alice.changeStatus(); // alice is now offline
-        conv2.sendMessage(new TextMessage(user, alice, "can you help me to implement a Kruskal", conv2));
-        for(Message message: conv2.getMessages()) System.out.println(message);
+        while(true){
+            System.out.print("Enter a command: ");
+            String command = scanner.nextLine();
+            if(command.equals("exit")) break;
+            Command cmd = cmdFactory.createCommand(command, sms.getContexts());
+            if(cmd != null){
+                cmd.run();
+            }
+        }
+        System.out.println("Bye");
     }
 }
