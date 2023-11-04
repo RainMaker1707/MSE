@@ -19,12 +19,6 @@ public abstract class Context {
         this.linkedFeatures = new ArrayList<>();
     }
 
-    public Context(String name, List<Feature> linkedFeatures){
-        this.name = name.toLowerCase();
-        this.activated = false;
-        this.linkedFeatures = linkedFeatures;
-    }
-
     public void activate(){
         if(!this.isActivated()) {
             this.activated = true;
