@@ -26,4 +26,8 @@ public enum LoggedIn {
         }
     }
 
+    public Profile getProfile(){
+        return this.loggedIn;
+    }
+
 }
