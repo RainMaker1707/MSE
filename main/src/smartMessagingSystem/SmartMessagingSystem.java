@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 class SmartMessagingSystem{
 
-    List<Context> contexts;
+    private List<Context> contexts;
 
     public SmartMessagingSystem(){
         DataBase.INSTANCE.populate();
@@ -31,11 +31,8 @@ class SmartMessagingSystem{
         return this.contexts;
     }
 
-    //Tests only for now
-    /* TODO read input to know which user we are
-        create profiles from DB
-        really send messages
-    */
+
+    // TODO: really send messages
     public static void main(String[] args) {
 
         System.out.println("Welcome in SMS\n");
@@ -51,7 +48,7 @@ class SmartMessagingSystem{
             String command = scanner.nextLine().trim();
             if(command.equals("exit")) break;
             Command cmd = cmdFactory.createCommand(command, sms.getContexts());
-            if(cmd != null){
+            if(cmd != null){ // Return null if command is not known
                 cmd.run();
             }
         }

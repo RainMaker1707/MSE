@@ -1,19 +1,20 @@
 package database;
 
 import constant.Colors;
+import features.contact.Contact;
 import features.profile.Profile;
 
 public enum LoggedIn {
 
     INSTANCE();
 
-    Profile loggedIn = null;
+    Contact loggedIn = null;
 
-    public void setLoggedIn(Profile profile){
+    public void setLoggedIn(Contact contact){
         if(loggedIn != null)
             System.out.println(Colors.ANSI_RED + "A user is already logged in: " + loggedIn.getName() + "!"+Colors.ANSI_RESET);
         else{
-            loggedIn = profile;
+            loggedIn = contact;
         }
     }
 
@@ -26,7 +27,7 @@ public enum LoggedIn {
         }
     }
 
-    public Profile getProfile(){
+    public Contact get(){
         return this.loggedIn;
     }
 

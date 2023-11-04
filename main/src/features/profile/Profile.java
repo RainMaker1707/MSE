@@ -37,15 +37,15 @@ public class Profile extends Feature{
     }
 
     public ContactList getContactList() {
-        return this.contactList;
+        return contactList;
     }
 
     public void addContact(Contact contact){
-        this.contactList.addContact(contact);
+        contactList.addContact(contact);
     }
 
     public void removeContact(Contact contact){
-        this.contactList.removeContact(contact);
+        contactList.removeContact(contact);
     }
 
     public void blockContact(Contact contact){

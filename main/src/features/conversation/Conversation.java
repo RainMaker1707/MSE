@@ -26,6 +26,13 @@ public class Conversation extends Feature {
         message.send();
     }
 
+    public Contact getContact1(){
+        return this.contact1;
+    }
+    public Contact getContact2(){
+        return this.contact2;
+    }
+
     public void removeMessage(Message message){
         //TODO implement logic to check if request comes from the sender
         this.conversation.remove(message);

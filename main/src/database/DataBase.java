@@ -10,28 +10,25 @@ public enum DataBase {
 
     INSTANCE();
 
-    final HashMap<String, Profile> set = new HashMap<>();
+    final HashMap<String, Contact> set = new HashMap<>();
 
     public void populate(){
         // create profile
-        set.put("Bob", new Profile("Bob", null));
-        set.put("Alice", new Profile("Alice", null));
-        set.put("WhiteHat", new Profile("WhiteHat", null));
-        set.put("BlackHat", new Profile("BlackHat", null));
+        set.put("Bob", new Contact("Bob", null));
+        set.put("Alice", new Contact("Alice", null));
+        set.put("WhiteHat", new Contact("WhiteHat", null));
+        set.put("BlackHat", new Contact("BlackHat", null));
 
-        // populate contact list
-        set.get("Bob").addContact(new Contact(set.get("Alice")));
-        set.get("Bob").addContact(new Contact(set.get("WhiteHat")));
-        set.get("Alice").addContact(new Contact(set.get("Bob")));
-        set.get("BlackHat").addContact(new Contact(set.get("Alice")));
+        set.get("Bob").addContact(set.get("Alice"));
+        set.get("Alice").addContact(set.get("Bob"));
     }
 
-    public Profile getUser(String username){
+    public Contact getUser(String username){
         return set.get(username);
     }
 
-    public void addUser(Profile profile){
-        set.put(profile.getName(), profile);
+    public void addUser(Contact contact){
+        set.put(contact.getName(), contact);
     }
 
 }

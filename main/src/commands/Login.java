@@ -4,9 +4,7 @@ import constant.Colors;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
-import features.Feature;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Login extends Command{

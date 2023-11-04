@@ -15,18 +15,17 @@ public class Add extends Command{
     @Override
     public void run() {
         List<String> args = this.getArguments(false);
-        if(LoggedIn.INSTANCE.getProfile() == null) error("No user logged in");
+        if(LoggedIn.INSTANCE.get() == null) error("No user logged in");
         else if(args.isEmpty()) error("Provide at least one contact to add");
         else{
             for(String arg: args) {
                 if(DataBase.INSTANCE.getUser(arg) == null) error("No user with name " + arg);
-                else if(LoggedIn.INSTANCE.getProfile().getContactList().getContacts().stream()
+                else if(LoggedIn.INSTANCE.get().getContactList().getContacts().stream()
                         .map(Contact::getName).toList().contains(arg)) error(arg + " already in your contact list");
                 else {
-                    LoggedIn.INSTANCE.getProfile().addContact(new Contact(DataBase.INSTANCE.getUser(arg)));
-                    feedback("User " + arg + " has been added to "
-                            + LoggedIn.INSTANCE.getProfile().getName() + " contacts list"
-                    );
+                    LoggedIn.INSTANCE.get().addContact(new Contact(DataBase.INSTANCE.getUser(arg)));
+                    DataBase.INSTANCE.getUser(arg).addContact(new Contact(LoggedIn.INSTANCE.get()));
+                    feedback("User " + arg + " and " + LoggedIn.INSTANCE.get().getName() + " are now contact");
                 }
             }
 
