@@ -14,7 +14,6 @@ public class Profile extends Feature{
     private final Image picture;
     private final String name;
     private final ContactList contactList;
-
     private final List<Conversation> conversations;
 
     public Profile(String name, Image picture){

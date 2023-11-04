@@ -13,13 +13,14 @@ public abstract class Context {
 
 
     public Context(String name){
-        this.name = name;
+        this.name = name.toLowerCase();
         this.activated = false;
+        // TODO: link real feature
         this.linkedFeatures = new ArrayList<>();
     }
 
     public Context(String name, List<Feature> linkedFeatures){
-        this.name = name;
+        this.name = name.toLowerCase();
         this.activated = false;
         this.linkedFeatures = linkedFeatures;
     }
@@ -39,6 +40,10 @@ public abstract class Context {
         else error(this.getName() + " is already deactivated");
     }
 
+    public List<Feature> getLinkedFeatures(){
+        return this.linkedFeatures;
+    }
+
     public String getName(){
         return this.name;
     }
@@ -52,7 +57,7 @@ public abstract class Context {
     }
 
     public void feedback(String feedback){
-        System.out.println("Context: " + this.getName() + " " + feedback);
+        System.out.println(Colors.ANSI_BLUE + "Context: " + this.getName() + " " + feedback + Colors.ANSI_RESET);
     }
 
 }

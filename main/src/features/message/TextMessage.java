@@ -6,7 +6,7 @@ import features.conversation.Conversation;
 public class TextMessage extends Message {
     String content;
     public TextMessage(Contact sender, Contact receiver, String content, Conversation conversation){
-        super(sender, receiver, conversation);
+        super("TextMessage", sender, receiver, conversation);
         this.content = content;
     }
 
