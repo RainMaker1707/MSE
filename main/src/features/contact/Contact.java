@@ -14,6 +14,11 @@ public class Contact extends Profile{
         this.status = Status.offline;
     }
 
+    public Contact(Profile profile){
+        super(profile.getName(), profile.getPicture());
+        this.status = Status.offline;
+    }
+
     public Status getStatus() {
         return this.status;
     }
