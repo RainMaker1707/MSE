@@ -52,9 +52,9 @@ public class Activate extends Command{
         else if(behavior.getAlternative() ||behavior.getOptional()){
             if(!behavior.isActivated()){
                 behavior.activate();
-                Light.activate();
-                Dark.activate();
-                feedback(arg + " is now activated." );
+                if(behavior.getName().equals("light"))Light.activate();
+                if(behavior.getName().equals("dark")) Dark.activate();
+                feedback(arg + " is now activated.");
             }else error(arg + " is already activated!");
         }
     }
