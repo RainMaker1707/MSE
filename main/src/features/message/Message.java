@@ -1,27 +1,21 @@
 package features.message;
 
+import database.Features;
 import database.LoggedIn;
 import features.Feature;
+import features.FeatureBehavior;
 import features.contact.*;
 import features.conversation.Conversation;
 import static features.message.MessageState.*;
 
-public class Message extends Feature {
+public class Message{
     private final Conversation conversation;
     Contact sender;
     Contact receiver;
     MessageState state;
+    FeatureBehavior behavior = Features.INSTANCE.get("message");
 
     public Message(Contact sender, Contact receiver, Conversation conversation){
-        super("Message");
-        this.conversation = conversation;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.state = sending;
-    }
-
-    public Message(String name, Contact sender, Contact receiver, Conversation conversation){
-        super(name);
         this.conversation = conversation;
         this.sender = sender;
         this.receiver = receiver;

@@ -1,23 +1,24 @@
 package features.contact;
 
 
+import database.Features;
 import features.Feature;
+import features.FeatureBehavior;
 import features.profile.Profile;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class ContactList extends Feature {
+public class ContactList{
     private final Profile owner;
     List<Contact> contactList;
     List<Contact> blocked;
+    FeatureBehavior behavior = Features.INSTANCE.get("list");
 
     public ContactList(Profile profile){
-        super("ContactList");
         this.owner = profile;
         this.contactList = new ArrayList<>();
         this.blocked = new ArrayList<>();
-        // TODO read DB to restore contact list for a certain profile
     }
 
     public List<Contact> getContacts() {
@@ -30,16 +31,13 @@ public class ContactList extends Feature {
     public void removeContact(Contact contact){
         this.contactList.remove(contact);
     }
-    public void blockContact(Contact contact){
-        this.contactList.remove(contact);
+    public void addBlocked(Contact contact){
+
         this.blocked.add(contact);
     }
-
-    public void unblockContact(Contact contact){
-        this.contactList.add(contact);
+    public void removeBlocked(Contact contact){
         this.blocked.remove(contact);
     }
-
     public List<Status> getContactsStatus(){
         return this.contactList.stream().map(Contact::getStatus).toList();
     }

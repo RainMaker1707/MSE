@@ -2,12 +2,15 @@ package smartMessagingSystem;
 
 import context.*;
 import commands.*;
-import context.time.Time;
 import database.DataBase;
-import features.*;
-import features.profile.Profile;
+
+
+import database.Features;
+import features.Feature;
+import features.FeatureBehavior;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,16 +18,23 @@ import java.util.Scanner;
 class SmartMessagingSystem{
 
     private List<Context> contexts;
+    private HashMap<String, FeatureBehavior> features;
 
     public SmartMessagingSystem(){
         DataBase.INSTANCE.populate();
+        Features.INSTANCE.populate();
         this.defaultContext();
+        this.features = Features.INSTANCE.get();
     }
 
     public void defaultContext(){
         contexts = new ArrayList<>();
         contexts.add(new Driving());
         contexts.add(new Meeting());
+    }
+
+    public HashMap<String, FeatureBehavior> getFeatures() {
+        return features;
     }
 
     private List<Context> getContexts() {

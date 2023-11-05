@@ -4,7 +4,6 @@ import constant.Colors;
 import context.Context;
 import database.LoggedIn;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Logout extends Command{

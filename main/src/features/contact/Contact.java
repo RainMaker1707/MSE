@@ -1,13 +1,17 @@
 package features.contact;
 
 
+import database.Features;
+import features.FeatureBehavior;
 import features.conversation.Conversation;
 import features.profile.*;
+
 import java.awt.*;
 
 public class Contact extends Profile{
 
     private Status status;
+    FeatureBehavior behavior = Features.INSTANCE.get("contact");
 
     public Contact(String name, Image picture){
         super(name, picture);
