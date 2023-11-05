@@ -1,19 +1,15 @@
 package features;
 
-public abstract class Feature {
-    String name;
-    boolean activated;
+public interface Feature {
 
-    public Feature(String name){
-        this.name = name;
-        this.activated = false;
-    }
-
-    public void activate(){
-        this.activated = true;
-    }
-
-    public void deactivate(){
-        this.activated = false;
-    }
+    void setMandatory(boolean value);
+    void setAlternative(boolean value);
+    void setOptional(boolean value);
+    void activate();
+    void deactivate();
+    boolean getMandatory();
+    boolean getAlternative();
+    boolean getOptional();
+    String getName();
+    public boolean isActivated();
 }
