@@ -15,14 +15,12 @@ public class CommandFactory {
         return switch (cmd.toLowerCase()) {
             case "activate" -> new Activate(contexts,  command);
             case "deactivate" -> new Deactivate(contexts,  command);
+            case "contacts" -> new ContactCmd(contexts, command);
             case "login" -> new Login(contexts, command);
             case "logout" -> new Logout(contexts, command);
             case "add" -> new Add(contexts, command);
             case "remove" -> new Remove(contexts, command);
-            case "block" -> {
-                System.out.println("BLOCK command triggered");
-                yield null;
-            }
+            case "block" -> new Block(contexts, command);
             case "send" -> new Send(contexts, command);
             case "conversations" -> new ConversationCmd(contexts, command);
             case "messages" -> new MessageCmd(contexts, command);
