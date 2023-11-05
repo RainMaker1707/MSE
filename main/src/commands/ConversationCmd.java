@@ -16,6 +16,14 @@ public class ConversationCmd extends Command{
     @Override
     public void run() {
         Contact user = LoggedIn.INSTANCE.get();
+        if(user == null){
+            error("no user logged in");
+            return;
+        }
+        if(!this.getArguments(true).isEmpty()){
+            error("doesn't need argument");
+            return;
+        }
         StringBuilder text = new StringBuilder();
         text.append(user.getName());
         text.append("'s conversations: [");
