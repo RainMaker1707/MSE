@@ -4,7 +4,6 @@ public class Driving extends Context{
 
     public Driving(){
         super("Driving");
-        this.activate();
     }
 
 }
