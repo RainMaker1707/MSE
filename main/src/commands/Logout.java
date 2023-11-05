@@ -15,7 +15,10 @@ public class Logout extends Command{
     public void run() {
         List<String> args = this.getArguments(false);
         if(!args.isEmpty()) error("doesn't need argument" + Colors.ANSI_RESET);
-        else LoggedIn.INSTANCE.logout();
+        else {
+            LoggedIn.INSTANCE.get().changeStatus();
+            LoggedIn.INSTANCE.logout();
+        }
     }
 
     @Override
