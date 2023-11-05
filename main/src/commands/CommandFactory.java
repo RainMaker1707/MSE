@@ -25,7 +25,7 @@ public class CommandFactory {
             case "conversations" -> new ConversationCmd(contexts, command);
             case "messages" -> new MessageCmd(contexts, command);
             default -> {
-                System.out.println(Colors.ANSI_RED + "Command error: " + cmd + " is not a command!" + Colors.ANSI_RESET);
+                System.out.println(Colors.ANSI_RED + "Command error: " + cmd + " is not a command!" + Colors.currentColor);
                 yield null;
             }
         };

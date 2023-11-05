@@ -30,10 +30,10 @@ public abstract class Command {
         return arguments;
     }
     public void error(String err){
-        System.out.println(Colors.ANSI_RED + "Command Error: " + this.getKeyword() + " --> " + err + Colors.ANSI_RESET);
+        System.out.println(Colors.ANSI_RED + "Command Error: " + this.getKeyword() + " --> " + err + Colors.currentColor);
     }
     public void feedback(String feedback){
-        System.out.println(Colors.ANSI_BLUE + feedback + Colors.ANSI_RESET);
+        System.out.println(Colors.ANSI_BLUE + feedback + Colors.currentColor);
     }
 
     public abstract void help();

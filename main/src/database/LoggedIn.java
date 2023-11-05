@@ -2,7 +2,6 @@ package database;
 
 import constant.Colors;
 import features.contact.Contact;
-import features.profile.Profile;
 
 public enum LoggedIn {
 
@@ -12,7 +11,7 @@ public enum LoggedIn {
 
     public void setLoggedIn(Contact contact){
         if(loggedIn != null)
-            System.out.println(Colors.ANSI_RED + "A user is already logged in: " + loggedIn.getName() + "!"+Colors.ANSI_RESET);
+            System.out.println(Colors.ANSI_RED + "A user is already logged in: " + loggedIn.getName() + "!"+Colors.currentColor);
         else{
             loggedIn = contact;
         }
@@ -20,10 +19,10 @@ public enum LoggedIn {
 
     public void logout(){
         if(loggedIn != null){
-            System.out.println(Colors.ANSI_BLUE + "Now disconnected from " + loggedIn.getName() + " account." + Colors.ANSI_RESET);
+            System.out.println(Colors.ANSI_BLUE + "Now disconnected from " + loggedIn.getName() + " account." + Colors.currentColor);
             loggedIn = null;
         }else{
-            System.out.println(Colors.ANSI_RED + "No user connected yet!"+Colors.ANSI_RESET);
+            System.out.println(Colors.ANSI_RED + "No user connected yet!"+Colors.currentColor);
         }
     }
 

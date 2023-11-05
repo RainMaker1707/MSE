@@ -1,5 +1,6 @@
 package smartMessagingSystem;
 
+import constant.Colors;
 import context.*;
 import commands.*;
 import database.DataBase;
@@ -40,13 +41,10 @@ class SmartMessagingSystem{
     private List<Context> getContexts() {
         return this.contexts;
     }
-
-
-    // TODO: really send messages
+    
     public static void main(String[] args) {
-
-        System.out.println("Welcome in SMS\n");
         SmartMessagingSystem sms = new SmartMessagingSystem();
+        System.out.println("Welcome in SMS\n");
         System.out.println();
 
         // Scanner for command at runtime
@@ -56,6 +54,7 @@ class SmartMessagingSystem{
         while(true){
             System.out.print("Enter a command: ");
             String command = scanner.nextLine().trim();
+            System.out.println();
             if(command.equals("exit")) break;
             Command cmd = cmdFactory.createCommand(command, sms.getContexts());
             if(cmd != null){ // Return null if command is not known

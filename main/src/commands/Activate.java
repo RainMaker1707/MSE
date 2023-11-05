@@ -3,6 +3,8 @@ package commands;
 import context.Context;
 import database.Features;
 import features.FeatureBehavior;
+import features.themes.Dark;
+import features.themes.Light;
 
 import java.util.List;
 
@@ -46,11 +48,12 @@ public class Activate extends Command{
             error(arg + " is not a feature");
             return;
         }
-        // TODO list alternative to check if activated and deactivate them
         if(behavior.getMandatory()) error("Mandatory features are always activated");
-        else if(behavior.getOptional()){
+        else if(behavior.getAlternative() ||behavior.getOptional()){
             if(!behavior.isActivated()){
                 behavior.activate();
+                Light.activate();
+                Dark.activate();
                 feedback(arg + " is now activated." );
             }else error(arg + " is already activated!");
         }

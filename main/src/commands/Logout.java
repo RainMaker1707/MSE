@@ -13,7 +13,7 @@ public class Logout extends Command{
     @Override
     public void run() {
         List<String> args = this.getArguments(false);
-        if(!args.isEmpty()) error("doesn't need argument" + Colors.ANSI_RESET);
+        if(!args.isEmpty()) error("doesn't need argument" + Colors.currentColor);
         else {
             LoggedIn.INSTANCE.get().changeStatus();
             LoggedIn.INSTANCE.logout();

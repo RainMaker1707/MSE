@@ -47,11 +47,11 @@ public abstract class Context {
     }
 
     public static void error(String err){
-        System.out.println(Colors.ANSI_RED + "Context error: " + err + Colors.ANSI_RESET);
+        System.out.println(Colors.ANSI_RED + "Context error: " + err + Colors.currentColor);
     }
 
     public void feedback(String feedback){
-        System.out.println(Colors.ANSI_BLUE + "Context: " + this.getName() + " " + feedback + Colors.ANSI_RESET);
+        System.out.println(Colors.ANSI_BLUE + "Context: " + this.getName() + " " + feedback + Colors.currentColor);
     }
 
 }
