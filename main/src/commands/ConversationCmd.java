@@ -10,7 +10,7 @@ import java.util.List;
 public class ConversationCmd extends Command{
 
     public ConversationCmd(List<Context> contexts, String command){
-        super("conversation", contexts, command);
+        super("conversations", contexts, command);
     }
 
     @Override
