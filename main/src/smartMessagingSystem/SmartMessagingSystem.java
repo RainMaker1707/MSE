@@ -7,7 +7,6 @@ import database.DataBase;
 
 
 import database.Features;
-import features.Feature;
 import features.FeatureBehavior;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ class SmartMessagingSystem{
     private List<Context> getContexts() {
         return this.contexts;
     }
-    
+
     public static void main(String[] args) {
         SmartMessagingSystem sms = new SmartMessagingSystem();
         System.out.println("Welcome in SMS\n");
@@ -51,15 +50,13 @@ class SmartMessagingSystem{
         System.out.println("Insert command to start conversation or (un)active context");
         Scanner scanner = new Scanner(System.in);
         CommandFactory cmdFactory = new CommandFactory();
-        while(true){
+        while(true) {
             System.out.print("Enter a command: ");
             String command = scanner.nextLine().trim();
-            System.out.println();
             if(command.equals("exit")) break;
             Command cmd = cmdFactory.createCommand(command, sms.getContexts());
-            if(cmd != null){ // Return null if command is not known
-                cmd.run();
-            }
+            // Return null if command is not known
+            if(cmd != null) cmd.run();
         }
         System.out.println("Bye");
     }
