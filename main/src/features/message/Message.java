@@ -1,5 +1,6 @@
 package features.message;
 
+import database.LoggedIn;
 import features.Feature;
 import features.contact.*;
 import features.conversation.Conversation;
@@ -35,6 +36,10 @@ public class Message extends Feature {
         return this.receiver;
     }
 
+    public MessageState getState() {
+        return state;
+    }
+
     public void send(){
         //TODO send the message to the receiver user
         this.state = sent;
@@ -47,7 +52,9 @@ public class Message extends Feature {
     }
 
     public void seen(){
-        // TODO implement logic when receiver has read the message
+        // Only triggered by MessageCmd
+        if(this.state == received && this.receiver.equals(LoggedIn.INSTANCE.get()))
+            this.state = seen;
     }
 
     public void delete(Contact contact) {
