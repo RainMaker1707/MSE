@@ -67,6 +67,11 @@ public class FeatureBehavior implements Feature{
 
     @Override
     public void activate() {
+        if(this.getAlternative()){
+            for(FeatureBehavior alt: this.getAlternativesSet().values()){
+                if(alt.isActivated()) alt.deactivate();
+            }
+        }
         activate = true;
     }
 
@@ -105,4 +110,6 @@ public class FeatureBehavior implements Feature{
         if(alt == null) throw new IllegalArgumentException( name + " is not a feature, can't be set as alternative");
         alternativesSet.put(name, alt);
     }
+
+    public HashMap<String, FeatureBehavior> getAlternativesSet(){return alternativesSet;}
 }
