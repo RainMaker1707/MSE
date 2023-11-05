@@ -1,6 +1,7 @@
 package database;
 
 import features.FeatureBehavior;
+import features.themes.Dark;
 
 import java.util.HashMap;
 
@@ -26,6 +27,7 @@ public enum Features {
         features.get("dark").activate();
         features.get("dark").addAlternativeFeature("light");
         features.get("light").addAlternativeFeature("dark");
+        Dark.activate();
     }
 
     public HashMap<String, FeatureBehavior> get(){
