@@ -10,8 +10,8 @@ public class Colors {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_MAGENTA = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_WHITE = "\u001B[97m";
 
-    public static final String BG_WHITE = "\033[107m";
-    public static final String BG_BLACK = "\033[40m";
+    public static final String BG_LIGHT = "\u001B[107m";
+    public static final String BG_DARK = "\u001B[40m";
 }

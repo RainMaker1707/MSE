@@ -9,7 +9,7 @@ public class Light {
 
     public static void activate(){
         if(behavior.isActivated()) {
-            System.out.print(Colors.BG_WHITE + Colors.ANSI_BLACK);
+            System.out.print(Colors.BG_LIGHT + Colors.ANSI_BLACK);
             Colors.currentColor = Colors.ANSI_BLACK;
         }
     }
