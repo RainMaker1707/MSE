@@ -60,8 +60,6 @@ public class Send extends Command{
         {
             // create conversation
             conversation = new Conversation(user, recipient);
-            user.addConversation(conversation);
-            recipient.addConversation(conversation);
         }else {
             // conversation already exist
             for(Conversation conv: user.getConversations()){
