@@ -3,7 +3,6 @@ package commands;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
-import features.Feature;
 import features.contact.Contact;
 
 import java.util.List;
@@ -28,7 +27,6 @@ public class Add extends Command{
                     feedback("User " + arg + " and " + LoggedIn.INSTANCE.get().getName() + " are now contact");
                 }
             }
-
         }
     }
 

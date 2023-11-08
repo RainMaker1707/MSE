@@ -7,10 +7,6 @@ import java.util.List;
 
 public class CommandFactory {
     public Command createCommand(String command, List<Context> contexts){
-        /* TODO:
-            add features in place of null
-            finish commands
-        */
         String cmd = command.split(" ")[0];
         return switch (cmd.toLowerCase()) {
             case "activate" -> new Activate(contexts,  command);

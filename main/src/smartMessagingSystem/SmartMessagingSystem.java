@@ -1,6 +1,5 @@
 package smartMessagingSystem;
 
-import constant.Colors;
 import context.*;
 import commands.*;
 import database.DataBase;
@@ -18,7 +17,7 @@ import java.util.Scanner;
 class SmartMessagingSystem{
 
     private List<Context> contexts;
-    private HashMap<String, FeatureBehavior> features;
+    private final HashMap<String, FeatureBehavior> features;
 
     public SmartMessagingSystem(){
         DataBase.INSTANCE.populate();

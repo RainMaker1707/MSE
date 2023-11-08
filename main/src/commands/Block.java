@@ -3,7 +3,6 @@ package commands;
 import context.Context;
 import database.Features;
 import database.LoggedIn;
-import features.FeatureBehavior;
 import features.contact.BlockContact;
 import features.contact.Contact;
 

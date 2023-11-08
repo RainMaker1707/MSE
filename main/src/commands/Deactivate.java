@@ -3,6 +3,8 @@ package commands;
 import context.Context;
 import database.Features;
 import features.FeatureBehavior;
+import features.themes.Dark;
+import features.themes.Light;
 
 import java.util.List;
 
@@ -30,9 +32,11 @@ public class Deactivate extends Command {
             for(String arg: args) {
                 FeatureBehavior behavior = Features.INSTANCE.get(arg);
                 // TODO list alternative to check if activated and deactivate them
-                if(behavior.getOptional()){
+                if(behavior.getAlternative() || behavior.getOptional()){
                     if(behavior.isActivated()){
                         behavior.deactivate();
+                        if(behavior.getName().equals("light")) Dark.activate();
+                        if(behavior.getName().equals("dark")) Light.activate();
                         feedback(arg + " is now deactivated." );
                     }else error(arg + " is already deactivated!");
                 }else if(behavior.getMandatory()) error("Mandatory features can't be deactivated");

@@ -3,6 +3,7 @@ package features;
 import database.Features;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class FeatureBehavior implements Feature{
 
@@ -24,8 +25,8 @@ public class FeatureBehavior implements Feature{
             }
             case "alternative": {
                 this.setAlternative(true);
-                this.deactivate();
                 alternativesSet = new HashMap<>();
+                this.activate = false;
                 break;
             }
             case "optional": {
@@ -67,16 +68,26 @@ public class FeatureBehavior implements Feature{
 
     @Override
     public void activate() {
+        activate = true;
         if(this.getAlternative()){
             for(FeatureBehavior alt: this.getAlternativesSet().values()){
                 if(alt.isActivated()) alt.deactivate();
             }
         }
-        activate = true;
     }
 
     @Override
     public void deactivate() {
+        if(this.getAlternative()){
+            boolean flag = false;
+            for(FeatureBehavior f: this.getAlternativesSet().values()) {
+                if(f.isActivated()) {
+                    flag= true;
+                    break;
+                }
+            }
+            if(!flag) this.getAlternativesSet().values().stream().toList().get(0).activate();
+        }
         activate = false;
     }
 

@@ -27,8 +27,4 @@ public enum DataBase {
         return set.get(username);
     }
 
-    public void addUser(Contact contact){
-        set.put(contact.getName(), contact);
-    }
-
 }

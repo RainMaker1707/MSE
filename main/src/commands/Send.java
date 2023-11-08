@@ -4,10 +4,7 @@ import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Conversation;
-import features.message.Message;
 import features.message.TextMessage;
-import features.profile.Profile;
-import org.w3c.dom.Text;
 
 import java.util.List;
 
