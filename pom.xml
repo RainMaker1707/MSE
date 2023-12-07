@@ -17,7 +17,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>GUI</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

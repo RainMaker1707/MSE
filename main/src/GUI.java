@@ -1,21 +1,39 @@
+import commands.Command;
+import commands.Login;
+import constant.Colors;
+import database.LoggedIn;
+import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+
+import java.util.List;
 
 
 public class GUI extends JFrame{
 
     final int TOTAL_HEIGHT = 540;
     final int TOTAL_WIDTH = 960;
+    final String TITLE = "SmartMessagingSystem";
+    SmartMessagingSystem sms;
+    JPanel mainPanel;
 
     public GUI(){
-        setTitle("SmartMessagingSystem");
+        sms = new SmartMessagingSystem();
+
+        setTitle(TITLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(TOTAL_WIDTH, TOTAL_HEIGHT);
 
         // Create the main panel with BorderLayout
-        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel = new JPanel(new BorderLayout());
         // Set the menu bar
+        createWelcomeMenu();
+    }
+
+    private void createWelcomeMenu(){
         setJMenuBar(createMenuBar());
 
         // Create components for the main panel
@@ -45,8 +63,13 @@ public class GUI extends JFrame{
         setVisible(true);
     }
 
+    private void reset(){
+        setTitle(TITLE);
+        mainPanel.removeAll();
+        createWelcomeMenu();
+    }
+
     private void MenuLogin(JPanel panel, JLabel label, JPanel panelButton){
-        String lastText = label.getText();
         panel.remove(panelButton);
         label.setText("");
 
@@ -62,31 +85,61 @@ public class GUI extends JFrame{
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
         innerPanel.add(buttonPanel);
+
         JButton login = new JButton("LoggIn");
         login.addActionListener(e->{
-            label.setText("LoggedIn as ...");
-            panel.remove(innerPanel);
-            panel.remove(panelButton);
-            JPanel contactPanel = new JPanel();
-            contactPanel.setBackground(Color.lightGray);
-            JLabel subLabel = new JLabel("Contacts List");
-            contactPanel.add(subLabel);
-            JPanel menuPanel = new JPanel();
-            menuPanel.add(label);
-            panel.add(menuPanel, BorderLayout.CENTER);
-            panel.add(contactPanel, BorderLayout.EAST);
-            SwingUtilities.updateComponentTreeUI(this);
-            this.getJMenuBar().add(createSettingsMenu());
+            Command log = new Login(sms.getContexts(), "login " + logInput.getText());
+            log.run();
+            if(LoggedIn.INSTANCE.isLoggedIn()) loggedInScreen(label);
+            else System.out.println("Unknown user");
         });
+
         buttonPanel.add(login);
         JButton cancel = new JButton("Cancel");
-        cancel.addActionListener(e->{
-            label.setText(lastText);
-            panel.remove(innerPanel);
-            panel.add(panelButton, BorderLayout.SOUTH);
-            SwingUtilities.updateComponentTreeUI(this);
-        });
+        cancel.addActionListener(e->reset());
         buttonPanel.add(cancel);
+    }
+
+    private void loggedInScreen(JLabel label){
+        setTitle(TITLE + " | " + LoggedIn.INSTANCE.get().getName());
+        label.setText("LoggedIn as " + LoggedIn.INSTANCE.get().getName());
+        mainPanel.removeAll();
+        JPanel contactPanel = new JPanel();
+        contactPanel.setBackground(Color.lightGray);
+        createContactList(contactPanel);
+        JPanel menuPanel = new JPanel();
+        menuPanel.add(label);
+        mainPanel.add(menuPanel, BorderLayout.CENTER);
+        mainPanel.add(contactPanel, BorderLayout.EAST);
+        SwingUtilities.updateComponentTreeUI(this);
+        this.getJMenuBar().add(createSettingsMenu());
+    }
+
+    private void createContactList(JPanel contactPanel) {
+        JLabel subLabel = new JLabel("Contacts List");
+        subLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        contactPanel.add(subLabel);
+        contactPanel.setLayout(new BoxLayout(contactPanel, BoxLayout.PAGE_AXIS));
+        contactPanel.add(Box.createRigidArea(new Dimension(100, 30)));
+
+        List<Contact> contacts = LoggedIn.INSTANCE.get().getContactList().getContacts();
+        for(Contact contact: contacts){
+            JLabel label = new JLabel(contact.getName() +"\n");
+            label.setBorder(new LineBorder(Color.BLACK, 1));
+            label.setAlignmentX(Component.CENTER_ALIGNMENT);
+            contactPanel.add(label);
+        }
+
+        JButton addContact = new JButton("Add Contact");
+        addContact.addActionListener(e->addContactAction());
+        addContact.setAlignmentX(Component.CENTER_ALIGNMENT);
+        contactPanel.add(Box.createVerticalGlue());
+        contactPanel.add(addContact);
+        contactPanel.add(Box.createRigidArea(new Dimension(100, 20)));
+    }
+
+    private void addContactAction() {
+        System.out.println("Add contact clicked");
     }
 
     private JMenuBar createMenuBar() {
@@ -117,77 +170,16 @@ public class GUI extends JFrame{
     private JMenu createSettingsMenu(){
         JMenu settings = new JMenu("Settings");
         JMenuItem logout = new JMenuItem("LogOut");
+        logout.addActionListener(e->{
+            LoggedIn.INSTANCE.logout();
+            reset();
+        });
         settings.add(logout);
         return settings;
     }
 
     public static void main(String[] args){
         new GUI();
+        System.out.print(Colors.RESET);
     }
 }
-
-
-    // Create window with title "application" that stop the program when closed
-//    JFrame frame = new JFrame("Application");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//                // Creating a panel that will hold the buttons
-//                JPanel panel = new JPanel();
-//
-//                // Setup frame with the panel
-//                frame.add(panel);
-//                frame.setSize(200, 200);
-//                frame.setVisible(true); // show the window
-//
-//                // Creation of a button that will be shown dynamically
-//                JButton buttonTemp = new JButton("Dynamic click me");
-//                buttonTemp.addActionListener((actionEvent) -> {
-//                System.out.println("dynamic click");
-//                });
-//
-//                frame.setTitle("SmartMessagingSystem");
-
-// Make the button appear
-//    case "add":
-//        panel.add(buttonTemp);
-//        break;
-
-//        GUI.Main loop
-//        Scanner in = new Scanner(System.in);
-//        while (true) {
-//            System.out.print("Enter a command: ");
-//            String line = in.nextLine();
-//            String[] cutLine = line.split(" ");
-//
-//            switch (cutLine[0]) {
-//
-//                // Enable dark mode
-//                case "dark":
-//                    frame.panel.setBackground(Color.BLACK);
-//                    break;
-//
-//                // Disable dark mode
-//                case "light":
-//                    panel.setBackground(Color.WHITE);
-//                    break;
-//
-//                // Stop the program
-//                case "stop":
-//                    in.close();
-//                    System.exit(0);
-//                    break;
-//
-//                // Unknown command
-//                default:
-//                    System.out.println("Unknown command " + cutLine[0]);
-//                    break;
-//            }
-//
-//            /*
-//             * These lines update the UI
-//             * Repaint holds for all graphical changes (like color changes)
-//             * Revalidate holds for UI change (like button add/remove)
-//             */
-//            frame.repaint();
-//            frame.revalidate();
-//        }
