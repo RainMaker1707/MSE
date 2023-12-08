@@ -46,6 +46,13 @@ public class ContactList{
         return this.contactList.stream().map(Contact::getName).toList();
     }
 
+    public Contact getContact(String name) {
+        return this.contactList.stream()
+                .filter(contact -> contact.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
     @Override
     public String toString() {
         StringBuilder contactList = new StringBuilder();

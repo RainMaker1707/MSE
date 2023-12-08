@@ -6,6 +6,10 @@ import features.FeatureBehavior;
 import features.contact.Contact;
 import features.contact.ContactList;
 import features.conversation.Conversation;
+import features.conversation.Group;
+import features.conversation.GroupList;
+import features.message.TextMessage;
+import features.notification.Notification;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,6 +21,8 @@ public class Profile{
     private final String name;
     private final ContactList contactList;
     private final List<Conversation> conversations;
+    private final GroupList groups;
+    private final List<Notification> notifications;
 
     FeatureBehavior behavior = Features.INSTANCE.get("profile");
 
@@ -25,6 +31,8 @@ public class Profile{
         this.picture = picture;
         this.contactList = new ContactList(this);
         this.conversations = new ArrayList<>();
+        this.groups = new GroupList(this);
+        this.notifications = new ArrayList<>();
     }
 
     public Profile getProfile(){
@@ -43,8 +51,16 @@ public class Profile{
         return contactList;
     }
 
+    public GroupList getGroups() {
+        return this.groups;
+    }
+
     public void addContact(Contact contact){
         contactList.addContact(contact);
+    }
+
+    public void addGroup(Group group) {
+        this.groups.addGroup(group);
     }
 
     public void addBlocked(Contact contact){
@@ -60,8 +76,16 @@ public class Profile{
     public void addConversation(Conversation c){
         this.conversations.add(c);
     }
-
+    
     public List<Conversation> getConversations(){
         return this.conversations;
+    }
+
+    public List<Notification> getNotifications(){
+        return this.notifications;
+    }
+
+    public void addNotification(Notification n) {
+        this.notifications.add(n);
     }
 }

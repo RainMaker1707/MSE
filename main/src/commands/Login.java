@@ -21,6 +21,7 @@ public class Login extends Command{
             if(DataBase.INSTANCE.getUser(username) != null){
                 LoggedIn.INSTANCE.setLoggedIn(DataBase.INSTANCE.getUser(username));
                 LoggedIn.INSTANCE.get().changeStatus();
+                feedback("User successfully logged in");
             }else error("unknown user " + username + ". Create user before login!");
         }
     }

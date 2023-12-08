@@ -5,6 +5,7 @@ import features.Feature;
 import features.FeatureBehavior;
 import features.contact.Contact;
 import features.message.Message;
+import features.notification.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,10 @@ public class Conversation{
         c2.addConversation(this);
     }
 
-    public void sendMessage(Message message){
+    public void sendMessage(Message message, Notification notification){
         this.conversation.add(message);
         message.send();
+        notification.send();
     }
 
     public Contact getContact1(){

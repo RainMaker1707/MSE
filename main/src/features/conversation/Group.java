@@ -4,6 +4,7 @@ package features.conversation;
 import database.Features;
 import features.FeatureBehavior;
 import features.contact.Contact;
+import features.message.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,19 @@ import java.util.List;
 public class Group extends Conversation{
     private final Contact owner;
     private final List<Contact> members;
+    private final String groupName;
     FeatureBehavior behavior = Features.INSTANCE.get("group");
-    public Group(Contact owner, Contact c2){
+    public Group(String groupName,Contact owner, Contact c2){
         super(owner, c2);
+        this.groupName = groupName;
         this.owner = owner;
         this.members = new ArrayList<>();
         this.addToGroup(owner);
         this.addToGroup(c2);
+    }
+
+    public String getGroupName() {
+        return this.groupName;
     }
 
     public Contact getOwner(){
@@ -40,5 +47,6 @@ public class Group extends Conversation{
     public void quitGroup(Contact c){
         this.members.remove(c);
     }
+
 
 }

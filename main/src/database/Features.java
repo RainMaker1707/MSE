@@ -2,6 +2,7 @@ package database;
 
 import features.FeatureBehavior;
 import features.themes.Dark;
+import features.notification.Silent;
 
 import java.util.HashMap;
 
@@ -19,6 +20,7 @@ public enum Features {
         features.put("message", new FeatureBehavior("message", "mandatory"));
         features.put("text", new FeatureBehavior("text", "mandatory"));
         features.put("profile", new FeatureBehavior("profile", "mandatory"));
+        features.put("notification", new FeatureBehavior("notification", "mandatory"));
 
         features.put("block", new FeatureBehavior("block", "optional"));
 
@@ -28,6 +30,18 @@ public enum Features {
         features.get("dark").addAlternativeFeature("light");
         features.get("light").addAlternativeFeature("dark");
         Dark.activate();
+
+        features.put("silent", new FeatureBehavior("silent", "alternative"));
+        features.put("vibrant", new FeatureBehavior("vibrant", "alternative"));
+        features.put("sound", new FeatureBehavior("sound", "alternative"));
+        features.get("silent").activate();
+        features.get("silent").addAlternativeFeature("vibrant");
+        features.get("silent").addAlternativeFeature("sound");
+        features.get("vibrant").addAlternativeFeature("silent");
+        features.get("vibrant").addAlternativeFeature("sound");
+        features.get("sound").addAlternativeFeature("vibrant");
+        features.get("sound").addAlternativeFeature("silent");
+        Silent.activate();
     }
 
     public HashMap<String, FeatureBehavior> get(){
