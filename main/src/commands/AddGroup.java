@@ -7,6 +7,9 @@ import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Group;
+import smartMessagingSystem.SmartMessagingSystem;
+
+import javax.swing.*;
 
 public class AddGroup extends Command {
     public AddGroup(List<Context> contexts, String command){
@@ -55,6 +58,11 @@ public class AddGroup extends Command {
                 error(groupName + " is not in your group list");
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

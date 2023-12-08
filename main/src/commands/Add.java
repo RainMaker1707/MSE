@@ -1,10 +1,13 @@
 package commands;
 
+import GUI.LoggedInMenu;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Add extends Command{
@@ -28,6 +31,11 @@ public class Add extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
     }
 
     @Override

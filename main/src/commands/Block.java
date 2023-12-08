@@ -5,7 +5,9 @@ import database.Features;
 import database.LoggedIn;
 import features.contact.BlockContact;
 import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Block extends Command{
@@ -32,6 +34,11 @@ public class Block extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

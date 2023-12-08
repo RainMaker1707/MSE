@@ -7,6 +7,9 @@ import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Group;
+import smartMessagingSystem.SmartMessagingSystem;
+
+import javax.swing.*;
 
 public class CreateGroup extends Command {
     public CreateGroup(List<Context> contexts, String command){
@@ -46,6 +49,11 @@ public class CreateGroup extends Command {
                 feedback("Group " + groupName + " created successfully");
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

@@ -1,12 +1,13 @@
 package commands;
 
+import GUI.LoggedInMenu;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
-import features.contact.Contact;
-import features.notification.NotificationState;
 import features.notification.Notification;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Login extends Command{
@@ -43,5 +44,10 @@ public class Login extends Command{
     @Override
     public void help(){
 
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
     }
 }

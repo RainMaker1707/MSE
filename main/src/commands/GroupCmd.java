@@ -6,6 +6,9 @@ import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Group;
+import smartMessagingSystem.SmartMessagingSystem;
+
+import javax.swing.*;
 
 public class GroupCmd extends Command {
     public GroupCmd(List<Context> contexts, String command){
@@ -39,6 +42,11 @@ public class GroupCmd extends Command {
             feedback(text.toString());
         }
         
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

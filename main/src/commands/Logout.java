@@ -1,9 +1,12 @@
 package commands;
 
+import GUI.WelcomeMenu;
 import constant.Colors;
 import context.Context;
 import database.LoggedIn;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Logout extends Command{
@@ -18,6 +21,11 @@ public class Logout extends Command{
             LoggedIn.INSTANCE.get().changeStatus();
             LoggedIn.INSTANCE.logout();
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new WelcomeMenu(sms);
     }
 
     @Override

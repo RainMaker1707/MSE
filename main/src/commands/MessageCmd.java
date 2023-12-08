@@ -8,7 +8,9 @@ import features.conversation.Conversation;
 import features.conversation.Group;
 import features.message.Message;
 import features.message.TextMessage;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class MessageCmd extends Command {
@@ -72,6 +74,11 @@ public class MessageCmd extends Command {
             if(toPrint.isEmpty()) toPrint.append("No message yet with ").append(groupRecipient.getGroupName());
             feedback(toPrint.toString());
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

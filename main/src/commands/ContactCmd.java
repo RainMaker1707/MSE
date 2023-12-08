@@ -3,7 +3,9 @@ package commands;
 import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ContactCmd extends Command {
@@ -36,6 +38,11 @@ public class ContactCmd extends Command {
             feedback(user.getName() + "'s contacts: " + text);
         }else feedback(user.getName() + " has no contact yet");
 
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override
