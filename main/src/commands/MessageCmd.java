@@ -8,6 +8,7 @@ import features.conversation.Conversation;
 import features.conversation.Group;
 import features.message.Message;
 import features.message.TextMessage;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.util.List;
@@ -76,7 +77,7 @@ public class MessageCmd extends Command {
     }
 
     @Override
-    public JPanel gui() {
+    public JPanel gui(SmartMessagingSystem sms) {
         return null;
     }
 

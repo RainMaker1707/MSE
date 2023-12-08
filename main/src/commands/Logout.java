@@ -3,6 +3,7 @@ package commands;
 import constant.Colors;
 import context.Context;
 import database.LoggedIn;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Logout extends Command{
     }
 
     @Override
-    public JPanel gui() {
+    public JPanel gui(SmartMessagingSystem sms) {
         return null;
     }
 

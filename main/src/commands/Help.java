@@ -1,6 +1,7 @@
 package commands;
 
 import context.Context;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Help extends Command{
     }
 
     @Override
-    public JPanel gui() {
+    public JPanel gui(SmartMessagingSystem sms) {
         return null;
     }
 

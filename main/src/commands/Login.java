@@ -1,8 +1,10 @@
 package commands;
 
+import GUI.LoggedInMenu;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.util.List;
@@ -33,7 +35,7 @@ public class Login extends Command{
     }
 
     @Override
-    public JPanel gui() {
-        return null;
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
     }
 }

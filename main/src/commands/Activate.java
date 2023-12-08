@@ -5,6 +5,7 @@ import database.Features;
 import features.FeatureBehavior;
 import features.themes.Dark;
 import features.themes.Light;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.util.List;
@@ -61,7 +62,7 @@ public class Activate extends Command{
     }
 
     @Override
-    public JPanel gui() {
+    public JPanel gui(SmartMessagingSystem sms) {
         return null;
     }
 

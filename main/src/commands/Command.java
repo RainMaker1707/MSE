@@ -2,6 +2,7 @@ package commands;
 
 import constant.Colors;
 import context.Context;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public abstract class Command {
 
     public abstract void help();
 
-    public abstract JPanel gui();
+    public abstract JPanel gui(SmartMessagingSystem sms);
 
     public String getKeyword(){
         return this.keyword;

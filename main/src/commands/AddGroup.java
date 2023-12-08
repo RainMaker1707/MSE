@@ -7,6 +7,7 @@ import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Group;
+import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 
@@ -60,7 +61,7 @@ public class AddGroup extends Command {
     }
 
     @Override
-    public JPanel gui() {
+    public JPanel gui(SmartMessagingSystem sms) {
         return null;
     }
 
