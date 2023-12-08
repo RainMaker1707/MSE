@@ -3,6 +3,7 @@ package database;
 import features.FeatureBehavior;
 import features.themes.Dark;
 import features.notification.Silent;
+import features.themes.Light;
 
 import java.util.HashMap;
 
@@ -29,7 +30,7 @@ public enum Features {
         features.get("dark").activate();
         features.get("dark").addAlternativeFeature("light");
         features.get("light").addAlternativeFeature("dark");
-        Dark.activate();
+        features.get("light").activate();
 
         features.put("silent", new FeatureBehavior("silent", "alternative"));
         features.put("vibrant", new FeatureBehavior("vibrant", "alternative"));
