@@ -4,6 +4,8 @@ import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
 public class WelcomeMenu extends JPanel {
     private final SmartMessagingSystem sms;
@@ -19,6 +21,12 @@ public class WelcomeMenu extends JPanel {
         labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.LINE_AXIS));
 
         JLabel label = new JLabel("Welcome in " + Constants.TITLE);
+        Font font = label.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        label.setFont(font.deriveFont(attributes));
+        label.setAlignmentX(CENTER_ALIGNMENT);
+
         labelPanel.add(Box.createHorizontalGlue());
         labelPanel.add(label, BorderLayout.CENTER);
         labelPanel.add(Box.createHorizontalGlue());

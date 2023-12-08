@@ -13,16 +13,23 @@ import java.awt.event.MouseListener;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 
-public class ContactListMenu extends JPanel {
+public class ContactListPanel extends JPanel {
 
     private final SmartMessagingSystem sms;
     private final JTextField field;
+    private final MessagePanel msgPanel;
 
-    public ContactListMenu(SmartMessagingSystem sms) {
+    /**
+        DO NOT UPDATE Frame.lastFrame here
+    **/
+    public ContactListPanel(SmartMessagingSystem sms, MessagePanel msgPanel) {
         this.field = new JTextField(32);
         this.sms = sms;
+        this.msgPanel = msgPanel;
 
-        // DO NOT UPDATE Frame.lastFrame here
+        setBackground(Color.LIGHT_GRAY);
+
+
         setMinimumSize(new Dimension(100, Constants.TOTAL_HEIGHT));
         setPreferredSize(new Dimension(200, Constants.TOTAL_HEIGHT));
         setMaximumSize(new Dimension(Constants.TOTAL_WIDTH/3, Constants.TOTAL_HEIGHT));
@@ -61,9 +68,11 @@ public class ContactListMenu extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         panel.setMinimumSize(new Dimension(100, 0));
         panel.setMaximumSize(new Dimension(Constants.TOTAL_WIDTH/3, 300));
+        panel.setOpaque(false);
 
         JPanel innerPanel = new JPanel();
         innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
+        innerPanel.setOpaque(false);
 
         panel.add(Box.createRigidArea(new Dimension(25,0)));
         panel.add(innerPanel);
@@ -73,6 +82,7 @@ public class ContactListMenu extends JPanel {
             JLabel label = new JLabel("• "+contact.getName());
             label.setAlignmentX(LEFT_ALIGNMENT);
             label.setAlignmentY(TOP_ALIGNMENT);
+            label.addMouseListener(getMouseListener(label, contact));
             innerPanel.add(label);
         }
         return panel;
@@ -85,6 +95,7 @@ public class ContactListMenu extends JPanel {
         panel.add(Box.createRigidArea(new Dimension(25, 0)));
         panel.add(field);
         panel.add(Box.createRigidArea(new Dimension(25, 0)));
+        panel.setOpaque(false);
         return panel;
     }
 
@@ -92,6 +103,7 @@ public class ContactListMenu extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         createButton(panel);
+        panel.setOpaque(false);
         return panel;
     }
 
@@ -130,5 +142,36 @@ public class ContactListMenu extends JPanel {
             this.refresh();
             SwingUtilities.updateComponentTreeUI(this);
         }
+    }
+
+    private MouseListener getMouseListener(JLabel label, Contact contact){
+        return new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                msgPanel.showMessages(contact);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                label.setForeground(Color.BLUE);
+                SwingUtilities.updateComponentTreeUI(label);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                label.setForeground(Color.BLACK);
+                SwingUtilities.updateComponentTreeUI(label);
+            }
+        };
     }
 }

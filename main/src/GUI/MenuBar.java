@@ -82,6 +82,7 @@ public class MenuBar extends JMenuBar {
         logout.addActionListener(e->{
             LoggedIn.INSTANCE.logout();
             if(LoggedIn.INSTANCE.get() == null){
+                Frame.frame.setTitle(Constants.TITLE);
                 Frame.frame.remove(Frame.lastPanel);
                 Frame.frame.setJMenuBar(new MenuBar(sms));
                 Frame.frame.add(new WelcomeMenu(sms));

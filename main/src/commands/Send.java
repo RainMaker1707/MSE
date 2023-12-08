@@ -32,7 +32,7 @@ public class Send extends Command{
             List<Group> groups = user.getGroups().getGroups();
             Group groupRecipient = null;
             for(Group group: groups) {
-                if(group.getGroupName().equals(args.get(0))) groupRecipient = group;
+                if(group != null && group.getGroupName().equals(args.get(0))) groupRecipient = group;
             }
             if (recipient == null && groupRecipient == null) {
                 error("Contact or group not found: " + args.get(0));

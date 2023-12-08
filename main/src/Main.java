@@ -13,17 +13,17 @@ import java.util.Scanner;
 public class Main {
     static boolean gui = false;
 
-    public static void main(String[] args) {
+    public static void isGUIActivated(String[] args){
         for(String arg: args) {
-            switch(arg){
-                case "--gui":
-                    Main.gui = true;
-                    break;
-                default:
-                    System.out.println("unrecognized argument: " + arg);
+            if(arg.equals("--gui")){
+                Main.gui = true;
+                break;
             }
         }
+    }
 
+    public static void main(String[] args) {
+        isGUIActivated(args);
         SmartMessagingSystem sms = new SmartMessagingSystem();
 
         if(Main.gui){
@@ -50,10 +50,14 @@ public class Main {
             if(cmd != null) {
                 cmd.run();
                 if(Frame.frame != null) {
-                    Frame.frame.remove(Frame.lastPanel);
-                    Frame.frame.setJMenuBar(new MenuBar(sms));
-                    Frame.frame.add(cmd.gui(sms));
-                    SwingUtilities.updateComponentTreeUI(Frame.frame);
+                    JPanel last = Frame.lastPanel;
+                    JPanel panel = cmd.gui(sms);
+                    if(panel != null){
+                        Frame.frame.remove(last);
+                        Frame.frame.setJMenuBar(new MenuBar(sms));
+                        Frame.frame.add(panel);
+                        SwingUtilities.updateComponentTreeUI(Frame.frame);
+                    }else Frame.lastPanel = last;
                 }
             }
         }
