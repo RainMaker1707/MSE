@@ -1,5 +1,6 @@
 package commands;
 
+import GUI.LoggedInMenu;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
@@ -39,7 +40,7 @@ public class Remove extends Command{
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
-        return null;
+        return new LoggedInMenu(sms);
     }
 
     @Override
