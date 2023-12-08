@@ -10,6 +10,10 @@ public class LoggedInMenu extends JPanel {
     public LoggedInMenu(SmartMessagingSystem sms){
         this.sms = sms;
         Frame.lastPanel = this;
+        setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+        add(getProfile());
+        add(getContactList());
+        Frame.frame.add(this);
     }
 
     private JPanel getContactList() { return new ContactListMenu(sms);}

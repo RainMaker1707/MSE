@@ -1,5 +1,6 @@
 package commands;
 
+import GUI.WelcomeMenu;
 import constant.Colors;
 import context.Context;
 import database.LoggedIn;
@@ -24,7 +25,7 @@ public class Logout extends Command{
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
-        return null;
+        return new WelcomeMenu(sms);
     }
 
     @Override
