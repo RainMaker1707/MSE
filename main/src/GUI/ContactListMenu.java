@@ -8,13 +8,15 @@ import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 
 public class ContactListMenu extends JPanel {
 
     private final SmartMessagingSystem sms;
-    JTextField field;
+    private final JTextField field;
 
     public ContactListMenu(SmartMessagingSystem sms) {
         this.field = new JTextField(32);
