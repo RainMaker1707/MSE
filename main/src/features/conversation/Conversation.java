@@ -14,6 +14,7 @@ public class Conversation{
     Contact contact1;
     Contact contact2;
     List<Message> conversation;
+    List<Notification> notifications;
 
     FeatureBehavior behavior = Features.INSTANCE.get("conversation");
 
@@ -21,12 +22,14 @@ public class Conversation{
         this.contact1 = c1;
         this.contact2 = c2;
         this.conversation = new ArrayList<>();
+        this.notifications = new ArrayList<>();
         c1.addConversation(this);
         c2.addConversation(this);
     }
 
     public void sendMessage(Message message, Notification notification){
         this.conversation.add(message);
+        this.notifications.add(notification);
         message.send();
         notification.send();
     }

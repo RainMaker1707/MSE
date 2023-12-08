@@ -4,6 +4,7 @@ import GUI.LoggedInMenu;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
+import features.notification.Notification;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
@@ -25,7 +26,18 @@ public class Login extends Command{
                 LoggedIn.INSTANCE.setLoggedIn(DataBase.INSTANCE.getUser(username));
                 LoggedIn.INSTANCE.get().changeStatus();
                 feedback("User successfully logged in");
+                checkNotifications(LoggedIn.INSTANCE.get());
             }else error("unknown user " + username + ". Create user before login!");
+        }
+    }
+
+    private void checkNotifications(Contact loggedInUser) {
+        List<Notification> notifications = loggedInUser.getNotifications();
+
+        for (Notification notification : notifications) {
+            if (notification.getReceiver().equals(loggedInUser) && notification.getState() == NotificationState.received) {
+                System.out.println("Notification: You have received a message from " + notification.getSender().getName());
+            }
         }
     }
 

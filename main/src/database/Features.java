@@ -1,7 +1,7 @@
 package database;
 
 import features.FeatureBehavior;
-import features.themes.Dark;
+import features.themes.Light;
 import features.notification.Silent;
 import features.themes.Light;
 
@@ -27,7 +27,6 @@ public enum Features {
 
         features.put("dark", new FeatureBehavior("dark", "alternative"));
         features.put("light", new FeatureBehavior("light", "alternative"));
-        features.get("dark").activate();
         features.get("dark").addAlternativeFeature("light");
         features.get("light").addAlternativeFeature("dark");
         features.get("light").activate();
