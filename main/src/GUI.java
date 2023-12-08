@@ -2,6 +2,9 @@ import commands.*;
 import constant.Colors;
 import database.LoggedIn;
 import features.contact.Contact;
+import features.conversation.Conversation;
+import features.message.Message;
+import features.message.TextMessage;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
@@ -10,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 
@@ -125,9 +130,10 @@ public class GUI extends JFrame{
         label.setText("LoggedIn as " + LoggedIn.INSTANCE.get().getName());
         mainPanel.removeAll();
         JPanel contactPanel = new JPanel();
-        contactPanel.setBackground(Color.lightGray);
-        createContactList(contactPanel);
         JPanel menuPanel = new JPanel();
+        menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.PAGE_AXIS));
+        contactPanel.setBackground(Color.lightGray);
+        createContactList(contactPanel, menuPanel);
         menuPanel.add(label);
         mainPanel.add(menuPanel, BorderLayout.CENTER);
         mainPanel.add(contactPanel, BorderLayout.EAST);
@@ -136,19 +142,39 @@ public class GUI extends JFrame{
     }
 
 
-    private void createContactList(JPanel contactPanel) {
+    private void createContactList(JPanel contactPanel, JPanel menuPanel) {
         JLabel subLabel = new JLabel("Contacts List");
         subLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         contactPanel.add(subLabel);
         contactPanel.setLayout(new BoxLayout(contactPanel, BoxLayout.PAGE_AXIS));
-        contactPanel.add(Box.createRigidArea(new Dimension(100, 30)));
+        contactPanel.add(Box.createRigidArea(new Dimension(0, 30)));
 
         List<Contact> contacts = LoggedIn.INSTANCE.get().getContactList().getContacts();
         for(Contact contact: contacts){
-            JLabel label = new JLabel("• "+contact.getName() +"\n");
-            //label.setBorder(new LineBorder(Color.BLUE, 1));
-            label.setBorder(new CompoundBorder(null, new EmptyBorder(10,10,10,10)));
-            label.setAlignmentX(Component.CENTER_ALIGNMENT);
+            JLabel label = new JLabel("• "+contact.getName());
+            label.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    JPanel messagePanel = new JPanel();
+                    JLabel panelTitle = new JLabel("Conversation with " + contact.getName());
+                    messagePanel.add(panelTitle);
+                    menuPanel.removeAll();
+                    menuPanel.add(panelTitle);
+                    messages(panelTitle, menuPanel, contact);
+                    SwingUtilities.updateComponentTreeUI(menuPanel);
+                }
+                @Override
+                public void mousePressed(MouseEvent e) {}
+                @Override
+                public void mouseReleased(MouseEvent e) {}
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+            label.setAlignmentX(Component.LEFT_ALIGNMENT);
             contactPanel.add(label);
         }
         JTextField contactSearch = new JTextField(32);
@@ -166,12 +192,12 @@ public class GUI extends JFrame{
         buttonLine.setLayout(new BoxLayout(buttonLine, BoxLayout.LINE_AXIS));
 
         JButton addContact = new JButton("Add Contact");
-        addContact.addActionListener(e->addContactAction(contactPanel, contactSearch));
+        addContact.addActionListener(e->addContactAction(contactPanel, contactSearch, menuPanel));
         addContact.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonLine.add(Box.createHorizontalGlue());
         buttonLine.add(addContact);
         JButton remContact = new JButton("Remove Contact");
-        remContact.addActionListener(e->removeContactAction(contactPanel, contactSearch));
+        remContact.addActionListener(e->removeContactAction(contactPanel, contactSearch, menuPanel));
         buttonLine.add(Box.createHorizontalGlue());
         buttonLine.add(remContact);
         buttonLine.add(Box.createHorizontalGlue());
@@ -181,18 +207,76 @@ public class GUI extends JFrame{
         contactPanel.add(Box.createRigidArea(new Dimension(100, 20)));
     }
 
+    private void messages(JLabel title, JPanel menuPanel, Contact contact) {
+        if(LoggedIn.INSTANCE.get().getConversations().isEmpty()){
+            JLabel emptyMessage = new JLabel("No messages yet");
+            menuPanel.add(Box.createVerticalGlue());
+            menuPanel.add(emptyMessage);
+        } else {
+            menuPanel.removeAll();
+            menuPanel.add(title);
+            for (Conversation c : LoggedIn.INSTANCE.get().getConversations())
+                if (c.getContact1().equals(contact) || c.getContact2().equals(contact))
+                    messageList(c, menuPanel);
+        }
+        // after added messages in panel
+        menuPanel.add(Box.createVerticalGlue());
 
-    private void addContactAction(JPanel panel, JTextField field) {
+        JPanel lineSend = new JPanel();
+        JTextField sendMessage = new JTextField();
+        sendMessage.setMaximumSize(new Dimension(TOTAL_WIDTH, 70));
+        JButton sendBtn = new JButton("Send");
+        sendBtn.addActionListener(e->sendMessageAction(title, contact, sendMessage, menuPanel));
+
+        lineSend.setLayout(new BoxLayout(lineSend, BoxLayout.LINE_AXIS));
+        lineSend.add(sendMessage);
+        lineSend.add(sendBtn);
+        menuPanel.add(lineSend);
+    }
+
+    private void messageList(Conversation c, JPanel panel) {
+        for(Message m: c.getMessages()){
+            if(m instanceof TextMessage msg){
+                JPanel line = new JPanel();
+                line.setLayout(new BoxLayout(line, BoxLayout.LINE_AXIS));
+                if(msg.getSender().getName().equals(LoggedIn.INSTANCE.get().getName())){
+                    line.add(Box.createHorizontalGlue());
+                    JLabel message = new JLabel(msg.getContent());
+                    // TODO: custom message box
+                    line.add(message);
+                } else{
+                    JLabel message = new JLabel(msg.getContent());
+                    // TODO: custom message box
+                    line.add(message);
+                    line.add(Box.createHorizontalGlue());
+                }
+                panel.add(line);
+            }
+        }
+        SwingUtilities.updateComponentTreeUI(panel);
+    }
+
+    private void sendMessageAction(JLabel title, Contact contact, JTextField sendMessage, JPanel menuPanel) {
+        System.out.println(sendMessage.getText());
+        new Send(sms.getContexts(), "send " + contact.getName() + " " + sendMessage.getText()).run();
+        new MessageCmd(sms.getContexts(), "messages " + contact.getName()).run();
+        sendMessage.setText("");
+        messages(title, menuPanel, contact);
+        SwingUtilities.updateComponentTreeUI(sendMessage);
+    }
+
+
+    private void addContactAction(JPanel panel, JTextField field, JPanel menuPanel) {
         new Add(sms.getContexts(), "add " + field.getText()).run();
         panel.removeAll();
-        createContactList(panel);
+        createContactList(panel, menuPanel);
         SwingUtilities.updateComponentTreeUI(this);
     }
 
-    private void removeContactAction(JPanel panel, JTextField field){
+    private void removeContactAction(JPanel panel, JTextField field, JPanel menuPanel){
         new Remove(sms.getContexts(), "remove " + field.getText()).run();
         panel.removeAll();
-        createContactList(panel);
+        createContactList(panel, menuPanel);
         SwingUtilities.updateComponentTreeUI(this);
     }
 
