@@ -1,9 +1,5 @@
-import commands.Activate;
-import commands.Add;
-import commands.Command;
-import commands.Login;
+import commands.*;
 import constant.Colors;
-import database.Features;
 import database.LoggedIn;
 import features.contact.Contact;
 import smartMessagingSystem.SmartMessagingSystem;
@@ -135,8 +131,8 @@ public class GUI extends JFrame{
         menuPanel.add(label);
         mainPanel.add(menuPanel, BorderLayout.CENTER);
         mainPanel.add(contactPanel, BorderLayout.EAST);
-        SwingUtilities.updateComponentTreeUI(this);
         this.getJMenuBar().add(createSettingsMenu());
+        SwingUtilities.updateComponentTreeUI(this);
     }
 
 
@@ -162,30 +158,43 @@ public class GUI extends JFrame{
         contactPanel.add(contactSearch);
 
         JPanel spacer = new JPanel();
-        spacer.setMaximumSize(new Dimension(TOTAL_WIDTH, 50));
+        spacer.setMaximumSize(new Dimension(TOTAL_WIDTH/2, 50));
         spacer.setOpaque(false);
         contactPanel.add(spacer);
+
+        JPanel buttonLine = new JPanel();
+        buttonLine.setLayout(new BoxLayout(buttonLine, BoxLayout.LINE_AXIS));
 
         JButton addContact = new JButton("Add Contact");
         addContact.addActionListener(e->addContactAction(contactPanel, contactSearch));
         addContact.setAlignmentX(Component.CENTER_ALIGNMENT);
-        contactPanel.add(addContact);
+        buttonLine.add(Box.createHorizontalGlue());
+        buttonLine.add(addContact);
+        JButton remContact = new JButton("Remove Contact");
+        remContact.addActionListener(e->removeContactAction(contactPanel, contactSearch));
+        buttonLine.add(Box.createHorizontalGlue());
+        buttonLine.add(remContact);
+        buttonLine.add(Box.createHorizontalGlue());
+        buttonLine.setOpaque(false);
+
+        contactPanel.add(buttonLine);
         contactPanel.add(Box.createRigidArea(new Dimension(100, 20)));
     }
 
 
     private void addContactAction(JPanel panel, JTextField field) {
-        System.out.println("Add contact clicked: " + field.getText());
-        int oldListSize = LoggedIn.INSTANCE.get().getContactList().getContacts().size();
         new Add(sms.getContexts(), "add " + field.getText()).run();
-        int newListSize = LoggedIn.INSTANCE.get().getContactList().getContacts().size();
-        if(oldListSize < newListSize) {
-            panel.removeAll();
-            createContactList(panel);
-            SwingUtilities.updateComponentTreeUI(this);
-        }
+        panel.removeAll();
+        createContactList(panel);
+        SwingUtilities.updateComponentTreeUI(this);
     }
 
+    private void removeContactAction(JPanel panel, JTextField field){
+        new Remove(sms.getContexts(), "remove " + field.getText()).run();
+        panel.removeAll();
+        createContactList(panel);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
 
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
