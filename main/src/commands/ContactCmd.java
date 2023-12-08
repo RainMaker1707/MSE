@@ -4,6 +4,7 @@ import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ContactCmd extends Command {
@@ -36,6 +37,11 @@ public class ContactCmd extends Command {
             feedback(user.getName() + "'s contacts: " + text);
         }else feedback(user.getName() + " has no contact yet");
 
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

@@ -3,6 +3,7 @@ package commands;
 import constant.Colors;
 import context.Context;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public abstract class Command {
     }
 
     public abstract void help();
+
+    public abstract JPanel gui();
 
     public String getKeyword(){
         return this.keyword;

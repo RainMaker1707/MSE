@@ -5,6 +5,7 @@ import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Conversation;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ConversationCmd extends Command{
@@ -47,6 +48,11 @@ public class ConversationCmd extends Command{
             text.append("No conversation yet");
         }
         feedback(text.toString());
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

@@ -6,6 +6,7 @@ import database.LoggedIn;
 import features.contact.Contact;
 import features.profile.Profile;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Remove extends Command{
@@ -33,6 +34,11 @@ public class Remove extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

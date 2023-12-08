@@ -6,6 +6,7 @@ import features.FeatureBehavior;
 import features.themes.Dark;
 import features.themes.Light;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Deactivate extends Command {
@@ -42,6 +43,11 @@ public class Deactivate extends Command {
                 }else if(behavior.getMandatory()) error("Mandatory features can't be deactivated");
             }
         }else error("Not recognized argument: " + key);
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

@@ -8,6 +8,7 @@ import features.conversation.Group;
 import features.message.TextMessage;
 import features.notification.Notification;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Send extends Command{
@@ -55,6 +56,11 @@ public class Send extends Command{
                 
             }
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     public String createMessage(List<String> args){

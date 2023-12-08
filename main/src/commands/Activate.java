@@ -6,6 +6,7 @@ import features.FeatureBehavior;
 import features.themes.Dark;
 import features.themes.Light;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Activate extends Command{
@@ -57,6 +58,11 @@ public class Activate extends Command{
                 feedback(arg + " is now activated.");
             }else error(arg + " is already activated!");
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

@@ -4,6 +4,7 @@ import context.Context;
 import database.DataBase;
 import database.LoggedIn;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Login extends Command{
@@ -29,5 +30,10 @@ public class Login extends Command{
     @Override
     public void help(){
 
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 }

@@ -8,6 +8,8 @@ import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Group;
 
+import javax.swing.*;
+
 public class CreateGroup extends Command {
     public CreateGroup(List<Context> contexts, String command){
         super("creategroup", contexts, command);
@@ -46,6 +48,11 @@ public class CreateGroup extends Command {
                 feedback("Group " + groupName + " created successfully");
             }
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

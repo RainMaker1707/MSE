@@ -8,8 +8,6 @@ import features.message.TextMessage;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -18,7 +16,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 
-public class GUI extends JFrame{
+public class OldGUI extends JFrame{
 
     final int TOTAL_HEIGHT = 540;
     final int TOTAL_WIDTH = 960;
@@ -28,7 +26,7 @@ public class GUI extends JFrame{
     Color backgroundColor;
     Color textColor;
 
-    public GUI(){
+    public OldGUI(){
         sms = new SmartMessagingSystem();
 
         setTitle(TITLE);
@@ -350,7 +348,7 @@ public class GUI extends JFrame{
 
 
     public static void main(String[] args){
-        new GUI();
+        new OldGUI();
         System.out.print(Colors.RESET);
     }
 }

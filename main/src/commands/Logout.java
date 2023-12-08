@@ -4,6 +4,7 @@ import constant.Colors;
 import context.Context;
 import database.LoggedIn;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Logout extends Command{
@@ -18,6 +19,11 @@ public class Logout extends Command{
             LoggedIn.INSTANCE.get().changeStatus();
             LoggedIn.INSTANCE.logout();
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

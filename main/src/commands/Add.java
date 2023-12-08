@@ -5,6 +5,7 @@ import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Add extends Command{
@@ -28,6 +29,11 @@ public class Add extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

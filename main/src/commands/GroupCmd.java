@@ -7,6 +7,8 @@ import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Group;
 
+import javax.swing.*;
+
 public class GroupCmd extends Command {
     public GroupCmd(List<Context> contexts, String command){
         super("groups", contexts, command);
@@ -39,6 +41,11 @@ public class GroupCmd extends Command {
             feedback(text.toString());
         }
         
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override

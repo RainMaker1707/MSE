@@ -6,6 +6,7 @@ import database.LoggedIn;
 import features.contact.BlockContact;
 import features.contact.Contact;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Block extends Command{
@@ -32,6 +33,11 @@ public class Block extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui() {
+        return null;
     }
 
     @Override
