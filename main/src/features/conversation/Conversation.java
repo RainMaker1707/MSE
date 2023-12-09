@@ -18,13 +18,15 @@ public class Conversation{
 
     FeatureBehavior behavior = Features.INSTANCE.get("conversation");
 
-    public Conversation(Contact c1, Contact c2){
+    public Conversation(Contact c1, Contact c2, boolean isGroup){
         this.contact1 = c1;
         this.contact2 = c2;
         this.conversation = new ArrayList<>();
         this.notifications = new ArrayList<>();
-        c1.addConversation(this);
-        c2.addConversation(this);
+        if(!isGroup){
+            c1.addConversation(this);
+            c2.addConversation(this);
+        }
     }
 
     public void sendMessage(Message message, Notification notification){

@@ -18,7 +18,7 @@ public class Group extends Conversation{
 
     FeatureBehavior behavior = Features.INSTANCE.get("group");
     public Group(String groupName,Contact owner, Contact c2){
-        super(owner, c2);
+        super(owner, c2, true);
         this.groupName = groupName;
         this.owner = owner;
         this.members = new ArrayList<>();

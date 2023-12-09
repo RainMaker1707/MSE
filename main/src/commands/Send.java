@@ -81,7 +81,7 @@ public class Send extends Command{
                 && !user.getConversations().stream().map(Conversation::getContact2).toList().contains(recipient))
         {
             // create conversation
-            conversation = new Conversation(user, recipient);
+            conversation = new Conversation(user, recipient, false);
         }else {
             // conversation already exist
             for(Conversation conv: user.getConversations()){
