@@ -5,6 +5,7 @@ import database.Features;
 import features.FeatureBehavior;
 import features.contact.Contact;
 import features.message.Message;
+import features.notification.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +14,18 @@ public class Group extends Conversation{
     private final Contact owner;
     private final List<Contact> members;
     private final String groupName;
+    List<Message> groupConversation;
+
     FeatureBehavior behavior = Features.INSTANCE.get("group");
     public Group(String groupName,Contact owner, Contact c2){
         super(owner, c2);
         this.groupName = groupName;
         this.owner = owner;
         this.members = new ArrayList<>();
+        this.groupConversation = new ArrayList<>();
         this.addToGroup(owner);
         this.addToGroup(c2);
+
     }
 
     public String getGroupName() {
@@ -46,6 +51,19 @@ public class Group extends Conversation{
 
     public void quitGroup(Contact c){
         this.members.remove(c);
+    }
+
+    @Override
+    public void sendMessage(Message message, Notification notification){
+        this.groupConversation.add(message);
+        this.notifications.add(notification);
+        message.send();
+        notification.send();
+    }
+
+    @Override
+    public List<Message> getMessages() {
+        return this.groupConversation;
     }
 
 
