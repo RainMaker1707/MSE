@@ -42,7 +42,7 @@ public class Message extends Feature {
     }
 
     public void receive(){
-        if(this.state == sent && this.receiver.getStatus() == Status.online)
+        if(this.state == sent && this.receiver != null && this.receiver.getStatus() == Status.online)
             this.state = received;
     }
 

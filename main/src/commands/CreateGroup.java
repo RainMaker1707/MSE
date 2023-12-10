@@ -21,17 +21,18 @@ public class CreateGroup extends Command {
         List<String> args = this.getArguments(false);
         if (LoggedIn.INSTANCE.get() == null) {
             error("No user logged in");
-        } else if (args.size() < 2) {
-            error("Provide a group name and at least one contact to create a group");
+        } else if (args.isEmpty()) {
+            error("Provide a group name to create a group");
         } else {
             String groupName = args.get(0);
-            Contact member = LoggedIn.INSTANCE.get().getContactList().getContact(args.get(1));
-            if (member == null) {
-                error("Contact " + args.get(1) + " not found in your contact list");
-            } else if (DataBase.INSTANCE.getGroup(groupName) != null) {
+//            Contact member = LoggedIn.INSTANCE.get().getContactList().getContact(args.get(1));
+//            if (member == null) {
+//                error("Contact " + args.get(1) + " not found in your contact list");
+//            } else
+            if (DataBase.INSTANCE.getGroup(groupName) != null) {
                 error("Group with name " + groupName + " already exists");
             } else {
-                Group newGroup = new Group(groupName, LoggedIn.INSTANCE.get(), member);
+                Group newGroup = new Group(groupName, LoggedIn.INSTANCE.get(), null);
 
                 for (int i = 1; i < args.size(); i++) {
                     String contactName = args.get(i);
@@ -44,8 +45,6 @@ public class CreateGroup extends Command {
                     }
                 }
 
-                // Add the new group to the user's profile
-                LoggedIn.INSTANCE.get().addGroup(newGroup);
                 feedback("Group " + groupName + " created successfully");
             }
         }

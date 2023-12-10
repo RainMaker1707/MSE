@@ -41,7 +41,7 @@ public class Notification extends Feature {
     }
 
     public void receive(){
-        if(this.receiver.getStatus() == Status.online)
+        if(this.receiver != null && this.receiver.getStatus() == Status.online)
             this.state = received;
     }
 

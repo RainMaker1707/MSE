@@ -24,8 +24,7 @@ public class Group extends Conversation{
         this.members = new ArrayList<>();
         this.groupConversation = new ArrayList<>();
         this.addToGroup(owner);
-        this.addToGroup(c2);
-
+        if(c2 != null) this.addToGroup(c2);
     }
 
     public String getGroupName() {
