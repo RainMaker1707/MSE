@@ -1,5 +1,6 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class MessageCmd extends Command {
 
-    public MessageCmd(List<Context> contexts, String command){
+    public MessageCmd(List<ContextBehavior> contexts, String command){
         super("messages", contexts, command);
     }
     @Override

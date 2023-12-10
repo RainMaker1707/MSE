@@ -1,12 +1,13 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import constant.Colors;
 import context.Context;
 
 import java.util.List;
 
 public class CommandFactory {
-    public Command createCommand(String command, List<Context> contexts){
+    public Command createCommand(String command, List<ContextBehavior> contexts){
         String cmd = command.split(" ")[0];
         return switch (cmd.toLowerCase()) {
             case "activate" -> new Activate(contexts,  command);

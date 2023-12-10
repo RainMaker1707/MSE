@@ -1,5 +1,6 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class ConversationCmd extends Command{
 
-    public ConversationCmd(List<Context> contexts, String command){
+    public ConversationCmd(List<ContextBehavior> contexts, String command){
         super("conversations", contexts, command);
     }
 

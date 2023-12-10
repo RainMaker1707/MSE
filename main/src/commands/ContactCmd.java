@@ -1,5 +1,6 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class ContactCmd extends Command {
-    public ContactCmd(List<Context> contexts, String command) {
+    public ContactCmd(List<ContextBehavior> contexts, String command) {
         super("contacts", contexts, command);
     }
 

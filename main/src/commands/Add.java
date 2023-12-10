@@ -1,6 +1,7 @@
 package commands;
 
 import GUI.LoggedInMenu;
+import behaviour.ContextBehavior;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
@@ -11,7 +12,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class Add extends Command{
-    public Add(List<Context> contexts, String command){
+    public Add(List<ContextBehavior> contexts, String command){
         super("add", contexts, command);
     }
     @Override

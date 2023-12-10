@@ -1,5 +1,6 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
 import behaviour.FeatureBehavior;
@@ -11,7 +12,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class Deactivate extends Command {
-    public Deactivate(List<Context> contexts, String command){
+    public Deactivate(List<ContextBehavior> contexts, String command){
         super("deactivate", contexts, command);
     }
 
@@ -25,7 +26,7 @@ public class Deactivate extends Command {
         args.remove(0);
         if(key.equals("context")) {
             for(String arg: args) {
-                int index = contexts.stream().map(Context::getName).toList().indexOf(arg);
+                int index = contexts.stream().map(ContextBehavior::getName).toList().indexOf(arg);
                 if(index != -1){
                     contexts.get(index).deactivate();
                 }else Context.error(arg + " not found!");

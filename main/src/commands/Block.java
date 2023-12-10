@@ -1,5 +1,6 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
 import database.LoggedIn;
@@ -11,7 +12,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class Block extends Command{
-    public Block(List<Context> contexts, String command){
+    public Block(List<ContextBehavior> contexts, String command){
         super("block", contexts, command);
     }
     @Override

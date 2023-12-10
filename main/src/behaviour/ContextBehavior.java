@@ -2,7 +2,9 @@ package behaviour;
 
 import database.ContextsDB;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ContextBehavior implements Behaviour{
 
@@ -13,9 +15,12 @@ public class ContextBehavior implements Behaviour{
     boolean activate = true;
 
     HashMap<String, ContextBehavior> alternativesSet;
+    List<FeatureBehavior> linkedFeatures;
 
     public ContextBehavior(String linkedContextName, String type) {
         this.name = linkedContextName;
+        this.linkedFeatures = new ArrayList<>();
+
         switch(type){
             case "mandatory": {
                 this.setMandatory(true);
@@ -123,4 +128,8 @@ public class ContextBehavior implements Behaviour{
     }
 
     public HashMap<String, ContextBehavior> getAlternativesSet(){return alternativesSet;}
+
+    public List<FeatureBehavior> getLinkedFeatures(){
+        return this.linkedFeatures;
+    }
 }

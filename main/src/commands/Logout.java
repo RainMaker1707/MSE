@@ -1,6 +1,7 @@
 package commands;
 
 import GUI.WelcomeMenu;
+import behaviour.ContextBehavior;
 import constant.Colors;
 import context.Context;
 import database.LoggedIn;
@@ -10,7 +11,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class Logout extends Command{
-    public Logout(List<Context> contexts, String command){
+    public Logout(List<ContextBehavior> contexts, String command){
         super("Logout", contexts, command);
     }
     @Override

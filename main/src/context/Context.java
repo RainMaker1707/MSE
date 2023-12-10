@@ -1,41 +1,20 @@
 package context;
 
-import features.Feature;
+import behaviour.ContextBehavior;
+import behaviour.FeatureBehavior;
 import constant.Colors;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Context {
     String name;
     boolean activated;
-    List<Feature> linkedFeatures;
 
+    ContextBehavior behavior;
 
-    public Context(String name){
+    public Context(String name, ContextBehavior behavior){
         this.name = name.toLowerCase();
         this.activated = false;
-        // TODO: link real feature
-        this.linkedFeatures = new ArrayList<>();
-    }
-
-    public void activate(){
-        if(!this.isActivated()) {
-            this.activated = true;
-            feedback("is now activated");
-        }
-        else error(this.getName() + " is already activated");
-    }
-    public void deactivate(){
-        if(this.isActivated()) {
-            this.activated = false;
-            feedback("is now deactivated");
-        }
-        else error(this.getName() + " is already deactivated");
-    }
-
-    public List<Feature> getLinkedFeatures(){
-        return this.linkedFeatures;
+        this.behavior = behavior;
     }
 
     public String getName(){

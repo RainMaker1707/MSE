@@ -1,6 +1,7 @@
 package commands;
 
 import GUI.LoggedInMenu;
+import behaviour.ContextBehavior;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
@@ -13,7 +14,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class Login extends Command{
-    public Login(List<Context> contexts, String command){
+    public Login(List<ContextBehavior> contexts, String command){
         super("login", contexts, command);
     }
 

@@ -2,6 +2,7 @@ package commands;
 
 import java.util.List;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -11,7 +12,7 @@ import smartMessagingSystem.SmartMessagingSystem;
 import javax.swing.*;
 
 public class GroupCmd extends Command {
-    public GroupCmd(List<Context> contexts, String command){
+    public GroupCmd(List<ContextBehavior> contexts, String command){
         super("groups", contexts, command);
     }
 

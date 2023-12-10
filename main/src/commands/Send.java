@@ -1,5 +1,6 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class Send extends Command{
 
-    public Send(List<Context> contexts, String command){
+    public Send(List<ContextBehavior> contexts, String command){
         super("send", contexts, command);
     }
 

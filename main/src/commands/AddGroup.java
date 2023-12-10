@@ -2,6 +2,7 @@ package commands;
 
 import java.util.List;
 
+import behaviour.ContextBehavior;
 import context.Context;
 import database.DataBase;
 import database.LoggedIn;
@@ -12,7 +13,7 @@ import smartMessagingSystem.SmartMessagingSystem;
 import javax.swing.*;
 
 public class AddGroup extends Command {
-    public AddGroup(List<Context> contexts, String command){
+    public AddGroup(List<ContextBehavior> contexts, String command){
         super("addgroup", contexts, command);
     }
 
