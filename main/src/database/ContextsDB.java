@@ -16,6 +16,8 @@ public enum ContextsDB {
 
         set.put("day", new ContextBehavior("day", "alternative"));
         set.put("night", new ContextBehavior("night", "alternative"));
+        set.get("day").addLinkedFeature(Features.INSTANCE.get("light"));
+        set.get("night").addLinkedFeature(Features.INSTANCE.get("dark"));
 
         set.get("day").addAlternativeContext("night");
         set.get("night").addAlternativeContext("day");

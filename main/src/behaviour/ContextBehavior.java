@@ -1,6 +1,7 @@
 package behaviour;
 
 import database.ContextsDB;
+import features.Feature;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,4 +133,5 @@ public class ContextBehavior implements Behaviour{
     public List<FeatureBehavior> getLinkedFeatures(){
         return this.linkedFeatures;
     }
+    public void addLinkedFeature(FeatureBehavior feature) {linkedFeatures.add(feature);}
 }
