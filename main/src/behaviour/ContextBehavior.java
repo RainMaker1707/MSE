@@ -82,7 +82,6 @@ public class ContextBehavior implements Behaviour{
             }
         }
         for(FeatureBehavior featureBehavior: linkedFeaturesBehavior) featureBehavior.activate();
-        //for(Feature feature: linkedFeatures) feature.activate();
     }
 
     @Override
@@ -98,6 +97,7 @@ public class ContextBehavior implements Behaviour{
             if(!flag) this.getAlternativesSet().values().stream().toList().get(0).activate();
         }
         activate = false;
+        for(FeatureBehavior featureBehavior: linkedFeaturesBehavior) featureBehavior.deactivate();
     }
 
     @Override
@@ -134,14 +134,10 @@ public class ContextBehavior implements Behaviour{
 
     public HashMap<String, ContextBehavior> getAlternativesSet(){return alternativesSet;}
 
-    public List<Feature> getLinkedFeatures(){
-        return this.linkedFeatures;
-    }
     public List<FeatureBehavior> getLinkedFeaturesBehavior(){
         return this.linkedFeaturesBehavior;
     }
-    public void addLinkedFeature(FeatureBehavior featureBehavior, Feature feature) {
+    public void addLinkedFeature(FeatureBehavior featureBehavior) {
         linkedFeaturesBehavior.add(featureBehavior);
-        linkedFeatures.add(feature);
     }
 }

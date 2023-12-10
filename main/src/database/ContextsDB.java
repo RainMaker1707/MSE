@@ -18,8 +18,8 @@ public enum ContextsDB {
 
         set.put("day", new ContextBehavior("day", "alternative"));
         set.put("night", new ContextBehavior("night", "alternative"));
-        set.get("day").addLinkedFeature(Features.INSTANCE.get("light"), new Light());
-        set.get("night").addLinkedFeature(Features.INSTANCE.get("dark"), new Dark());
+        set.get("day").addLinkedFeature(Features.INSTANCE.get("light"));
+        set.get("night").addLinkedFeature(Features.INSTANCE.get("dark"));
 
         set.get("day").addAlternativeContext("night");
         set.get("night").addAlternativeContext("day");
@@ -66,6 +66,7 @@ public enum ContextsDB {
         set.get("tablet").addAlternativeContext("phone");
 
         set.put("subscribe", new ContextBehavior("subscribe", "optional"));
+        set.get("subscribe").addLinkedFeature(Features.INSTANCE.get("block"));
     }
 
     public HashMap<String, ContextBehavior> get(){
