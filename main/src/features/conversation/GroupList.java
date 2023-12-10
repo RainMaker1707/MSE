@@ -2,8 +2,7 @@ package features.conversation;
 
 
 import database.Features;
-import features.Feature;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
 import features.profile.Profile;
 
 

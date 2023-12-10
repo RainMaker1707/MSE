@@ -1,16 +1,14 @@
 package features.notification;
 
-import context.Context;
 import database.Features;
-import database.LoggedIn;
+import behaviour.FeatureBehavior;
 import features.Feature;
-import features.FeatureBehavior;
 import features.contact.*;
 import features.conversation.Conversation;
 import static features.notification.NotificationState.*;
 
 
-public class Notification{
+public class Notification extends Feature {
     private final Conversation conversation;
     Contact sender;
     Contact receiver;

@@ -2,21 +2,20 @@ package features.profile;
 
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
+import features.Feature;
 import features.contact.Contact;
 import features.contact.ContactList;
 import features.conversation.Conversation;
 import features.conversation.Group;
 import features.conversation.GroupList;
-import features.message.TextMessage;
 import features.notification.Notification;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import features.Feature;
 
-public class Profile{
+public class Profile extends Feature {
     private final Image picture;
     private final String name;
     private final ContactList contactList;

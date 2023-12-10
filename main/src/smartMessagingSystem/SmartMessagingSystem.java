@@ -1,17 +1,15 @@
 package smartMessagingSystem;
 
 import context.*;
-import commands.*;
 import database.DataBase;
 
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class SmartMessagingSystem{

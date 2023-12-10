@@ -1,9 +1,10 @@
 package features.notification;
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
+import features.Feature;
 
-public class Silent {
+public class Silent extends Feature {
     static FeatureBehavior behavior = Features.INSTANCE.get("silent");
 
     public static void activate(){

@@ -2,9 +2,10 @@ package features.themes;
 
 import constant.Colors;
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
+import features.Feature;
 
-public class Dark {
+public class Dark extends Feature {
     static FeatureBehavior behavior = Features.INSTANCE.get("dark");
 
     public static void activate(){

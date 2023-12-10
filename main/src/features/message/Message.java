@@ -2,13 +2,13 @@ package features.message;
 
 import database.Features;
 import database.LoggedIn;
+import behaviour.FeatureBehavior;
 import features.Feature;
-import features.FeatureBehavior;
 import features.contact.*;
 import features.conversation.Conversation;
 import static features.message.MessageState.*;
 
-public class Message{
+public class Message extends Feature {
     private final Conversation conversation;
     Contact sender;
     Contact receiver;

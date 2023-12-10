@@ -1,8 +1,8 @@
 package features.conversation;
 
 import database.Features;
+import behaviour.FeatureBehavior;
 import features.Feature;
-import features.FeatureBehavior;
 import features.contact.Contact;
 import features.message.Message;
 import features.notification.Notification;
@@ -10,7 +10,7 @@ import features.notification.Notification;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Conversation{
+public class Conversation extends Feature {
     Contact contact1;
     Contact contact2;
     List<Message> conversation;

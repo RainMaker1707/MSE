@@ -1,9 +1,10 @@
 package features.notification;
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
+import features.Feature;
 
-public class Vibrant {
+public class Vibrant extends Feature {
     static FeatureBehavior behavior = Features.INSTANCE.get("vibrant");
 
     public static void activate(){

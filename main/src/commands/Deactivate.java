@@ -2,7 +2,7 @@ package commands;
 
 import context.Context;
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
 import features.themes.Dark;
 import features.themes.Light;
 import smartMessagingSystem.SmartMessagingSystem;

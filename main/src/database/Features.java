@@ -1,9 +1,7 @@
 package database;
 
-import features.FeatureBehavior;
-import features.themes.Light;
+import behaviour.FeatureBehavior;
 import features.notification.Silent;
-import features.themes.Light;
 
 import java.util.HashMap;
 

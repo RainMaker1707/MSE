@@ -1,7 +1,7 @@
 package features.message;
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
 import features.contact.Contact;
 import features.conversation.Conversation;
 

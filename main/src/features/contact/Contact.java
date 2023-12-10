@@ -2,7 +2,7 @@ package features.contact;
 
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
 import features.conversation.Conversation;
 import features.profile.*;
 

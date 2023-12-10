@@ -1,11 +1,10 @@
-package features;
+package behaviour;
 
-import database.Features;
+import database.ContextsDB;
 
 import java.util.HashMap;
-import java.util.List;
 
-public class FeatureBehavior implements Feature{
+public class ContextBehavior implements Behaviour{
 
     private final String name;
     boolean mandatory = true;
@@ -13,10 +12,10 @@ public class FeatureBehavior implements Feature{
     boolean optional = false;
     boolean activate = true;
 
-    HashMap<String, FeatureBehavior> alternativesSet;
+    HashMap<String, ContextBehavior> alternativesSet;
 
-    public FeatureBehavior(String linkedFeatureName, String type){
-        this.name = linkedFeatureName;
+    public ContextBehavior(String linkedContextName, String type) {
+        this.name = linkedContextName;
         switch(type){
             case "mandatory": {
                 this.setMandatory(true);
@@ -34,8 +33,8 @@ public class FeatureBehavior implements Feature{
                 this.deactivate();
                 break;
             }
-            default: throw new IllegalArgumentException("FeatureBehavior type: " + type
-                            + "is not in ['mandatory', 'optional', 'alternative']");
+            default: throw new IllegalArgumentException("ContextBehavior type: " + type
+                    + "is not in ['mandatory', 'optional', 'alternative']");
         }
     }
 
@@ -70,7 +69,7 @@ public class FeatureBehavior implements Feature{
     public void activate() {
         activate = true;
         if(this.getAlternative()){
-            for(FeatureBehavior alt: this.getAlternativesSet().values()){
+            for(ContextBehavior alt: this.getAlternativesSet().values()){
                 if(alt.isActivated()) alt.deactivate();
             }
         }
@@ -80,7 +79,7 @@ public class FeatureBehavior implements Feature{
     public void deactivate() {
         if(this.getAlternative()){
             boolean flag = false;
-            for(FeatureBehavior f: this.getAlternativesSet().values()) {
+            for(ContextBehavior f: this.getAlternativesSet().values()) {
                 if(f.isActivated()) {
                     flag= true;
                     break;
@@ -116,11 +115,12 @@ public class FeatureBehavior implements Feature{
         return activate;
     }
 
+    @Override
     public void addAlternativeFeature(String name){
-        FeatureBehavior alt = Features.INSTANCE.get(name);
+        ContextBehavior alt = ContextsDB.INSTANCE.get(name);
         if(alt == null) throw new IllegalArgumentException( name + " is not a feature, can't be set as alternative");
         alternativesSet.put(name, alt);
     }
 
-    public HashMap<String, FeatureBehavior> getAlternativesSet(){return alternativesSet;}
+    public HashMap<String, ContextBehavior> getAlternativesSet(){return alternativesSet;}
 }

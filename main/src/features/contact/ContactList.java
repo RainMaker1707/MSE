@@ -2,14 +2,14 @@ package features.contact;
 
 
 import database.Features;
+import behaviour.FeatureBehavior;
 import features.Feature;
-import features.FeatureBehavior;
 import features.profile.Profile;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class ContactList{
+public class ContactList extends Feature {
     private final Profile owner;
     List<Contact> contactList;
     List<Contact> blocked;
