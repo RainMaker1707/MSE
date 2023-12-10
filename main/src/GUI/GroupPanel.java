@@ -1,5 +1,7 @@
 package GUI;
 
+import commands.Add;
+import commands.CreateGroup;
 import database.LoggedIn;
 import features.conversation.Group;
 import smartMessagingSystem.SmartMessagingSystem;
@@ -110,7 +112,14 @@ public class GroupPanel extends JPanel {
     }
 
     private void createBtnAction(){
-        System.out.println("CLICKED BTN 1");
+        int oldSize = LoggedIn.INSTANCE.get().getGroups().getGroups().size();
+        new CreateGroup(sms.getContexts(), "createGroup " + field.getText()).run();
+        int newSize = LoggedIn.INSTANCE.get().getGroups().getGroups().size();
+        if(oldSize < newSize) {
+            this.removeAll();
+            this.refresh();
+            SwingUtilities.updateComponentTreeUI(this);
+        }
     }
 
     private MouseListener getMouseListener(JLabel label, Group group) {
