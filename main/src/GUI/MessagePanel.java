@@ -112,4 +112,28 @@ public class MessagePanel extends JPanel {
         label.setFont(font.deriveFont(attributes));
         label.setAlignmentX(CENTER_ALIGNMENT);
     }
+
+    public void showGroup(Conversation conversation){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+
+        for(Message msg: conversation.getMessages()){
+            if(msg instanceof TextMessage m){
+                JPanel msgPanel = new JPanel();
+                msgPanel.setLayout(new BoxLayout(msgPanel, BoxLayout.LINE_AXIS));
+                JLabel content = new JLabel(m.getContent());
+                if(m.getSender().equals(LoggedIn.INSTANCE.get())){
+                    msgPanel.add(Box.createHorizontalGlue());
+                    content.setForeground(Color.BLUE);
+                    msgPanel.add(content);
+                }else{
+                    content.setForeground(Color.GREEN);
+                    msgPanel.add(content);
+                    msgPanel.add(Box.createHorizontalGlue());
+                }
+                panel.add(msgPanel);
+            }
+        }
+        add(panel);
+    }
 }

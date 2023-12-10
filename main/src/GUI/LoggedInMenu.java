@@ -8,18 +8,20 @@ import javax.swing.*;
 public class LoggedInMenu extends JPanel {
     private final SmartMessagingSystem sms;
 
-    private final MessagePanel profile;
+    private final MessagePanel msgPanel;
     public LoggedInMenu(SmartMessagingSystem sms){
         this.sms = sms;
-        this.profile = getProfile();
+        this.msgPanel = getMessagePanel();
         Frame.lastPanel = this;
         setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-        add(profile);
+        add(getGroupPanel());
+        add(msgPanel);
         add(getContactList());
         Frame.frame.add(this);
         Frame.frame.setTitle(Constants.TITLE + " | " + LoggedIn.INSTANCE.get().getName());
     }
 
-    private JPanel getContactList() { return new ContactListPanel(sms, profile);}
-    private MessagePanel getProfile() {return new MessagePanel(sms);}
+    private JPanel getContactList() { return new ContactListPanel(sms, msgPanel);}
+    private JPanel getGroupPanel() {return new GroupPanel(sms, msgPanel);}
+    private MessagePanel getMessagePanel() {return new MessagePanel(sms);}
 }

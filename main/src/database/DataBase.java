@@ -25,9 +25,6 @@ public enum DataBase {
         set.get("Alice").addContact(set.get("Bob"));
 
         setGroup.put("Friends", new Group("Friends", set.get("Bob"), set.get("Alice")));
-        set.get("Bob").addGroup(setGroup.get("Friends"));
-        set.get("Alice").addGroup(setGroup.get("Friends"));
-        
     }
 
     public Contact getUser(String username){
