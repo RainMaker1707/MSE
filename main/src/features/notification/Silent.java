@@ -7,7 +7,7 @@ import features.Feature;
 public class Silent extends Feature {
     static FeatureBehavior behavior = Features.INSTANCE.get("silent");
 
-    public static void activate(){
+    public void activate(){
         if(behavior.isActivated()) {
             return;
         }

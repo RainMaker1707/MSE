@@ -15,6 +15,8 @@ public class Notification extends Feature {
     NotificationState state;
     FeatureBehavior behavior = Features.INSTANCE.get("notification");
 
+    public Notification(){conversation = null;}
+
     public Notification(Contact sender, Contact receiver, Conversation conversation){
         this.conversation = conversation;
         this.sender = sender;
@@ -41,5 +43,10 @@ public class Notification extends Feature {
     public void receive(){
         if(this.receiver.getStatus() == Status.online)
             this.state = received;
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

@@ -1,6 +1,8 @@
 package database;
 
 import behaviour.ContextBehavior;
+import features.themes.Light;
+import features.themes.Dark;
 
 import java.util.HashMap;
 
@@ -16,8 +18,8 @@ public enum ContextsDB {
 
         set.put("day", new ContextBehavior("day", "alternative"));
         set.put("night", new ContextBehavior("night", "alternative"));
-        set.get("day").addLinkedFeature(Features.INSTANCE.get("light"));
-        set.get("night").addLinkedFeature(Features.INSTANCE.get("dark"));
+        set.get("day").addLinkedFeature(Features.INSTANCE.get("light"), new Light());
+        set.get("night").addLinkedFeature(Features.INSTANCE.get("dark"), new Dark());
 
         set.get("day").addAlternativeContext("night");
         set.get("night").addAlternativeContext("day");

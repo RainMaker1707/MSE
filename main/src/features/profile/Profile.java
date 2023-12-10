@@ -16,14 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Profile extends Feature {
-    private final Image picture;
-    private final String name;
-    private final ContactList contactList;
-    private final List<Conversation> conversations;
-    private final GroupList groups;
-    private final List<Notification> notifications;
+    private  Image picture;
+    private  String name;
+    private  ContactList contactList;
+    private  List<Conversation> conversations;
+    private  GroupList groups;
+    private  List<Notification> notifications;
 
     FeatureBehavior behavior = Features.INSTANCE.get("profile");
+
+    public Profile(){}
 
     public Profile(String name, Image picture){
         this.name = name;
@@ -86,5 +88,10 @@ public class Profile extends Feature {
 
     public void addNotification(Notification n) {
         this.notifications.add(n);
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

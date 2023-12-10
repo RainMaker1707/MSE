@@ -9,6 +9,8 @@ public class BlockContact extends Feature {
     FeatureBehavior behavior = Features.INSTANCE.get("block");
 
     Contact owner;
+
+    public BlockContact(){}
     public BlockContact(Contact owner) {
         this.owner = owner;
     }
@@ -22,5 +24,10 @@ public class BlockContact extends Feature {
     public void unblockContact(Contact contact){
         owner.removeBlocked(contact);
         owner.addContact(contact);
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

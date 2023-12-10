@@ -10,10 +10,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ContactList extends Feature {
-    private final Profile owner;
+    private Profile owner;
     List<Contact> contactList;
     List<Contact> blocked;
     FeatureBehavior behavior = Features.INSTANCE.get("list");
+
+    public ContactList(){}
 
     public ContactList(Profile profile){
         this.owner = profile;
@@ -66,5 +68,10 @@ public class ContactList extends Feature {
         if(contactList.length()>2)contactList.delete(contactList.length() - 2, contactList.length());
         contactList.append("]");
         return contactList.toString();
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

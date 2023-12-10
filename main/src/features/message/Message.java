@@ -9,11 +9,13 @@ import features.conversation.Conversation;
 import static features.message.MessageState.*;
 
 public class Message extends Feature {
-    private final Conversation conversation;
+    private Conversation conversation;
     Contact sender;
     Contact receiver;
     MessageState state;
     FeatureBehavior behavior = Features.INSTANCE.get("message");
+
+    public Message(){}
 
     public Message(Contact sender, Contact receiver, Conversation conversation){
         this.conversation = conversation;
@@ -54,5 +56,10 @@ public class Message extends Feature {
     public void delete(Contact contact) {
         if(contact.getProfile() == sender)
             this.conversation.removeMessage(this);
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

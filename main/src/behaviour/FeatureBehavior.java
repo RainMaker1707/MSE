@@ -1,6 +1,7 @@
 package behaviour;
 
 import database.Features;
+import features.Feature;
 
 import java.util.HashMap;
 
@@ -14,12 +15,13 @@ public class FeatureBehavior implements Behaviour{
 
     HashMap<String, FeatureBehavior> alternativesSet;
 
+    Feature feature;
+
     public FeatureBehavior(String linkedFeatureName, String type){
         this.name = linkedFeatureName;
         switch(type){
             case "mandatory": {
                 this.setMandatory(true);
-                this.activate();
                 break;
             }
             case "alternative": {
@@ -36,6 +38,12 @@ public class FeatureBehavior implements Behaviour{
             default: throw new IllegalArgumentException("FeatureBehavior type: " + type
                             + "is not in ['mandatory', 'optional', 'alternative']");
         }
+    }
+
+    public FeatureBehavior addClass(Feature feature) {
+        this.feature = feature;
+        if(this.getMandatory()) this.feature.activate();
+        return this;
     }
 
     @Override
@@ -68,6 +76,7 @@ public class FeatureBehavior implements Behaviour{
     @Override
     public void activate() {
         activate = true;
+        this.feature.activate();
         if(this.getAlternative()){
             for(FeatureBehavior alt: this.getAlternativesSet().values()){
                 if(alt.isActivated()) alt.deactivate();

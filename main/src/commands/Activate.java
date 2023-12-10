@@ -4,6 +4,7 @@ import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
 import behaviour.FeatureBehavior;
+import features.Feature;
 import features.themes.Dark;
 import features.themes.Light;
 import smartMessagingSystem.SmartMessagingSystem;
@@ -42,6 +43,7 @@ public class Activate extends Command{
         int index = contexts.stream().map(ContextBehavior::getName).toList().indexOf(arg);
         if (index != -1) {
             contexts.get(index).activate();
+            for(FeatureBehavior featureBehavior: contexts.get(index).getLinkedFeaturesBehavior()) featureBehavior.activate();
         } else Context.error(arg + " not found!");
     }
 
@@ -55,8 +57,6 @@ public class Activate extends Command{
         else if(behavior.getAlternative() ||behavior.getOptional()){
             if(!behavior.isActivated()){
                 behavior.activate();
-                if(behavior.getName().equals("light"))Light.activate();
-                if(behavior.getName().equals("dark")) Dark.activate();
                 feedback(arg + " is now activated.");
             }else error(arg + " is already activated!");
         }

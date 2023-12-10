@@ -11,12 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Group extends Conversation{
-    private final Contact owner;
-    private final List<Contact> members;
-    private final String groupName;
+    private Contact owner;
+    private List<Contact> members;
+    private String groupName;
     List<Message> groupConversation;
 
     FeatureBehavior behavior = Features.INSTANCE.get("group");
+
+    public Group(){}
+
     public Group(String groupName,Contact owner, Contact c2){
         super(owner, c2, true);
         this.groupName = groupName;

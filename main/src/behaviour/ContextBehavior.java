@@ -16,10 +16,12 @@ public class ContextBehavior implements Behaviour{
     boolean activate = true;
 
     HashMap<String, ContextBehavior> alternativesSet;
-    List<FeatureBehavior> linkedFeatures;
+    List<FeatureBehavior> linkedFeaturesBehavior;
+    List<Feature> linkedFeatures;
 
     public ContextBehavior(String linkedContextName, String type) {
         this.name = linkedContextName;
+        this.linkedFeaturesBehavior = new ArrayList<>();
         this.linkedFeatures = new ArrayList<>();
 
         switch(type){
@@ -79,6 +81,8 @@ public class ContextBehavior implements Behaviour{
                 if(alt.isActivated()) alt.deactivate();
             }
         }
+        for(FeatureBehavior featureBehavior: linkedFeaturesBehavior) featureBehavior.activate();
+        //for(Feature feature: linkedFeatures) feature.activate();
     }
 
     @Override
@@ -130,8 +134,14 @@ public class ContextBehavior implements Behaviour{
 
     public HashMap<String, ContextBehavior> getAlternativesSet(){return alternativesSet;}
 
-    public List<FeatureBehavior> getLinkedFeatures(){
+    public List<Feature> getLinkedFeatures(){
         return this.linkedFeatures;
     }
-    public void addLinkedFeature(FeatureBehavior feature) {linkedFeatures.add(feature);}
+    public List<FeatureBehavior> getLinkedFeaturesBehavior(){
+        return this.linkedFeaturesBehavior;
+    }
+    public void addLinkedFeature(FeatureBehavior featureBehavior, Feature feature) {
+        linkedFeaturesBehavior.add(featureBehavior);
+        linkedFeatures.add(feature);
+    }
 }

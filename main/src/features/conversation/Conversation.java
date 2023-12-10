@@ -18,6 +18,8 @@ public class Conversation extends Feature {
 
     FeatureBehavior behavior = Features.INSTANCE.get("conversation");
 
+    public Conversation(){}
+
     public Conversation(Contact c1, Contact c2, boolean isGroup){
         this.contact1 = c1;
         this.contact2 = c2;
@@ -54,5 +56,10 @@ public class Conversation extends Feature {
 
     public void updateStatus() {
         for(Message m: this.getMessages()) m.receive();
+    }
+
+    @Override
+    public void activate() {
+
     }
 }
