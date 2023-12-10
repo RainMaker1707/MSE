@@ -62,9 +62,7 @@ public class GroupPanel extends JPanel {
         panel.add(Box.createRigidArea(new Dimension(25,0)));
         panel.add(innerPanel);
         panel.add(Box.createRigidArea(new Dimension(25,0)));
-        int i = 0;
         for(Group group: LoggedIn.INSTANCE.get().getGroups().getGroups()){
-            System.out.println(i++ + " group: " + group.getGroupName());
             JLabel label = new JLabel("• "+group.getGroupName());
             label.setAlignmentX(LEFT_ALIGNMENT);
             label.setAlignmentY(TOP_ALIGNMENT);
@@ -104,18 +102,16 @@ public class GroupPanel extends JPanel {
     }
 
     private void createButton(JPanel panel){
-
         JButton addBtn = new JButton("Create");
-        addBtn.addActionListener(e-> System.out.println("CLICKED BTN 1"));
-
-        JButton removeBtn = new JButton("Manage");
-        removeBtn.addActionListener(e-> System.out.println("CLICKED BTN 2"));
+        addBtn.addActionListener(e->createBtnAction());
 
         panel.add(Box.createHorizontalGlue());
         panel.add(addBtn);
-        panel.add(Box.createRigidArea(new Dimension(20, 0)));
-        panel.add(removeBtn);
         panel.add(Box.createHorizontalGlue());
+    }
+
+    private void createBtnAction(){
+        System.out.println("CLICKED BTN 1");
     }
 
     private MouseListener getMouseListener(JLabel label, Group group) {
