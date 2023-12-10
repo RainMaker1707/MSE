@@ -38,8 +38,6 @@ public class Deactivate extends Command {
                 if(behavior.getAlternative() || behavior.getOptional()){
                     if(behavior.isActivated()){
                         behavior.deactivate();
-                        //if(behavior.getName().equals("light")) new Dark().activate();
-                        //if(behavior.getName().equals("dark")) new Light().activate();
                         feedback(arg + " is now deactivated." );
                     }else error(arg + " is already deactivated!");
                 }else if(behavior.getMandatory()) error("Mandatory features can't be deactivated");
