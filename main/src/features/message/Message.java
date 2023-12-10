@@ -37,7 +37,6 @@ public class Message extends Feature {
     }
 
     public void send(){
-        //TODO send the message to the receiver user
         this.state = sent;
         this.receive();
     }

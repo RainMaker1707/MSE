@@ -45,6 +45,7 @@ public class Group extends Conversation{
 
     public void addToGroup(Contact c){
         members.add(c);
+        c.addGroup(this);
     }
 
     public void removeToGroup(Contact c){
