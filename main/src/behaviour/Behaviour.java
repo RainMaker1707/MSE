@@ -14,6 +14,5 @@ public interface Behaviour {
     boolean getOptional();
     String getName();
     public boolean isActivated();
-    public void addAlternativeFeature(String name);
 
 }

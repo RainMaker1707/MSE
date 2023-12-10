@@ -120,8 +120,8 @@ public class ContextBehavior implements Behaviour{
         return activate;
     }
 
-    @Override
-    public void addAlternativeFeature(String name){
+
+    public void addAlternativeContext(String name){
         ContextBehavior alt = ContextsDB.INSTANCE.get(name);
         if(alt == null) throw new IllegalArgumentException( name + " is not a feature, can't be set as alternative");
         alternativesSet.put(name, alt);

@@ -1,5 +1,11 @@
 package context.mode;
 
 
-public class Silent extends Mode{
+import context.Context;
+import database.ContextsDB;
+
+public class Silent extends Context {
+    public Silent() {
+        super("silent", ContextsDB.INSTANCE.get("silent"));
+    }
 }

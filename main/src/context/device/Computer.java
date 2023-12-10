@@ -1,4 +1,10 @@
 package context.device;
 
-public class Computer extends Device{
+import context.Context;
+import database.ContextsDB;
+
+public class Computer extends Context {
+    public Computer() {
+        super("computer", ContextsDB.INSTANCE.get("computer"));
+    }
 }

@@ -17,49 +17,49 @@ public enum ContextsDB {
         set.put("day", new ContextBehavior("day", "alternative"));
         set.put("night", new ContextBehavior("night", "alternative"));
 
-        set.get("day").addAlternativeFeature("night");
-        set.get("night").addAlternativeFeature("day");
+        set.get("day").addAlternativeContext("night");
+        set.get("night").addAlternativeContext("day");
 
         set.put("flight", new ContextBehavior("flight", "alternative"));
         set.put("silent", new ContextBehavior("silent", "alternative"));
         set.put("sound", new ContextBehavior("sound", "alternative"));
         set.put("vibrate", new ContextBehavior("vibrate", "alternative"));
 
-        set.get("flight").addAlternativeFeature("vibrate");
-        set.get("flight").addAlternativeFeature("silent");
-        set.get("flight").addAlternativeFeature("sound");
+        set.get("flight").addAlternativeContext("vibrate");
+        set.get("flight").addAlternativeContext("silent");
+        set.get("flight").addAlternativeContext("sound");
 
-        set.get("silent").addAlternativeFeature("flight");
-        set.get("silent").addAlternativeFeature("vibrant");
-        set.get("silent").addAlternativeFeature("sound");
+        set.get("silent").addAlternativeContext("flight");
+        set.get("silent").addAlternativeContext("vibrate");
+        set.get("silent").addAlternativeContext("sound");
 
-        set.get("sound").addAlternativeFeature("flight");
-        set.get("sound").addAlternativeFeature("silent");
-        set.get("sound").addAlternativeFeature("vibrant");
+        set.get("sound").addAlternativeContext("flight");
+        set.get("sound").addAlternativeContext("silent");
+        set.get("sound").addAlternativeContext("vibrate");
 
-        set.get("vibrant").addAlternativeFeature("flight");
-        set.get("vibrant").addAlternativeFeature("silent");
-        set.get("vibrant").addAlternativeFeature("sound");
+        set.get("vibrate").addAlternativeContext("flight");
+        set.get("vibrate").addAlternativeContext("silent");
+        set.get("vibrate").addAlternativeContext("sound");
 
         set.put("mobiledata", new ContextBehavior("mobiledata", "alternative"));
         set.put("wifi", new ContextBehavior("wifi", "alternative"));
 
-        set.get("mobiledata").addAlternativeFeature("wifi");
-        set.get("wifi").addAlternativeFeature("mobiledata");
+        set.get("mobiledata").addAlternativeContext("wifi");
+        set.get("wifi").addAlternativeContext("mobiledata");
 
 
         set.put("computer", new ContextBehavior("computer", "alternative"));
         set.put("phone", new ContextBehavior("phone", "alternative"));
         set.put("tablet", new ContextBehavior("tablet", "alternative"));
 
-        set.get("computer").addAlternativeFeature("phone");
-        set.get("computer").addAlternativeFeature("tablet");
+        set.get("computer").addAlternativeContext("phone");
+        set.get("computer").addAlternativeContext("tablet");
 
-        set.get("phone").addAlternativeFeature("computer");
-        set.get("phone").addAlternativeFeature("tablet");
+        set.get("phone").addAlternativeContext("computer");
+        set.get("phone").addAlternativeContext("tablet");
 
-        set.get("tablet").addAlternativeFeature("computer");
-        set.get("tablet").addAlternativeFeature("phone");
+        set.get("tablet").addAlternativeContext("computer");
+        set.get("tablet").addAlternativeContext("phone");
 
         set.put("subscribe", new ContextBehavior("subscribe", "optional"));
     }

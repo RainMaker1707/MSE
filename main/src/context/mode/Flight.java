@@ -1,5 +1,10 @@
 package context.mode;
 
-public class Flight extends Mode {
+import context.Context;
+import database.ContextsDB;
 
+public class Flight extends Context {
+    public Flight() {
+        super("flight", ContextsDB.INSTANCE.get("flight"));
+    }
 }

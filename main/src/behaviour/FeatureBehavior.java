@@ -115,7 +115,6 @@ public class FeatureBehavior implements Behaviour{
         return activate;
     }
 
-    @Override
     public void addAlternativeFeature(String name){
         FeatureBehavior alt = Features.INSTANCE.get(name);
         if(alt == null) throw new IllegalArgumentException( name + " is not a feature, can't be set as alternative");

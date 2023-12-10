@@ -1,5 +1,11 @@
 package context.mode;
 
 
-public class Vibrate extends Mode {
+import context.Context;
+import database.ContextsDB;
+
+public class Vibrate extends Context {
+    public Vibrate() {
+        super("vibrate", ContextsDB.INSTANCE.get("vibrate"));
+    }
 }

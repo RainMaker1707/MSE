@@ -1,5 +1,11 @@
 package context.mode;
 
 
-public class Sound extends Mode {
+import context.Context;
+import database.ContextsDB;
+
+public class Sound extends Context {
+    public Sound() {
+        super("sound", ContextsDB.INSTANCE.get("sound"));
+    }
 }
