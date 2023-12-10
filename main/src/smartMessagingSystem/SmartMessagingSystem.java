@@ -1,7 +1,6 @@
 package smartMessagingSystem;
 
 import behaviour.ContextBehavior;
-import context.*;
 import database.ContextsDB;
 import database.DataBase;
 
@@ -9,7 +8,6 @@ import database.DataBase;
 import database.Features;
 import behaviour.FeatureBehavior;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

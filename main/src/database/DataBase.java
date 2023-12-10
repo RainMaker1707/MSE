@@ -1,7 +1,6 @@
 package database;
 
 import features.contact.Contact;
-import features.profile.Profile;
 import features.conversation.Group;
 
 import java.util.HashMap;
