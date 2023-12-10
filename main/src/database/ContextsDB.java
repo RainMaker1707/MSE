@@ -23,6 +23,7 @@ public enum ContextsDB {
 
         set.get("day").addAlternativeContext("night");
         set.get("night").addAlternativeContext("day");
+        set.get("night").activate();
 
         set.put("flight", new ContextBehavior("flight", "alternative"));
         set.put("silent", new ContextBehavior("silent", "alternative"));

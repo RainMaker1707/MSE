@@ -58,7 +58,6 @@ public enum Features {
         features.get("light").addClass(new Light());
         features.get("dark").addAlternativeFeature("light");
         features.get("light").addAlternativeFeature("dark");
-        features.get("light").activate();
 
         features.put("silent", new FeatureBehavior("silent", "alternative"));
         features.get("silent").addClass(new Silent());
