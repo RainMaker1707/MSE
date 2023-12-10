@@ -2,7 +2,6 @@ package commands;
 
 import behaviour.ContextBehavior;
 import constant.Colors;
-import context.Context;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;

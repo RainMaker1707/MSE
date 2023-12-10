@@ -1,8 +1,6 @@
 package features.conversation;
 
 
-import database.Features;
-import behaviour.FeatureBehavior;
 import features.contact.Contact;
 import features.message.Message;
 import features.notification.Notification;
@@ -16,7 +14,6 @@ public class Group extends Conversation{
     private String groupName;
     List<Message> groupConversation;
 
-    FeatureBehavior behavior = Features.INSTANCE.get("group");
 
     public Group(){}
 

@@ -2,7 +2,6 @@ package commands;
 
 import GUI.LoggedInMenu;
 import behaviour.ContextBehavior;
-import context.Context;
 import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;

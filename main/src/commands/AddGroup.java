@@ -3,7 +3,6 @@ package commands;
 import java.util.List;
 
 import behaviour.ContextBehavior;
-import context.Context;
 import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;

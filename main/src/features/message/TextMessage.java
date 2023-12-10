@@ -1,13 +1,10 @@
 package features.message;
 
-import database.Features;
-import behaviour.FeatureBehavior;
 import features.contact.Contact;
 import features.conversation.Conversation;
 
 public class TextMessage extends Message {
     String content;
-    FeatureBehavior behavior = Features.INSTANCE.get("text");
 
     public TextMessage(){super();}
     public TextMessage(Contact sender, Contact receiver, String content, Conversation conversation){

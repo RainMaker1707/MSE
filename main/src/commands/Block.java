@@ -1,7 +1,6 @@
 package commands;
 
 import behaviour.ContextBehavior;
-import context.Context;
 import database.Features;
 import database.LoggedIn;
 import features.contact.BlockContact;

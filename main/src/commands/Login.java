@@ -2,12 +2,8 @@ package commands;
 
 import GUI.LoggedInMenu;
 import behaviour.ContextBehavior;
-import context.Context;
 import database.DataBase;
 import database.LoggedIn;
-import features.contact.Contact;
-import features.notification.Notification;
-import features.notification.NotificationState;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;

@@ -1,7 +1,6 @@
 package commands;
 
 import behaviour.ContextBehavior;
-import context.Context;
 import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -46,32 +45,13 @@ public class MessageCmd extends Command {
         }
         if (conversation != null) {
             StringBuilder toPrint = new StringBuilder();
-            for(Message msg: conversation.getMessages()){
-                if(msg instanceof TextMessage m){
-                    m.seen();
-                    toPrint.append(m.getSender().getName());
-                    toPrint.append(": ");
-                    toPrint.append(m.getContent());
-                    toPrint.append(" --> ");
-                    toPrint.append(m.getState());
-                    toPrint.append("\n");
-                }
-            }
+            for(Message msg: conversation.getMessages()) buildStrMsg(msg, toPrint);
+
             if(toPrint.isEmpty()) toPrint.append("No message yet with ").append(recipient.getName());
             feedback(toPrint.toString());
         } else {
             StringBuilder toPrint = new StringBuilder();
-            for(Message msg: groupRecipient.getMessages()){
-                if(msg instanceof TextMessage m){
-                    m.seen();
-                    toPrint.append(m.getSender().getName());
-                    toPrint.append(": ");
-                    toPrint.append(m.getContent());
-                    toPrint.append(" --> ");
-                    toPrint.append(m.getState());
-                    toPrint.append("\n");
-                }
-            }
+            for(Message msg: groupRecipient.getMessages()) buildStrMsg(msg, toPrint);
             if(toPrint.isEmpty()) toPrint.append("No message yet with ").append(groupRecipient.getGroupName());
             feedback(toPrint.toString());
         }
@@ -85,5 +65,17 @@ public class MessageCmd extends Command {
     @Override
     public void help() {
 
+    }
+
+    private void buildStrMsg(Message msg, StringBuilder toPrint){
+        if(msg instanceof TextMessage m){
+            m.seen();
+            toPrint.append(m.getSender().getName());
+            toPrint.append(": ");
+            toPrint.append(m.getContent());
+            toPrint.append(" --> ");
+            toPrint.append(m.getState());
+            toPrint.append("\n");
+        }
     }
 }

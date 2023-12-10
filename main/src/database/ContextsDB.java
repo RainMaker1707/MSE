@@ -1,8 +1,6 @@
 package database;
 
 import behaviour.ContextBehavior;
-import features.themes.Light;
-import features.themes.Dark;
 
 import java.util.HashMap;
 
@@ -46,11 +44,11 @@ public enum ContextsDB {
         set.get("vibrate").addAlternativeContext("silent");
         set.get("vibrate").addAlternativeContext("sound");
 
-        set.put("mobiledata", new ContextBehavior("mobiledata", "alternative"));
+        set.put("mobile_data", new ContextBehavior("mobile_data", "alternative"));
         set.put("wifi", new ContextBehavior("wifi", "alternative"));
 
-        set.get("mobiledata").addAlternativeContext("wifi");
-        set.get("wifi").addAlternativeContext("mobiledata");
+        set.get("mobile_data").addAlternativeContext("wifi");
+        set.get("wifi").addAlternativeContext("mobile_data");
 
 
         set.put("computer", new ContextBehavior("computer", "alternative"));

@@ -4,9 +4,6 @@ import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
 import behaviour.FeatureBehavior;
-import features.Feature;
-import features.themes.Dark;
-import features.themes.Light;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;

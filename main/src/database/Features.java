@@ -22,7 +22,7 @@ public enum Features {
 
     INSTANCE();
 
-    HashMap<String, FeatureBehavior> features = new HashMap<>();
+    final HashMap<String, FeatureBehavior> features = new HashMap<>();
 
     public void populate(){
         features.put("contact", new FeatureBehavior("contact", "mandatory"));

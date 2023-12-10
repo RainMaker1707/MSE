@@ -1,7 +1,6 @@
 package commands;
 
 import behaviour.ContextBehavior;
-import context.Context;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Conversation;
@@ -38,8 +37,8 @@ public class Send extends Command{
             if (recipient == null && groupRecipient == null) {
                 error("Contact or group not found: " + args.get(0));
             } else {
+                String text = createMessage(args);
                 if (recipient != null) {
-                    String text = createMessage(args);
                     Conversation conversation = getConversation(user, recipient);
                     TextMessage msg = new TextMessage(user, recipient, text, conversation);
                     Notification msgNotification = new Notification(user, recipient, conversation);
@@ -48,7 +47,6 @@ public class Send extends Command{
                         feedback("Message sent");
                     } else error("No conversation to send message");
                 } else {
-                    String text = createMessage(args);
                     Contact receiver = groupRecipient.getContact2();
                     TextMessage msg = new TextMessage(user, receiver, text, groupRecipient);
                     Notification msgNotification = new Notification(user, receiver, groupRecipient);

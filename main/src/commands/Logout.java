@@ -3,7 +3,6 @@ package commands;
 import GUI.WelcomeMenu;
 import behaviour.ContextBehavior;
 import constant.Colors;
-import context.Context;
 import database.LoggedIn;
 import smartMessagingSystem.SmartMessagingSystem;
 

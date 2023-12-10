@@ -1,6 +1,5 @@
 package behaviour;
 
-import java.util.HashMap;
 
 public interface Behaviour {
 
@@ -13,6 +12,6 @@ public interface Behaviour {
     boolean getAlternative();
     boolean getOptional();
     String getName();
-    public boolean isActivated();
+    boolean isActivated();
 
 }

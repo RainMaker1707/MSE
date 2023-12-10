@@ -40,10 +40,9 @@ public class FeatureBehavior implements Behaviour{
         }
     }
 
-    public FeatureBehavior addClass(Feature feature) {
+    public void addClass(Feature feature) {
         this.feature = feature;
         if(this.getMandatory()) this.feature.activate();
-        return this;
     }
 
     @Override
