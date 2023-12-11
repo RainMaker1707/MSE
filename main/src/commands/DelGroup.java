@@ -1,6 +1,9 @@
 package commands;
 
+import GUI.LoginMenu;
 import behaviour.ContextBehavior;
+import database.LoggedIn;
+import features.conversation.Group;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
@@ -13,7 +16,32 @@ public class DelGroup extends Command{
 
     @Override
     public void run() {
-
+        List<String> args = this.getArguments(false);
+        if(LoggedIn.INSTANCE.get() == null){
+            error("No user logged in");
+            return;
+        }
+        if(args.isEmpty()){
+            error("delGroup command need one argument: group name");
+            return;
+        }
+        if(LoggedIn.INSTANCE.get().getGroups().getGroups().isEmpty()){
+            error("User " +  LoggedIn.INSTANCE.get().getName() + " has no group yet");
+            return;
+        }
+        Group group = null;
+        for(Group g: LoggedIn.INSTANCE.get().getGroups().getGroups()){
+            if(g.getGroupName().equals(args.get(0))){
+                group = g;
+                break;
+            }
+        }
+        if(group == null){
+            error("No group with name " + args.get(0) + " found in your group list");
+            return;
+        }
+        if(group.delete(LoggedIn.INSTANCE.get())) feedback("Delete group " + group.getGroupName());
+        else error("You have not enough right to delete this group");
     }
 
     @Override
@@ -23,6 +51,6 @@ public class DelGroup extends Command{
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
-        return null;
+        return new LoginMenu(sms);
     }
 }
