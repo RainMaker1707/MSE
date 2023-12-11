@@ -17,16 +17,22 @@ public enum ContextsDB {
         set.put("day", new ContextBehavior("day", "alternative"));
         set.put("night", new ContextBehavior("night", "alternative"));
         set.get("day").addLinkedFeature(Features.INSTANCE.get("light"));
+        set.get("day").addLinkedFeature(Features.INSTANCE.get("sound"));
         set.get("night").addLinkedFeature(Features.INSTANCE.get("dark"));
+        set.get("night").addLinkedFeature(Features.INSTANCE.get("silent"));
 
         set.get("day").addAlternativeContext("night");
         set.get("night").addAlternativeContext("day");
         set.get("night").activate();
 
         set.put("flight", new ContextBehavior("flight", "alternative"));
+        // DO NOT KNOW WHICH FEATURE TO LINK HERE
         set.put("silent", new ContextBehavior("silent", "alternative"));
+        set.get("silent").addLinkedFeature(Features.INSTANCE.get("silent"));
         set.put("sound", new ContextBehavior("sound", "alternative"));
+        set.get("sound").addLinkedFeature(Features.INSTANCE.get("sound"));
         set.put("vibrate", new ContextBehavior("vibrate", "alternative"));
+        set.get("vibrate").addLinkedFeature(Features.INSTANCE.get("vibrant"));
 
         set.get("flight").addAlternativeContext("vibrate");
         set.get("flight").addAlternativeContext("silent");
