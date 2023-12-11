@@ -24,7 +24,6 @@ public enum ContextsDB {
 
         set.get("day").addAlternativeContext("night");
         set.get("night").addAlternativeContext("day");
-        set.get("night").activate();
 
         set.put("flight", new ContextBehavior("flight", "alternative"));
         // DO NOT KNOW WHICH FEATURE TO LINK HERE
@@ -73,6 +72,11 @@ public enum ContextsDB {
 
         set.put("subscribe", new ContextBehavior("subscribe", "optional"));
         set.get("subscribe").addLinkedFeature(Features.INSTANCE.get("block"));
+
+        set.get("night").activate();
+        set.get("wifi").activate();
+        set.get("computer").activate();
+
     }
 
     public HashMap<String, ContextBehavior> get(){
