@@ -6,7 +6,6 @@ import database.DataBase;
 import database.LoggedIn;
 import smartMessagingSystem.SmartMessagingSystem;
 import features.notification.Notification;
-import features.notification.NotificationState;
 import features.contact.Contact;
 import features.conversation.Group;
 
@@ -42,13 +41,13 @@ public class Login extends Command{
                 Group group = (Group) notification.getConversation();
                 List<Contact> members = group.getMembers();
                 for (Contact member : members) {
-                    if (member.equals(loggedInUser)) {
+                    if (member.equals(loggedInUser) && notification.getState() == "sending") {
                         notification.receive();
                         feedback("Notification: You have received a message from " + group.getGroupName());
                     }
                 }
             } else {
-                if (notification.getReceiver().equals(loggedInUser)) {
+                if (notification.getReceiver().equals(loggedInUser) && notification.getState() == "sending") {
                     notification.receive();
                     feedback("Notification: You have received a message from " + notification.getSender().getName());
                 }

@@ -22,6 +22,7 @@ public enum DataBase {
 
         set.get("Bob").addContact(set.get("Alice"));
         set.get("Bob").addContact(set.get("WhiteHat"));
+        set.get("WhiteHat").addContact(set.get("Bob"));
         set.get("Alice").addContact(set.get("Bob"));
 
         setGroup.put("Friends", new Group("Friends", set.get("Bob"), set.get("Alice")));

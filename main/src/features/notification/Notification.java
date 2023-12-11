@@ -12,7 +12,7 @@ public class Notification extends Feature {
     private final Conversation conversation;
     Contact sender;
     Contact receiver;
-    NotificationState state;
+    String state;
     boolean isGroup;
     FeatureBehavior behavior = Features.INSTANCE.get("notification");
 
@@ -22,7 +22,7 @@ public class Notification extends Feature {
         this.conversation = conversation;
         this.sender = sender;
         this.receiver = receiver;
-        this.state = sending;
+        this.state = "sending";
         this.isGroup = isGroup;
     }
 
@@ -38,7 +38,7 @@ public class Notification extends Feature {
         return this.conversation;
     }
 
-    public NotificationState getState() {
+    public String getState() {
         return state;
     }
 
@@ -48,7 +48,7 @@ public class Notification extends Feature {
 
     public void receive(){
         if(this.receiver != null && this.receiver.getStatus() == Status.online)
-            this.state = received;
+            this.state = "received";
     }
 
     public boolean isGroup() {

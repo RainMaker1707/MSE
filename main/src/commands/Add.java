@@ -25,8 +25,8 @@ public class Add extends Command{
                 else if(LoggedIn.INSTANCE.get().getContactList().getContacts().stream()
                         .map(Contact::getName).toList().contains(arg)) error(arg + " already in your contact list");
                 else {
-                    LoggedIn.INSTANCE.get().addContact(new Contact(DataBase.INSTANCE.getUser(arg)));
-                    DataBase.INSTANCE.getUser(arg).addContact(new Contact(LoggedIn.INSTANCE.get()));
+                    LoggedIn.INSTANCE.get().addContact(DataBase.INSTANCE.getUser(arg));
+                    DataBase.INSTANCE.getUser(arg).addContact(LoggedIn.INSTANCE.get());
                     feedback("User " + arg + " and " + LoggedIn.INSTANCE.get().getName() + " are now contact");
                 }
             }
