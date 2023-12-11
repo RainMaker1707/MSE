@@ -38,12 +38,12 @@ public enum ContextsDB {
         set.get("flight").addAlternativeContext("silent");
         set.get("flight").addAlternativeContext("sound");
 
+        set.get("silent").addAlternativeContext("sound");
         set.get("silent").addAlternativeContext("flight");
         set.get("silent").addAlternativeContext("vibrate");
-        set.get("silent").addAlternativeContext("sound");
 
-        set.get("sound").addAlternativeContext("flight");
         set.get("sound").addAlternativeContext("silent");
+        set.get("sound").addAlternativeContext("flight");
         set.get("sound").addAlternativeContext("vibrate");
 
         set.get("vibrate").addAlternativeContext("flight");

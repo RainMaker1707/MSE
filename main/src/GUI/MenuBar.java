@@ -2,6 +2,8 @@ package GUI;
 
 import behaviour.ContextBehavior;
 import commands.Activate;
+import commands.Login;
+import commands.Logout;
 import database.ContextsDB;
 import database.Features;
 import database.LoggedIn;
@@ -69,12 +71,9 @@ public class MenuBar extends JMenuBar {
         JMenu menu = new JMenu("Features");
         for(String feature: Features.INSTANCE.get().keySet().stream().toList()){
             JMenuItem item = new JMenuItem(feature);
-            if(Features.INSTANCE.get(feature).isActivated()){
-                item.setText("✔️ " + item.getText());
-            } else{
-                item.setText(item.getText());
-            }
-
+            if(Features.INSTANCE.get(feature).isActivated()) item.setBackground(Color.GREEN);
+            else item.setBackground(Color.RED);
+            item.setText(item.getText());
             menu.add(item);
         }
         return menu;
@@ -85,7 +84,7 @@ public class MenuBar extends JMenuBar {
         JMenu settings = new JMenu("⚙️");
         JMenuItem logout = new JMenuItem("LogOut");
         logout.addActionListener(e->{
-            LoggedIn.INSTANCE.logout();
+            new Logout(sms.getContexts(), "logout").run();
             if(LoggedIn.INSTANCE.get() == null){
                 Frame.frame.setTitle(Constants.TITLE);
                 Frame.frame.remove(Frame.lastPanel);

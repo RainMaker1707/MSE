@@ -21,6 +21,7 @@ public class Logout extends Command{
         if(!args.isEmpty()) error("doesn't need argument" + Colors.currentColor);
         else {
             LoggedIn.INSTANCE.get().changeStatus();
+            LoggedIn.INSTANCE.get().emptyNotification();
             LoggedIn.INSTANCE.logout();
         }
     }

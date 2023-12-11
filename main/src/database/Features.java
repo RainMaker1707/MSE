@@ -69,13 +69,15 @@ public enum Features {
         features.put("sound", new FeatureBehavior("sound", "alternative"));
         features.get("sound").addClass(new Sound());
 
-        features.get("silent").addAlternativeFeature("vibrant");
         features.get("silent").addAlternativeFeature("sound");
+        features.get("silent").addAlternativeFeature("vibrant");
+
         features.get("vibrant").addAlternativeFeature("silent");
         features.get("vibrant").addAlternativeFeature("sound");
-        features.get("sound").addAlternativeFeature("vibrant");
+
         features.get("sound").addAlternativeFeature("silent");
-        features.get("silent").activate();
+        features.get("sound").addAlternativeFeature("vibrant");
+
     }
 
     public HashMap<String, FeatureBehavior> get(){
