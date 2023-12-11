@@ -1,6 +1,7 @@
 package GUI;
 
 import commands.CreateGroup;
+import commands.MessageCmd;
 import database.LoggedIn;
 import features.conversation.Group;
 import smartMessagingSystem.SmartMessagingSystem;
@@ -125,6 +126,7 @@ public class GroupPanel extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                new MessageCmd(sms.getContexts(), "messages " + group.getGroupName()).run();
                 msgPanel.showGroup(group);
             }
 
