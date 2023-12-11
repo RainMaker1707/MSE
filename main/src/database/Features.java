@@ -72,7 +72,6 @@ public enum Features {
         features.get("vibrant").addAlternativeFeature("sound");
         features.get("sound").addAlternativeFeature("vibrant");
         features.get("sound").addAlternativeFeature("silent");
-        features.get("silent").activate();
     }
 
     public HashMap<String, FeatureBehavior> get(){
