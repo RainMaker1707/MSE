@@ -82,7 +82,7 @@ public class MenuBar extends JMenuBar {
 
 
     private JMenu createSettingsMenu(){
-        JMenu settings = new JMenu("Settings");
+        JMenu settings = new JMenu("⚙️");
         JMenuItem logout = new JMenuItem("LogOut");
         logout.addActionListener(e->{
             LoggedIn.INSTANCE.logout();
