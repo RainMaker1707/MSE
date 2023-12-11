@@ -5,6 +5,9 @@ import commands.Activate;
 import database.ContextsDB;
 import database.Features;
 import database.LoggedIn;
+import features.conversation.Group;
+import features.notification.Notification;
+import features.notification.NotificationState;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
@@ -20,7 +23,11 @@ public class MenuBar extends JMenuBar {
         this.sms = sms;
         add(createContextMenu());
         add(createFeaturesMenu());
-        if(LoggedIn.INSTANCE.isLoggedIn()) add(createSettingsMenu());
+        if(LoggedIn.INSTANCE.isLoggedIn()) {
+            add(Box.createHorizontalGlue());
+            add(createNotificationsMenu());
+            add(createSettingsMenu());
+        }
         SwingUtilities.updateComponentTreeUI(Frame.frame);
     }
 
@@ -89,5 +96,16 @@ public class MenuBar extends JMenuBar {
         });
         settings.add(logout);
         return settings;
+    }
+
+    private JMenu createNotificationsMenu() {
+        JMenu menu = new JMenu("🔔");
+        for(Notification notif :LoggedIn.INSTANCE.get().getNotifications()){
+            JMenuItem item;
+            if(notif.isGroup()) item = new JMenuItem("new message in " + ((Group)notif.getConversation()).getGroupName());
+            else item = new JMenuItem("new message from " + notif.getSender().getName());
+            menu.add(item);
+        }
+        return menu;
     }
 }
