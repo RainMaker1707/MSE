@@ -1,6 +1,5 @@
 package GUI;
 
-import commands.Add;
 import commands.CreateGroup;
 import database.LoggedIn;
 import features.conversation.Group;
