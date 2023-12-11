@@ -23,6 +23,9 @@ public class CommandFactory {
             case "addgroup" -> new AddGroup(contexts, command);
             case "creategroup" -> new CreateGroup(contexts, command);
             case "groups" -> new GroupCmd(contexts, command);
+            case "delgroup" -> new DelGroup(contexts, command); // TODO:
+            case "delmember" -> new DelMember(contexts, command); // TODO:
+            case "groupmember" -> new GroupMember(contexts, command); // TODO:
             default -> {
                 System.out.println(Colors.ANSI_RED + "Command error: " + cmd + " is not a command!" + Colors.currentColor);
                 yield null;
