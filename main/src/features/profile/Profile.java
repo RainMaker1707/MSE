@@ -68,11 +68,18 @@ public class Profile extends Feature {
         contactList.addBlocked(contact);
     }
 
+    public void addHidden(Contact contact) {
+        contactList.addHidden(contact);
+    }
+
     public void removeContact(Contact contact){
         contactList.removeContact(contact);
     }
     public void removeBlocked(Contact contact){
         contactList.removeBlocked(contact);
+    }
+    public void removeHidden(Contact contact) {
+        contactList.removeHidden(contact);
     }
 
     public void removeGroup(Group group) {
@@ -88,6 +95,10 @@ public class Profile extends Feature {
 
     public List<Notification> getNotifications(){
         return this.notifications;
+    }
+
+    public List<Contact> getHiddenContacts() {
+        return contactList.getHiddenContact();
     }
 
     public void addNotification(Notification n) {

@@ -9,6 +9,7 @@ import features.notification.Notification;
 import behaviour.FeatureBehavior;
 import database.Features;
 import features.contact.Contact;
+import features.contact.HiddenContact;
 import features.conversation.Group;
 
 import javax.swing.*;
@@ -46,16 +47,16 @@ public class Login extends Command{
                 Group group = (Group) notification.getConversation();
                 List<Contact> members = group.getMembers();
                 for (Contact member : members) {
-                    if (member.equals(loggedInUser) && notification.getState() == "sending") {
+                    if (!isHidden(member, loggedInUser) && member.equals(loggedInUser) && notification.getState() == "sending") {
                         notification.receive();
                         behaviorSilent.run();
                         behaviorSound.run();
                         behaviorVibrant.run();
-                        feedback("Notification: You have received a message from " + group.getGroupName());
+                        feedback("Notification: You have received a message from " + group.getGroupName() + "group");
                     }
                 }
             } else {
-                if (notification.getReceiver().equals(loggedInUser) && notification.getState() == "sending") {
+                if (!isHidden(notification.getSender(), loggedInUser) && notification.getReceiver().equals(loggedInUser) && notification.getState() == "sending") {
                     notification.receive();
                     behaviorSilent.run();
                     behaviorSound.run();
@@ -65,6 +66,15 @@ public class Login extends Command{
             }
             
         }
+    }
+
+
+    private boolean isHidden(Contact contact, Contact loggedInUser) {
+        List<Contact> hiddenContacts = loggedInUser.getHiddenContacts();
+        if (hiddenContacts != null && !hiddenContacts.isEmpty()) {
+            return hiddenContacts.contains(contact);
+        }
+        return false;
     }
 
     @Override

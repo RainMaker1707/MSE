@@ -52,6 +52,9 @@ public enum Features {
         features.put("block", new FeatureBehavior("block", "optional"));
         features.get("block").addClass(new BlockContact());
 
+        features.put("hide", new FeatureBehavior("hide", "optional"));
+        features.get("hide").addClass(new BlockContact());
+
         features.put("dark", new FeatureBehavior("dark", "alternative"));
         features.get("dark").addClass(new Dark());
         features.put("light", new FeatureBehavior("light", "alternative"));

@@ -13,6 +13,7 @@ public class ContactList extends Feature {
     private Profile owner;
     List<Contact> contactList;
     List<Contact> blocked;
+    List<Contact> hidden;
     FeatureBehavior behavior = Features.INSTANCE.get("list");
 
     public ContactList(){}
@@ -21,6 +22,7 @@ public class ContactList extends Feature {
         this.owner = profile;
         this.contactList = new ArrayList<>();
         this.blocked = new ArrayList<>();
+        this.hidden = new ArrayList<>();
     }
 
     public List<Contact> getContacts() {
@@ -40,6 +42,12 @@ public class ContactList extends Feature {
     public void removeBlocked(Contact contact){
         this.blocked.remove(contact);
     }
+    public void addHidden(Contact contact) {
+        this.hidden.add(contact);
+    }
+    public void removeHidden(Contact contact) {
+        this.hidden.remove(contact);
+    }
     public List<Status> getContactsStatus(){
         return this.contactList.stream().map(Contact::getStatus).toList();
     }
@@ -53,6 +61,10 @@ public class ContactList extends Feature {
                 .filter(contact -> contact.getName().equals(name))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<Contact> getHiddenContact() {
+        return this.hidden;
     }
 
     @Override
