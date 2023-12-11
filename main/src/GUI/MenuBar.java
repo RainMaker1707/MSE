@@ -69,12 +69,9 @@ public class MenuBar extends JMenuBar {
         JMenu menu = new JMenu("Features");
         for(String feature: Features.INSTANCE.get().keySet().stream().toList()){
             JMenuItem item = new JMenuItem(feature);
-            if(Features.INSTANCE.get(feature).isActivated()){
-                item.setText("✔️ " + item.getText());
-            } else{
-                item.setText(item.getText());
-            }
-
+            if(Features.INSTANCE.get(feature).isActivated()) item.setBackground(Color.GREEN);
+            else item.setBackground(Color.RED);
+            item.setText(item.getText());
             menu.add(item);
         }
         return menu;
