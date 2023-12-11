@@ -2,6 +2,8 @@ package GUI;
 
 import behaviour.ContextBehavior;
 import commands.Activate;
+import commands.Login;
+import commands.Logout;
 import database.ContextsDB;
 import database.Features;
 import database.LoggedIn;
@@ -82,7 +84,7 @@ public class MenuBar extends JMenuBar {
         JMenu settings = new JMenu("⚙️");
         JMenuItem logout = new JMenuItem("LogOut");
         logout.addActionListener(e->{
-            LoggedIn.INSTANCE.logout();
+            new Logout(sms.getContexts(), "logout").run();
             if(LoggedIn.INSTANCE.get() == null){
                 Frame.frame.setTitle(Constants.TITLE);
                 Frame.frame.remove(Frame.lastPanel);

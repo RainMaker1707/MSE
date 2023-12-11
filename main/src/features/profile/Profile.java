@@ -98,4 +98,8 @@ public class Profile extends Feature {
     public void activate() {
 
     }
+
+    public void emptyNotification() {
+        this.notifications = new ArrayList<>();
+    }
 }
