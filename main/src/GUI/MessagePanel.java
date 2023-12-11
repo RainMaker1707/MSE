@@ -1,5 +1,6 @@
 package GUI;
 
+import commands.MessageCmd;
 import commands.Send;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -38,19 +39,13 @@ public class MessagePanel extends JPanel {
         removeAll();
         add(createInputSend(contact), BorderLayout.PAGE_END);
         SwingUtilities.updateComponentTreeUI(this);
-        boolean flag = false;
         for(Conversation conv:LoggedIn.INSTANCE.get().getConversations()){
             if(!(conv instanceof Group)) {
                 if (conv.getContact1().equals(contact) || conv.getContact2().equals(contact)) {
                     showMessages(conv);
-                    flag = true;
                     break;
                 }
             }
-        }
-        if(!flag) {
-            JLabel label = new JLabel("No messages yet");;
-            add(centerLabel(label));
         }
         SwingUtilities.updateComponentTreeUI(this);
     }
@@ -59,28 +54,23 @@ public class MessagePanel extends JPanel {
         removeAll();
         add(createInputSend(group), BorderLayout.PAGE_END);
         SwingUtilities.updateComponentTreeUI(this);
-        boolean flag = false;
         for(Group grp: LoggedIn.INSTANCE.get().getGroups().getGroups()){
             if (grp.getGroupName().equals(group.getGroupName())) {
                 showMessages(group);
-                flag = true;
                 break;
             }
-        }
-        if(!flag) {
-            JLabel label = new JLabel("No messages yet");;
-            add(centerLabel(label));
         }
         SwingUtilities.updateComponentTreeUI(this);
     }
 
     public JPanel getMessagesPanel(Conversation conversation, boolean isGroup){
         if(isGroup && conversation instanceof Group group) groupLayer(group);
-
+        field.setText("");
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-
+        boolean flag = false;
         for(Message msg: conversation.getMessages()){
+            flag =true;
             if(msg instanceof TextMessage m){
                 JPanel msgPanel = new JPanel();
                 msgPanel.setLayout(new BoxLayout(msgPanel, BoxLayout.LINE_AXIS));
@@ -96,6 +86,12 @@ public class MessagePanel extends JPanel {
                 }
                 panel.add(msgPanel);
             }
+        }
+        if(!flag) {
+            JLabel label = new JLabel("No messages yet");
+            panel.add(Box.createVerticalGlue());
+            panel.add(centerLabel(label));
+            panel.add(Box.createVerticalGlue());
         }
         return panel;
     }
@@ -156,7 +152,7 @@ public class MessagePanel extends JPanel {
         label.setAlignmentX(CENTER_ALIGNMENT);
     }
 
-    public void showGroup(Conversation conversation){
+    public void showGroup(Group group){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
@@ -167,9 +163,25 @@ public class MessagePanel extends JPanel {
         contactInGroup.setPreferredSize(new Dimension(100, Constants.TOTAL_HEIGHT));
         contactInGroup.setMaximumSize(new Dimension(Constants.TOTAL_WIDTH/6, Constants.TOTAL_HEIGHT));
 
-        panel.add(contactInGroup);
-        panel.add(getMessagesPanel(conversation, true));
+        fillMemberPanel(contactInGroup, group);
 
+        panel.add(Box.createRigidArea(new Dimension(250, 0)));
+        panel.add(contactInGroup);
+        panel.add(getMessagesPanel(group, true));
         add(panel);
+    }
+
+    public void fillMemberPanel(JPanel panel, Group group){
+        JLabel label = new JLabel(group.getGroupName() + " members");
+        Font font = label.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        label.setFont(font.deriveFont(attributes));
+        label.setAlignmentX(CENTER_ALIGNMENT);
+
+        // TODO: fill member
+        panel.setBackground(Color.RED);
+        panel.add(label);
+        panel.add(Box.createRigidArea(new Dimension(100, 30)));
     }
 }

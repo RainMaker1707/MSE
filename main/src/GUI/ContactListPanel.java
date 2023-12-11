@@ -1,6 +1,7 @@
 package GUI;
 
 import commands.Add;
+import commands.MessageCmd;
 import commands.Remove;
 import database.LoggedIn;
 import features.contact.Contact;
@@ -148,6 +149,7 @@ public class ContactListPanel extends JPanel {
         return new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                new MessageCmd(sms.getContexts(), "messages " + contact.getName()).run();
                 msgPanel.showMessages(contact);
             }
 
