@@ -47,10 +47,12 @@ public class Group extends Conversation{
     public void removeToGroup(Contact c){
         //TODO implement roles to check if requester has enough right
         members.remove(c);
+        c.removeGroup(this);
     }
 
     public void quitGroup(Contact c){
         this.members.remove(c);
+        c.removeGroup(this);
     }
 
     @Override
@@ -66,5 +68,14 @@ public class Group extends Conversation{
         return this.groupConversation;
     }
 
+    public boolean delete(Contact requester){
+        if(requester.getName().equals(owner.getName())){
+            for(Contact contact: members){
+                contact.removeGroup(this);
+            }
+            return true;
+        }
+        return false;
+    }
 
 }

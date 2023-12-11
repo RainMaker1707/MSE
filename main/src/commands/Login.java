@@ -64,6 +64,7 @@ public class Login extends Command{
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
-        return new LoggedInMenu(sms);
+        if(LoggedIn.INSTANCE.get() != null) return new LoggedInMenu(sms);
+        else return null;
     }
 }
