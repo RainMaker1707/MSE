@@ -47,12 +47,12 @@ public class Login extends Command{
                 Group group = (Group) notification.getConversation();
                 List<Contact> members = group.getMembers();
                 for (Contact member : members) {
-                    if (!isHidden(member, loggedInUser) && member.equals(loggedInUser) && notification.getState() == "sending") {
+                    if (member.equals(loggedInUser) && notification.getState() == "sending") {
                         notification.receive();
                         behaviorSilent.run();
                         behaviorSound.run();
                         behaviorVibrant.run();
-                        feedback("Notification: You have received a message from " + group.getGroupName() + "group");
+                        feedback("Notification: You have received a message from " + group.getGroupName() + " group");
                     }
                 }
             } else {
