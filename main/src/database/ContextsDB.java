@@ -13,6 +13,7 @@ public enum ContextsDB {
     public void populate(){
         set.put("driving", new ContextBehavior("driving", "optional"));
         set.put("meeting", new ContextBehavior("meeting", "optional"));
+        set.get("meeting").addLinkedFeature(Features.INSTANCE.get("silent"));
 
         set.put("day", new ContextBehavior("day", "alternative"));
         set.put("night", new ContextBehavior("night", "alternative"));
