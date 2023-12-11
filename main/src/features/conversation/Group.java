@@ -52,6 +52,7 @@ public class Group extends Conversation{
 
     public void quitGroup(Contact c){
         this.members.remove(c);
+        c.removeGroup(this);
     }
 
     @Override
@@ -67,5 +68,14 @@ public class Group extends Conversation{
         return this.groupConversation;
     }
 
+    public boolean delete(Contact requester){
+        if(requester.getName().equals(owner.getName())){
+            for(Contact contact: members){
+                contact.removeGroup(this);
+            }
+            return true;
+        }
+        return false;
+    }
 
 }
