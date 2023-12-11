@@ -1,5 +1,6 @@
 package commands;
 
+import GUI.LoggedInMenu;
 import GUI.LoginMenu;
 import behaviour.ContextBehavior;
 import database.LoggedIn;
@@ -51,6 +52,6 @@ public class DelGroup extends Command{
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
-        return new LoginMenu(sms);
+        return new LoggedInMenu(sms);
     }
 }
