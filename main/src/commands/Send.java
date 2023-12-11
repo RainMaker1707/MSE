@@ -41,7 +41,9 @@ public class Send extends Command{
                 if (recipient != null) {
                     Conversation conversation = getConversation(user, recipient);
                     TextMessage msg = new TextMessage(user, recipient, text, conversation);
-                    Notification msgNotification = new Notification(user, recipient, conversation);
+                    Notification msgNotification = new Notification(user, recipient, conversation, false);
+                    recipient.addNotification(msgNotification);
+                    msgNotification.send();
                     if (conversation != null) {
                         conversation.sendMessage(msg, msgNotification);
                         feedback("Message sent");
@@ -49,7 +51,9 @@ public class Send extends Command{
                 } else {
                     Contact receiver = groupRecipient.getContact2();
                     TextMessage msg = new TextMessage(user, receiver, text, groupRecipient);
-                    Notification msgNotification = new Notification(user, receiver, groupRecipient);
+                    Notification msgNotification = new Notification(user, receiver, groupRecipient, true);
+                    receiver.addNotification(msgNotification);
+                    msgNotification.send();
                     groupRecipient.sendMessage(msg, msgNotification);
                     feedback("Message sent");
                 }

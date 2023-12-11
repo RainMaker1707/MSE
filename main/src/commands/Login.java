@@ -5,6 +5,10 @@ import behaviour.ContextBehavior;
 import database.DataBase;
 import database.LoggedIn;
 import smartMessagingSystem.SmartMessagingSystem;
+import features.notification.Notification;
+import features.notification.NotificationState;
+import features.contact.Contact;
+import features.conversation.Group;
 
 import javax.swing.*;
 import java.util.List;
@@ -25,20 +29,33 @@ public class Login extends Command{
                 LoggedIn.INSTANCE.setLoggedIn(DataBase.INSTANCE.getUser(username));
                 LoggedIn.INSTANCE.get().changeStatus();
                 feedback("User successfully logged in");
-                //checkNotifications(LoggedIn.INSTANCE.get());
+                checkNotifications(LoggedIn.INSTANCE.get());
             }else error("unknown user " + username + ". Create user before login!");
         }
     }
 
-    // private void checkNotifications(Contact loggedInUser) {
-    //     List<Notification> notifications = loggedInUser.getNotifications();
+    private void checkNotifications(Contact loggedInUser) {
+        List<Notification> notifications = loggedInUser.getNotifications();
 
-    //     for (Notification notification : notifications) {
-    //         if (notification.getReceiver().equals(loggedInUser) && notification.getState() == NotificationState.received) {
-    //             System.out.println("Notification: You have received a message from " + notification.getSender().getName());
-    //         }
-    //     }
-    // }
+        for (Notification notification : notifications) {
+            if (notification.isGroup()) {
+                Group group = (Group) notification.getConversation();
+                List<Contact> members = group.getMembers();
+                for (Contact member : members) {
+                    if (member.equals(loggedInUser)) {
+                        notification.receive();
+                        feedback("Notification: You have received a message from " + group.getGroupName());
+                    }
+                }
+            } else {
+                if (notification.getReceiver().equals(loggedInUser)) {
+                    notification.receive();
+                    feedback("Notification: You have received a message from " + notification.getSender().getName());
+                }
+            }
+            
+        }
+    }
 
     @Override
     public void help(){

@@ -54,6 +54,10 @@ public class Conversation extends Feature {
         return this.conversation;
     }
 
+    public List<Notification> getNotifications() {
+        return this.notifications;
+    }
+
     public void updateStatus() {
         for(Message m: this.getMessages()) m.receive();
     }
