@@ -1,5 +1,7 @@
 package commands;
 
+import GUI.Constants;
+import GUI.Frame;
 import GUI.WelcomeMenu;
 import behaviour.ContextBehavior;
 import constant.Colors;
@@ -25,6 +27,7 @@ public class Logout extends Command{
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
+        Frame.frame.setTitle(Constants.TITLE);
         return new WelcomeMenu(sms);
     }
 
