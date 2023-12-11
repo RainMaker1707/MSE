@@ -74,6 +74,10 @@ public class Profile extends Feature {
     public void removeBlocked(Contact contact){
         contactList.removeBlocked(contact);
     }
+
+    public void removeGroup(Group group) {
+        groups.removeGroup(group);
+    }
     public void addConversation(Conversation c){
         this.conversations.add(c);
     }

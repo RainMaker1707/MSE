@@ -47,6 +47,7 @@ public class Group extends Conversation{
     public void removeToGroup(Contact c){
         //TODO implement roles to check if requester has enough right
         members.remove(c);
+        c.removeGroup(this);
     }
 
     public void quitGroup(Contact c){
