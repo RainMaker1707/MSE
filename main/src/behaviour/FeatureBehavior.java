@@ -129,5 +129,9 @@ public class FeatureBehavior implements Behaviour{
         alternativesSet.put(name, alt);
     }
 
+    public void run() {
+        this.feature.activate();
+    }
+
     public HashMap<String, FeatureBehavior> getAlternativesSet(){return alternativesSet;}
 }
