@@ -1,5 +1,6 @@
 package features.notification;
 
+import constant.Colors;
 import database.Features;
 import behaviour.FeatureBehavior;
 import features.Feature;
@@ -9,7 +10,7 @@ public class Sound extends Feature {
 
     public void activate(){
         if(behavior.isActivated()) {
-            return;
+            System.out.println(Colors.ANSI_BLUE + "*Ding*" + Colors.currentColor);
         }
     }
     

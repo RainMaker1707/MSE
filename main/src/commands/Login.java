@@ -6,6 +6,8 @@ import database.DataBase;
 import database.LoggedIn;
 import smartMessagingSystem.SmartMessagingSystem;
 import features.notification.Notification;
+import behaviour.FeatureBehavior;
+import database.Features;
 import features.contact.Contact;
 import features.conversation.Group;
 
@@ -35,6 +37,9 @@ public class Login extends Command{
 
     private void checkNotifications(Contact loggedInUser) {
         List<Notification> notifications = loggedInUser.getNotifications();
+        FeatureBehavior behaviorSilent = Features.INSTANCE.get("silent");
+        FeatureBehavior behaviorSound = Features.INSTANCE.get("sound");
+        FeatureBehavior behaviorVibrant = Features.INSTANCE.get("vibrant");
 
         for (Notification notification : notifications) {
             if (notification.isGroup()) {
@@ -43,12 +48,18 @@ public class Login extends Command{
                 for (Contact member : members) {
                     if (member.equals(loggedInUser) && notification.getState() == "sending") {
                         notification.receive();
+                        behaviorSilent.run();
+                        behaviorSound.run();
+                        behaviorVibrant.run();
                         feedback("Notification: You have received a message from " + group.getGroupName());
                     }
                 }
             } else {
                 if (notification.getReceiver().equals(loggedInUser) && notification.getState() == "sending") {
                     notification.receive();
+                    behaviorSilent.run();
+                    behaviorSound.run();
+                    behaviorVibrant.run();
                     feedback("Notification: You have received a message from " + notification.getSender().getName());
                 }
             }

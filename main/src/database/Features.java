@@ -66,7 +66,6 @@ public enum Features {
         features.put("sound", new FeatureBehavior("sound", "alternative"));
         features.get("sound").addClass(new Sound());
 
-        features.get("silent").activate();
         features.get("silent").addAlternativeFeature("vibrant");
         features.get("silent").addAlternativeFeature("sound");
         features.get("vibrant").addAlternativeFeature("silent");
