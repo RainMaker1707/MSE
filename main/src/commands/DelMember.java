@@ -22,7 +22,7 @@ public class DelMember extends Command{
             return;
         }
         if(args.size() < 2){
-            error("groupMember command need two argument: group name and member name");
+            error("delMember command need two argument: group name and member name");
             return;
         }
         if(LoggedIn.INSTANCE.get().getGroups().getGroups().isEmpty()){
