@@ -28,6 +28,7 @@ public class CommandFactory {
             case "groupmember" -> new GroupMember(contexts, command); // TODO:
             case "hide" -> new Hide(contexts, command);
             case "hidden" -> new Hidden(contexts, command);
+            case "register" -> new Register(contexts, command);
             default -> {
                 System.out.println(Colors.ANSI_RED + "Command error: " + cmd + " is not a command!" + Colors.currentColor);
                 yield null;

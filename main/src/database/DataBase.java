@@ -32,6 +32,10 @@ public enum DataBase {
         return set.get(username);
     }
 
+    public void setUser(String username, Contact contact) {
+        set.put(username, contact);
+    }
+
     public Group getGroup(String groupname) {
         return setGroup.get(groupname);
     }
