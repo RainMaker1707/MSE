@@ -48,24 +48,29 @@ public class WelcomeMenu extends JPanel {
         btnLine.setLayout(new BoxLayout(btnLine, BoxLayout.LINE_AXIS));
 
         JButton loginBtn = new JButton("Login");
-        loginBtn.addActionListener(e -> loginAction());
+        loginBtn.addActionListener(e -> loginAction(true));
+
+        JButton createBtn = new JButton("Register");
+        createBtn.addActionListener(e->loginAction(false));
 
         JButton closeBtn = new JButton("Close");
         closeBtn.addActionListener(e -> System.exit(0));
 
         btnLine.add(Box.createHorizontalGlue());
+        btnLine.add(createBtn);
+        btnLine.add(Box.createRigidArea(new Dimension(25, 0)));
         btnLine.add(loginBtn);
-        btnLine.add(Box.createRigidArea(new Dimension(100, 0)));
+        btnLine.add(Box.createRigidArea(new Dimension(25, 0)));
         btnLine.add(closeBtn);
         btnLine.add(Box.createHorizontalGlue());
 
         return btnLine;
     }
 
-    private void loginAction() {
+    private void loginAction(boolean alreadyCreated) {
         Frame.frame.remove(this);
         Frame.frame.setJMenuBar(new MenuBar(sms));
-        Frame.frame.add(new LoginMenu(sms));
+        Frame.frame.add(new LoginMenu(sms, alreadyCreated));
         SwingUtilities.updateComponentTreeUI(Frame.frame);
     }
 }

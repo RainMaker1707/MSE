@@ -1,6 +1,7 @@
 package GUI;
 
 import commands.Login;
+import commands.Register;
 import database.LoggedIn;
 import smartMessagingSystem.SmartMessagingSystem;
 
@@ -11,10 +12,12 @@ public class LoginMenu extends JPanel {
     private final SmartMessagingSystem sms;
 
     private final JTextField field;
+    private final boolean create;
 
-    public LoginMenu(SmartMessagingSystem sms){
+    public LoginMenu(SmartMessagingSystem sms, boolean alreadyCreated){
         this.sms = sms;
         this. field = new JTextField(32);
+        this.create = !alreadyCreated;
         Frame.lastPanel = this;
 
         setLayout(new BorderLayout());
@@ -59,8 +62,14 @@ public class LoginMenu extends JPanel {
     private JPanel buttonPanel(){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-        JButton loginBtn = new JButton("Login");
-        loginBtn.addActionListener(e -> loginBtnAction());
+        JButton loginBtn;
+        if(this.create){
+            loginBtn = new JButton("Register");
+            loginBtn.addActionListener(e-> createBtnAction());
+        }else{
+            loginBtn = new JButton("Login");
+            loginBtn.addActionListener(e -> loginBtnAction());
+        }
         JButton cancelBtn = new JButton("Cancel");
         cancelBtn.addActionListener(e -> cancelBtnAction());
         panel.add(Box.createHorizontalGlue());
@@ -71,6 +80,12 @@ public class LoginMenu extends JPanel {
         return panel;
     }
 
+    private void createBtnAction() {
+        new Register(sms.getContexts(), "register " + field.getText()).run();
+        new Login(sms.getContexts(), "login " + field.getText()).run();
+        nextFrame();
+    }
+
     private void cancelBtnAction() {
         Frame.frame.remove(this);
         Frame.frame.add(new WelcomeMenu(sms));
@@ -79,6 +94,11 @@ public class LoginMenu extends JPanel {
 
     private void loginBtnAction() {
         new Login(sms.getContexts(), "login " + field.getText()).run();
+        nextFrame();
+
+    }
+
+    private void nextFrame(){
         if(LoggedIn.INSTANCE.get() != null){
             Frame.frame.remove(this);
             Frame.frame.setJMenuBar(new MenuBar(sms));
