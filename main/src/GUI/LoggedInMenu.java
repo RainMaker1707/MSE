@@ -1,10 +1,12 @@
 package GUI;
 
 import database.LoggedIn;
+import features.contact.Contact;
 import features.conversation.Group;
 import smartMessagingSystem.SmartMessagingSystem;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.font.TextAttribute;
 import java.util.Map;
@@ -40,12 +42,9 @@ public class LoggedInMenu extends JPanel {
     private MessagePanel getMessagePanel() {return new MessagePanel(sms, this);}
 
     public JPanel fillMemberPanel(Group group){
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-
-        panel.setMaximumSize(new Dimension(100, Constants.TOTAL_HEIGHT));
-        panel.setPreferredSize(new Dimension(100, Constants.TOTAL_HEIGHT));
-        panel.setMaximumSize(new Dimension(100, Constants.TOTAL_HEIGHT));
+        JPanel toReturn = new JPanel();
+        toReturn.setLayout(new BoxLayout(toReturn, BoxLayout.PAGE_AXIS));
+        toReturn.setBorder(new LineBorder(Color.black, 2, true));
 
         JLabel label = new JLabel(group.getGroupName() + " members");
         Font font = label.getFont();
@@ -53,11 +52,36 @@ public class LoggedInMenu extends JPanel {
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         label.setFont(font.deriveFont(attributes));
         label.setAlignmentX(CENTER_ALIGNMENT);
+        toReturn.add(label);
 
-        // TODO: fill member
-        panel.setBackground(Color.RED);
-        panel.add(label);
-        panel.add(Box.createRigidArea(new Dimension(100, 30)));
-        return panel;
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+
+        panel.setMaximumSize(new Dimension(100, Constants.TOTAL_HEIGHT));
+        panel.setPreferredSize(new Dimension(100, Constants.TOTAL_HEIGHT));
+        panel.setMaximumSize(new Dimension(100, Constants.TOTAL_HEIGHT));
+
+
+
+        JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
+        innerPanel.setOpaque(true);
+        innerPanel.setMaximumSize(new Dimension(90, Constants.TOTAL_HEIGHT));
+        innerPanel.setPreferredSize(new Dimension(90, Constants.TOTAL_HEIGHT));
+        innerPanel.setMaximumSize(new Dimension(90, Constants.TOTAL_HEIGHT));
+
+        for(Contact contact :group.getMembers()){
+            JLabel member = new JLabel("• "+contact.getName());
+            member.setAlignmentX(LEFT_ALIGNMENT);
+            member.setAlignmentY(TOP_ALIGNMENT);
+            innerPanel.add(member);
+        }
+
+        panel.add(Box.createRigidArea(new Dimension(10,0)));
+        panel.add(innerPanel);
+        panel.add(Box.createRigidArea(new Dimension(10,0)));
+        toReturn.add(Box.createRigidArea(new Dimension(0, 25)));
+        toReturn.add(panel);
+        return toReturn;
     }
 }
