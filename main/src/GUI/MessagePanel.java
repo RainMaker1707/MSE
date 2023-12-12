@@ -1,7 +1,10 @@
 package GUI;
 
-import commands.MessageCmd;
+import commands.Block;
+import commands.Hide;
 import commands.Send;
+import database.ContextsDB;
+import database.Features;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Conversation;
@@ -20,23 +23,29 @@ public class MessagePanel extends JPanel {
     private final JTextField field;
     private final SmartMessagingSystem sms;
 
+    private final LoggedInMenu parent;
 
-    public MessagePanel(SmartMessagingSystem sms) {
+
+    public MessagePanel(SmartMessagingSystem sms, LoggedInMenu parent) {
         // DO NOT UPDATE Frame.lastFrame here
         setLayout(new BorderLayout());
         this.field = new JTextField(32);
         this.sms = sms;
+        this.parent = parent;
         refresh();
     }
 
     private void refresh(){
+        removeAll();
         JLabel label = new JLabel("LoggedIn as " + LoggedIn.INSTANCE.get().getName());
         underlineLabel(label);
         add(centerLabel(label));
+        SwingUtilities.updateComponentTreeUI(this);
     }
 
     public void showMessages(Contact contact) {
         removeAll();
+
         add(createInputSend(contact), BorderLayout.PAGE_END);
         SwingUtilities.updateComponentTreeUI(this);
         for(Conversation conv:LoggedIn.INSTANCE.get().getConversations()){
@@ -46,6 +55,26 @@ public class MessagePanel extends JPanel {
                     break;
                 }
             }
+        }
+        if(ContextsDB.INSTANCE.get("subscribe").isActivated()){
+            JPanel hideAndBlock = new JPanel();
+            hideAndBlock.setLayout(new BoxLayout(hideAndBlock, BoxLayout.LINE_AXIS));
+            JButton block = new JButton("Block");
+            block.addActionListener(e->{
+                new Block(sms.getContexts(), "block " + contact.getName()).run();
+                refresh();
+                parent.refresh(false, null);
+            });
+            JButton btn = new JButton("Hide");
+            btn.addActionListener(e->{
+                new Hide(sms.getContexts(), "hide " + contact.getName()).run();
+                refresh();
+                parent.refresh(false, null);
+            });
+            hideAndBlock.add(Box.createHorizontalGlue());
+            hideAndBlock.add(block);
+            hideAndBlock.add(btn);
+            add(hideAndBlock, BorderLayout.NORTH);
         }
         SwingUtilities.updateComponentTreeUI(this);
     }
@@ -68,9 +97,7 @@ public class MessagePanel extends JPanel {
         field.setText("");
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        boolean flag = false;
         for(Message msg: conversation.getMessages()){
-            flag =true;
             if(msg instanceof TextMessage m){
                 JPanel msgPanel = new JPanel();
                 msgPanel.setLayout(new BoxLayout(msgPanel, BoxLayout.LINE_AXIS));
@@ -86,12 +113,6 @@ public class MessagePanel extends JPanel {
                 }
                 panel.add(msgPanel);
             }
-        }
-        if(!flag) {
-            JLabel label = new JLabel("No messages yet");
-            panel.add(Box.createVerticalGlue());
-            panel.add(centerLabel(label));
-            panel.add(Box.createVerticalGlue());
         }
         return panel;
     }
@@ -163,25 +184,11 @@ public class MessagePanel extends JPanel {
         contactInGroup.setPreferredSize(new Dimension(100, Constants.TOTAL_HEIGHT));
         contactInGroup.setMaximumSize(new Dimension(Constants.TOTAL_WIDTH/6, Constants.TOTAL_HEIGHT));
 
-        fillMemberPanel(contactInGroup, group);
+        //fillMemberPanel(contactInGroup, group);
 
         panel.add(Box.createRigidArea(new Dimension(250, 0)));
         panel.add(contactInGroup);
         panel.add(getMessagesPanel(group, true));
         add(panel);
-    }
-
-    public void fillMemberPanel(JPanel panel, Group group){
-        JLabel label = new JLabel(group.getGroupName() + " members");
-        Font font = label.getFont();
-        Map attributes = font.getAttributes();
-        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        label.setFont(font.deriveFont(attributes));
-        label.setAlignmentX(CENTER_ALIGNMENT);
-
-        // TODO: fill member
-        panel.setBackground(Color.RED);
-        panel.add(label);
-        panel.add(Box.createRigidArea(new Dimension(100, 30)));
     }
 }

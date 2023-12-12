@@ -1,5 +1,6 @@
 package commands;
 
+import GUI.LoggedInMenu;
 import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
@@ -45,7 +46,7 @@ public class Deactivate extends Command {
 
     @Override
     public JPanel gui(SmartMessagingSystem sms) {
-        return null;
+        return new LoggedInMenu(sms);
     }
 
     @Override

@@ -22,6 +22,7 @@ public class LoginMenu extends JPanel {
         add(createPanel(), BorderLayout.CENTER);
     }
 
+
     private JPanel createPanel(){
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));

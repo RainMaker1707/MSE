@@ -17,11 +17,13 @@ public class GroupPanel extends JPanel {
     private final JTextField field;
     private final SmartMessagingSystem sms;
     private final MessagePanel msgPanel;
+    private final LoggedInMenu parent;
 
-    public GroupPanel(SmartMessagingSystem sms, MessagePanel msgPanel){
+    public GroupPanel(SmartMessagingSystem sms, MessagePanel msgPanel, LoggedInMenu parent){
         this.field = new JTextField(32);
         this.sms = sms;
         this.msgPanel = msgPanel;
+        this.parent = parent;
 
         setBackground(Color.LIGHT_GRAY);
 
@@ -127,6 +129,7 @@ public class GroupPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 new MessageCmd(sms.getContexts(), "messages " + group.getGroupName()).run();
+                parent.refresh(true, group);
                 msgPanel.showGroup(group);
             }
 

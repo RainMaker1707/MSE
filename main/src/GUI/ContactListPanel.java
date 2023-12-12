@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.font.TextAttribute;
+import java.time.zone.ZoneRulesProvider;
 import java.util.Map;
 
 public class ContactListPanel extends JPanel {
@@ -20,13 +21,16 @@ public class ContactListPanel extends JPanel {
     private final JTextField field;
     private final MessagePanel msgPanel;
 
+    private final LoggedInMenu parent;
+
     /**
         DO NOT UPDATE Frame.lastFrame here
     **/
-    public ContactListPanel(SmartMessagingSystem sms, MessagePanel msgPanel) {
+    public ContactListPanel(SmartMessagingSystem sms, MessagePanel msgPanel, LoggedInMenu parent) {
         this.field = new JTextField(32);
         this.sms = sms;
         this.msgPanel = msgPanel;
+        this.parent = parent;
 
         setBackground(Color.LIGHT_GRAY);
 
@@ -150,6 +154,7 @@ public class ContactListPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 new MessageCmd(sms.getContexts(), "messages " + contact.getName()).run();
+                parent.refresh(false, null);
                 msgPanel.showMessages(contact);
             }
 
