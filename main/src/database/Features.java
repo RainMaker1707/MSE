@@ -2,6 +2,7 @@ package database;
 
 import behaviour.FeatureBehavior;
 import features.contact.BlockContact;
+import features.contact.HiddenContact;
 import features.contact.Contact;
 import features.contact.ContactList;
 import features.conversation.Conversation;
@@ -53,7 +54,7 @@ public enum Features {
         features.get("block").addClass(new BlockContact());
 
         features.put("hide", new FeatureBehavior("hide", "optional"));
-        features.get("hide").addClass(new BlockContact());
+        features.get("hide").addClass(new HiddenContact());
 
         features.put("dark", new FeatureBehavior("dark", "alternative"));
         features.get("dark").addClass(new Dark());

@@ -72,6 +72,7 @@ public enum ContextsDB {
 
         set.put("subscribe", new ContextBehavior("subscribe", "optional"));
         set.get("subscribe").addLinkedFeature(Features.INSTANCE.get("block"));
+        set.get("subscribe").addLinkedFeature(Features.INSTANCE.get("hide"));
 
         set.get("night").activate();
         set.get("wifi").activate();
