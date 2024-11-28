@@ -4,3 +4,5 @@
 out/
 *.iml
 *.class
+
+main/src/remove.sh

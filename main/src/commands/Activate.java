@@ -1,17 +1,20 @@
 package commands;
 
+import GUI.Frame;
+import GUI.LoggedInMenu;
+import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
-import features.FeatureBehavior;
-import features.themes.Dark;
-import features.themes.Light;
+import behaviour.FeatureBehavior;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Activate extends Command{
 
 
-    public Activate(List<Context> contexts, String command){
+    public Activate(List<ContextBehavior> contexts, String command){
         super("activate", contexts, command);
     }
 
@@ -36,9 +39,10 @@ public class Activate extends Command{
 
     public void activateContext(String arg){
         arg = arg.replace(",", "");
-        int index = contexts.stream().map(Context::getName).toList().indexOf(arg);
+        int index = contexts.stream().map(ContextBehavior::getName).toList().indexOf(arg);
         if (index != -1) {
             contexts.get(index).activate();
+            for(FeatureBehavior featureBehavior: contexts.get(index).getLinkedFeaturesBehavior()) featureBehavior.activate();
         } else Context.error(arg + " not found!");
     }
 
@@ -52,15 +56,17 @@ public class Activate extends Command{
         else if(behavior.getAlternative() ||behavior.getOptional()){
             if(!behavior.isActivated()){
                 behavior.activate();
-                if(behavior.getName().equals("light"))Light.activate();
-                if(behavior.getName().equals("dark")) Dark.activate();
                 feedback(arg + " is now activated.");
             }else error(arg + " is already activated!");
         }
     }
 
     @Override
-    public void help(){
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
+    }
 
+    @Override
+    public void help(){
     }
 }

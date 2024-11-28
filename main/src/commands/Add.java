@@ -1,14 +1,17 @@
 package commands;
 
-import context.Context;
+import GUI.LoggedInMenu;
+import behaviour.ContextBehavior;
 import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Add extends Command{
-    public Add(List<Context> contexts, String command){
+    public Add(List<ContextBehavior> contexts, String command){
         super("add", contexts, command);
     }
     @Override
@@ -22,12 +25,17 @@ public class Add extends Command{
                 else if(LoggedIn.INSTANCE.get().getContactList().getContacts().stream()
                         .map(Contact::getName).toList().contains(arg)) error(arg + " already in your contact list");
                 else {
-                    LoggedIn.INSTANCE.get().addContact(new Contact(DataBase.INSTANCE.getUser(arg)));
-                    DataBase.INSTANCE.getUser(arg).addContact(new Contact(LoggedIn.INSTANCE.get()));
+                    LoggedIn.INSTANCE.get().addContact(DataBase.INSTANCE.getUser(arg));
+                    DataBase.INSTANCE.getUser(arg).addContact(LoggedIn.INSTANCE.get());
                     feedback("User " + arg + " and " + LoggedIn.INSTANCE.get().getName() + " are now contact");
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
     }
 
     @Override

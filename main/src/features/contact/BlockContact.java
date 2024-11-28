@@ -1,17 +1,16 @@
 package features.contact;
 
 
-import constant.Colors;
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
+import features.Feature;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class BlockContact{
+public class BlockContact extends Feature {
     FeatureBehavior behavior = Features.INSTANCE.get("block");
 
     Contact owner;
+
+    public BlockContact(){}
     public BlockContact(Contact owner) {
         this.owner = owner;
     }
@@ -25,5 +24,10 @@ public class BlockContact{
     public void unblockContact(Contact contact){
         owner.removeBlocked(contact);
         owner.addContact(contact);
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

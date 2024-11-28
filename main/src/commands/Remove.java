@@ -1,15 +1,18 @@
 package commands;
 
-import context.Context;
+import GUI.LoggedInMenu;
+import behaviour.ContextBehavior;
 import database.DataBase;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.profile.Profile;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Remove extends Command{
-    public Remove(List<Context> contexts, String command){
+    public Remove(List<ContextBehavior> contexts, String command){
         super("remove", contexts, command);
     }
     @Override
@@ -33,6 +36,11 @@ public class Remove extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
     }
 
     @Override

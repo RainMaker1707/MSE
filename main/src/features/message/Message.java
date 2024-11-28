@@ -2,18 +2,20 @@ package features.message;
 
 import database.Features;
 import database.LoggedIn;
+import behaviour.FeatureBehavior;
 import features.Feature;
-import features.FeatureBehavior;
 import features.contact.*;
 import features.conversation.Conversation;
 import static features.message.MessageState.*;
 
-public class Message{
-    private final Conversation conversation;
+public class Message extends Feature {
+    private Conversation conversation;
     Contact sender;
     Contact receiver;
     MessageState state;
     FeatureBehavior behavior = Features.INSTANCE.get("message");
+
+    public Message(){}
 
     public Message(Contact sender, Contact receiver, Conversation conversation){
         this.conversation = conversation;
@@ -35,13 +37,12 @@ public class Message{
     }
 
     public void send(){
-        //TODO send the message to the receiver user
         this.state = sent;
         this.receive();
     }
 
     public void receive(){
-        if(this.state == sent && this.receiver.getStatus() == Status.online)
+        if(this.state == sent && this.receiver != null && this.receiver.getStatus() == Status.online)
             this.state = received;
     }
 
@@ -54,5 +55,10 @@ public class Message{
     public void delete(Contact contact) {
         if(contact.getProfile() == sender)
             this.conversation.removeMessage(this);
+    }
+
+    @Override
+    public void activate() {
+
     }
 }

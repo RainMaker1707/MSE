@@ -9,6 +9,10 @@ public enum LoggedIn {
 
     Contact loggedIn = null;
 
+    public boolean isLoggedIn() {
+        return loggedIn != null;
+    }
+
     public void setLoggedIn(Contact contact){
         if(loggedIn != null)
             System.out.println(Colors.ANSI_RED + "A user is already logged in: " + loggedIn.getName() + "!"+Colors.currentColor);

@@ -2,7 +2,7 @@ package features.contact;
 
 
 import database.Features;
-import features.FeatureBehavior;
+import behaviour.FeatureBehavior;
 import features.conversation.Conversation;
 import features.profile.*;
 
@@ -12,6 +12,8 @@ public class Contact extends Profile{
 
     private Status status;
     FeatureBehavior behavior = Features.INSTANCE.get("contact");
+
+    public Contact(){}
 
     public Contact(String name, Image picture){
         super(name, picture);

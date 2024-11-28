@@ -1,15 +1,17 @@
 package commands;
 
-import context.Context;
+import behaviour.ContextBehavior;
 import database.LoggedIn;
 import features.contact.Contact;
 import features.conversation.Conversation;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ConversationCmd extends Command{
 
-    public ConversationCmd(List<Context> contexts, String command){
+    public ConversationCmd(List<ContextBehavior> contexts, String command){
         super("conversations", contexts, command);
     }
 
@@ -47,6 +49,11 @@ public class ConversationCmd extends Command{
             text.append("No conversation yet");
         }
         feedback(text.toString());
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

@@ -1,4 +1,11 @@
 package context.time;
 
-public class Night extends Time{
+import behaviour.ContextBehavior;
+import context.Context;
+import database.ContextsDB;
+
+public class Night extends Context {
+    public Night() {
+        super("night", ContextsDB.INSTANCE.get("night"));
+    }
 }

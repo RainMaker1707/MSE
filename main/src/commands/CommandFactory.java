@@ -1,12 +1,12 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import constant.Colors;
-import context.Context;
 
 import java.util.List;
 
 public class CommandFactory {
-    public Command createCommand(String command, List<Context> contexts){
+    public Command createCommand(String command, List<ContextBehavior> contexts){
         String cmd = command.split(" ")[0];
         return switch (cmd.toLowerCase()) {
             case "activate" -> new Activate(contexts,  command);
@@ -20,6 +20,15 @@ public class CommandFactory {
             case "send" -> new Send(contexts, command);
             case "conversations" -> new ConversationCmd(contexts, command);
             case "messages" -> new MessageCmd(contexts, command);
+            case "addgroup" -> new AddGroup(contexts, command);
+            case "creategroup" -> new CreateGroup(contexts, command);
+            case "groups" -> new GroupCmd(contexts, command);
+            case "delgroup" -> new DelGroup(contexts, command); // TODO:
+            case "delmember" -> new DelMember(contexts, command); // TODO:
+            case "groupmember" -> new GroupMember(contexts, command); // TODO:
+            case "hide" -> new Hide(contexts, command);
+            case "hidden" -> new Hidden(contexts, command);
+            case "register" -> new Register(contexts, command);
             default -> {
                 System.out.println(Colors.ANSI_RED + "Command error: " + cmd + " is not a command!" + Colors.currentColor);
                 yield null;

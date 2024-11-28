@@ -1,15 +1,17 @@
 package commands;
 
+import GUI.LoggedInMenu;
+import behaviour.ContextBehavior;
 import context.Context;
 import database.Features;
-import features.FeatureBehavior;
-import features.themes.Dark;
-import features.themes.Light;
+import behaviour.FeatureBehavior;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Deactivate extends Command {
-    public Deactivate(List<Context> contexts, String command){
+    public Deactivate(List<ContextBehavior> contexts, String command){
         super("deactivate", contexts, command);
     }
 
@@ -23,7 +25,7 @@ public class Deactivate extends Command {
         args.remove(0);
         if(key.equals("context")) {
             for(String arg: args) {
-                int index = contexts.stream().map(Context::getName).toList().indexOf(arg);
+                int index = contexts.stream().map(ContextBehavior::getName).toList().indexOf(arg);
                 if(index != -1){
                     contexts.get(index).deactivate();
                 }else Context.error(arg + " not found!");
@@ -35,13 +37,16 @@ public class Deactivate extends Command {
                 if(behavior.getAlternative() || behavior.getOptional()){
                     if(behavior.isActivated()){
                         behavior.deactivate();
-                        if(behavior.getName().equals("light")) Dark.activate();
-                        if(behavior.getName().equals("dark")) Light.activate();
                         feedback(arg + " is now deactivated." );
                     }else error(arg + " is already deactivated!");
                 }else if(behavior.getMandatory()) error("Mandatory features can't be deactivated");
             }
         }else error("Not recognized argument: " + key);
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return new LoggedInMenu(sms);
     }
 
     @Override

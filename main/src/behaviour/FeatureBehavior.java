@@ -1,11 +1,11 @@
-package features;
+package behaviour;
 
 import database.Features;
+import features.Feature;
 
 import java.util.HashMap;
-import java.util.List;
 
-public class FeatureBehavior implements Feature{
+public class FeatureBehavior implements Behaviour{
 
     private final String name;
     boolean mandatory = true;
@@ -15,12 +15,13 @@ public class FeatureBehavior implements Feature{
 
     HashMap<String, FeatureBehavior> alternativesSet;
 
+    Feature feature;
+
     public FeatureBehavior(String linkedFeatureName, String type){
         this.name = linkedFeatureName;
         switch(type){
             case "mandatory": {
                 this.setMandatory(true);
-                this.activate();
                 break;
             }
             case "alternative": {
@@ -37,6 +38,11 @@ public class FeatureBehavior implements Feature{
             default: throw new IllegalArgumentException("FeatureBehavior type: " + type
                             + "is not in ['mandatory', 'optional', 'alternative']");
         }
+    }
+
+    public void addClass(Feature feature) {
+        this.feature = feature;
+        if(this.getMandatory()) this.feature.activate();
     }
 
     @Override
@@ -69,6 +75,7 @@ public class FeatureBehavior implements Feature{
     @Override
     public void activate() {
         activate = true;
+        this.feature.activate();
         if(this.getAlternative()){
             for(FeatureBehavior alt: this.getAlternativesSet().values()){
                 if(alt.isActivated()) alt.deactivate();
@@ -120,6 +127,10 @@ public class FeatureBehavior implements Feature{
         FeatureBehavior alt = Features.INSTANCE.get(name);
         if(alt == null) throw new IllegalArgumentException( name + " is not a feature, can't be set as alternative");
         alternativesSet.put(name, alt);
+    }
+
+    public void run() {
+        this.feature.activate();
     }
 
     public HashMap<String, FeatureBehavior> getAlternativesSet(){return alternativesSet;}

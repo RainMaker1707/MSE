@@ -1,15 +1,17 @@
 package commands;
 
-import context.Context;
+import behaviour.ContextBehavior;
 import database.Features;
 import database.LoggedIn;
 import features.contact.BlockContact;
 import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Block extends Command{
-    public Block(List<Context> contexts, String command){
+    public Block(List<ContextBehavior> contexts, String command){
         super("block", contexts, command);
     }
     @Override
@@ -32,6 +34,11 @@ public class Block extends Command{
                 }
             }
         }
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

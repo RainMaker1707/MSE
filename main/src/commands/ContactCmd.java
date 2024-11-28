@@ -1,13 +1,15 @@
 package commands;
 
-import context.Context;
+import behaviour.ContextBehavior;
 import database.LoggedIn;
 import features.contact.Contact;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ContactCmd extends Command {
-    public ContactCmd(List<Context> contexts, String command) {
+    public ContactCmd(List<ContextBehavior> contexts, String command) {
         super("contacts", contexts, command);
     }
 
@@ -36,6 +38,11 @@ public class ContactCmd extends Command {
             feedback(user.getName() + "'s contacts: " + text);
         }else feedback(user.getName() + " has no contact yet");
 
+    }
+
+    @Override
+    public JPanel gui(SmartMessagingSystem sms) {
+        return null;
     }
 
     @Override

@@ -1,18 +1,20 @@
 package commands;
 
+import behaviour.ContextBehavior;
 import constant.Colors;
-import context.Context;
+import smartMessagingSystem.SmartMessagingSystem;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Command {
 
-    final List<Context> contexts;
+    final List<ContextBehavior> contexts;
     private final String keyword;
     final String command;
 
-    public Command(String name, List<Context> contexts, String command){
+    public Command(String name, List<ContextBehavior> contexts, String command){
         this.contexts = contexts;
         this.keyword = name;
         this.command = command;
@@ -37,6 +39,8 @@ public abstract class Command {
     }
 
     public abstract void help();
+
+    public abstract JPanel gui(SmartMessagingSystem sms);
 
     public String getKeyword(){
         return this.keyword;
